@@ -51,3 +51,18 @@ npm run dev
 npm run build
 npm run live
 ```
+
+## Contributing
+
+Contributions are welcome! If you'd like to contribute to the project, please fork the repository and submit a pull request with your changes.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
+## Authors
+
+- [Diwash Bhattarai](https://github.com/author) - FullStack Developer
+- [Pravakar Rijal](https://github.com/author) - FrontEnd Developer
+- [Prakash Pandey](https://github.com/author) - UI/UX Designer
+- [Manish Dhungana](https://github.com/author) - Project Manager
