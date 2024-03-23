@@ -13,6 +13,7 @@ import {
   LuXCircle,
   LuStar,
 } from "react-icons/lu";
+import { TbCertificate } from "react-icons/tb";
 
 import MotionUserProfile from "../animations/user-profile-animation";
 import ProfileSettings from "./profile-settings";
@@ -40,22 +41,29 @@ const UserProfile = () => {
       },
     },
     {
-      label: "My Orders",
-      icon: LuShoppingBag,
+      label: "Birth Certificate",
+      icon: TbCertificate ,
       onClick: () => {
         router.push("/my-orders");
       },
     },
     {
-      label: "My Cancellations",
-      icon: LuXCircle,
+      label: "Death Certificate",
+      icon: TbCertificate,
       onClick: () => {
         router.push("/my-cancellations");
       },
     },
     {
-      label: "My Reviews",
-      icon: LuStar,
+      label: "Marriage Certificate",
+      icon: TbCertificate ,
+      onClick: () => {
+        router.push("/my-reviews");
+      },
+    },
+    {
+      label: "Migration Certificate",
+      icon: TbCertificate,
       onClick: () => {
         router.push("/my-reviews");
       },
@@ -73,7 +81,7 @@ const UserProfile = () => {
         onClick={() => setIsProfileOpen((currValue) => !currValue)}
       />
       {isProfileOpen && (
-        <MotionUserProfile className="absolute right-0 z-30 px-2 py-3 rounded-md shadow-sm w-52 top-14 bg-primary text-primary-foreground">
+        <MotionUserProfile className="absolute right-0 z-30 px-2 py-3 rounded-md shadow-sm w-56 top-14 bg-primary text-foreground">
           <ul className="flex flex-col gap-2">
             <li>
               <h3 className="px-2 py-3 font-medium rounded-md text-muted-foreground">

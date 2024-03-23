@@ -1,12 +1,12 @@
 import AnimationWrapper from "@/components/animations/page-animation";
 import MaxWidthContainer from "@/components/max-width-container";
 
-const ContactPage = () => {
+const FAQPage = () => {
   return (
     <AnimationWrapper>
-      <MaxWidthContainer>Contact Us</MaxWidthContainer>
+      <MaxWidthContainer>FAQ</MaxWidthContainer>
     </AnimationWrapper>
   );
 };
 
-export default ContactPage;
+export default FAQPage;

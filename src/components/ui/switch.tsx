@@ -55,17 +55,19 @@ const Switch = ({
       </div>
       <div
         className={cn(
-          "w-10 h-6 flex items-center bg-accent rounded-full cursor-pointer shadow-inner",
-          toggleSwitch && "bg-muted"
+          "w-10 h-6 flex items-center bg-foreground/30 rounded-full cursor-pointer shadow-inner",
+          toggleSwitch && "bg-foreground/20"
         )}
         onClick={handleSwitch}
       >
         <div
           className={cn(
-            "w-4 h-4 mx-1 bg-primary-foreground rounded-full duration-300",
-            toggleSwitch ? "translate-x-[100%]" : "translate-x-0"
+            "w-4 h-4 mx-1 rounded-full duration-300",
+            toggleSwitch
+              ? "translate-x-[100%] bg-foreground"
+              : "translate-x-0 bg-foreground/90"
           )}
-        ></div>
+        />
       </div>
     </div>
   );

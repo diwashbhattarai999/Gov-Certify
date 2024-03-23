@@ -1,5 +1,12 @@
+import AnimationWrapper from "@/components/animations/page-animation";
+import MaxWidthContainer from "@/components/max-width-container";
+
 const PrivacyPage = () => {
-  return <div>Privacy</div>;
+  return (
+    <AnimationWrapper>
+      <MaxWidthContainer>Privacy</MaxWidthContainer>
+    </AnimationWrapper>
+  );
 };
 
 export default PrivacyPage;

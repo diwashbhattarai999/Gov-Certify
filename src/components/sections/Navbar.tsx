@@ -50,7 +50,7 @@ const Navbar = ({}: NavbarProps) => {
       <Container className="flex items-center justify-between h-full">
         <Link
           href="/"
-          className="text-3xl font-bold tracking-tight text-primary-foregroun"
+          className="text-2xl font-bold tracking-tight text-primary-foreground flex items-center gap-4"
         >
           <Image
             src="images/Emblem_of_Nepal.svg"
@@ -59,9 +59,17 @@ const Navbar = ({}: NavbarProps) => {
             height={500}
             className="w-14 h-14"
           />
+          <div>
+            <h1>
+              Gov <span>Certify</span>
+            </h1>
+            <p className="text-sm font-normal hidden md:block -tracking-[0.06em]">
+              Your Digital Gateway to Official Certificates
+            </p>
+          </div>
         </Link>
 
-        <div className="flex gap-16 text-sm font-medium max-md:hidden lg:gap-24">
+        <div className="hidden md:flex gap-16 text-sm font-medium lg:gap-24 lg:-ml-40">
           <ul className="flex items-center justify-between gap-4">
             {NAV_LINKS.map((link) => {
               return (
@@ -81,16 +89,7 @@ const Navbar = ({}: NavbarProps) => {
         </div>
         <div className="z-50 flex items-center gap-4" ref={menuRef}>
           <ul className="flex items-center justify-between gap-4">
-            {user ? (
-              <li>
-                <div
-                  onClick={() => logout()}
-                  className="p-2 transition duration-300 ease-linear rounded-md cursor-pointer hover:bg-muted"
-                >
-                  SignOut
-                </div>
-              </li>
-            ) : (
+            {!user && (
               <>
                 <li>
                   <Link

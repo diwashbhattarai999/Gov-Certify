@@ -8,7 +8,7 @@ export const NAV_LINKS = [
     path: "/contact",
   },
   {
-    label: "Privacy Policy",
-    path: "/privacy",
+    label: "FAQ",
+    path: "/faq",
   },
 ];

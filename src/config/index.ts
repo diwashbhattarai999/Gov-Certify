@@ -1,37 +1,39 @@
 import { Metadata } from "next";
 
 export const siteConfig: Metadata = {
-  title: "Good Buy",
-  metadataBase: new URL("https://example.com"), // Replace "example.com" with your actual website URL
+  title: "Gov Certify |  Your Digital Gateway to Official Certificates",
+  metadataBase: new URL("https://example.com"), //TODO: Replace "example.com" with your actual website URL
+  icons: [
+    { rel: "icon", url: "favicon.png" },
+    { rel: "apple-touch-icon", url: "/apple-icon.png" },
+  ],
+
   alternates: {
     canonical: "/",
   },
   authors: [
-    { name: "Diwash Bhattarai", url: "https://example.com/your-profile" }, // Update with your information
+    { name: "Diwash Bhattarai", url: "https://example.com/your-profile" }, //TODO: Update with your information
   ],
   description:
-    "Discover amazing deals and quality products online at Good Buy. Shop from a wide selection of items including clothing, electronics, home goods, and more. Experience hassle-free shopping and great customer service!",
+    "Gov Certify is your one-stop destination for online certificate registration with the government. Apply for various government-issued certificates hassle-free and securely.",
   openGraph: {
-    title: "Good Buy",
+    title: "Gov Certify",
     description:
-      "Discover amazing deals and quality products online at Good Buy. Shop from a wide selection of items including clothing, electronics, home goods, and more. Experience hassle-free shopping and great customer service!",
+      "Gov Certify is your one-stop destination for online certificate registration with the government. Apply for various government-issued certificates hassle-free and securely.",
     images: [
       {
-        url: "/good-buy-logo.png", // Update with your logo image URL
-        alt: "Good Buy Logo", // Update with your logo alt text
-        width: 1200, // Update with your logo width
-        height: 630, // Update with your logo height
+        url: "favicon-32x32.png",
+        alt: "Gov Certify",
+        width: 1200,
+        height: 630,
       },
     ],
   },
   keywords: [
-    "online shopping",
-    "e-commerce",
-    "deals",
-    "discounts",
-    "clothing",
-    "electronics",
-    "home goods",
-    // Add more relevant keywords related to your e-commerce website
+    "certificate registration",
+    "government certificates",
+    "online application",
+    "government services",
+    "e-governance",
   ],
 } as const;

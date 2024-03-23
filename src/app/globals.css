@@ -22,11 +22,14 @@
     --muted: 0 0% 96.1%;
     --muted-foreground: 0 0% 45.1%;
 
-    --accent: 356.96 90.8% 34.12%;
+    --accent: 357 85% 47%;
     --accent-foreground: 0 85.7% 97.3%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
+
+    --success: 122 62% 78%;
+    --success-foreground: 120 88% 14%;
 
     --border: 0 0% 89.8%;
     --input: 0 0% 89.8%;
@@ -60,6 +63,9 @@
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
 
+    --success: 122 62% 78%;
+    --success-foreground: 120 88% 14%;
+
     --border: 0 0% 14.9%;
     --input: 0 0% 14.9%;
     --ring: 0 72.2% 50.6%;
@@ -92,4 +98,24 @@
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
   }
+}
+
+.swiper-pagination-bullet {
+  width: 0.7rem !important;
+  height: 0.7rem !important;
+  border-radius: 50% !important;
+  background-color: rgb(201, 201, 201) !important;
+  opacity: 1 !important;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: rgb(46, 46, 46) !important;
+}
+
+.swiper-pagination {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: end !important;
+  width: 100% !important;
+  padding: 0 2rem 1rem 0 !important;
 }

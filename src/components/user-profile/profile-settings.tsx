@@ -31,7 +31,7 @@ const ProfileSettings = ({
 
       <div
         className={cn(
-          "absolute top-0 -right-[100%] translate-x-[12%] translate-y-1/2 z-50 flex items-center justify-center w-screen h-screen duration-300",
+          "fixed top-0 left-0 z-50 flex items-center justify-center w-screen min-h-screen duration-300",
           isProfileSettingsOpen
             ? "translate-y-0 opacity-100 pointer-events-auto"
             : "-translate-y-10 opacity-0 pointer-events-none"
@@ -39,13 +39,13 @@ const ProfileSettings = ({
       >
         <div
           ref={profileSettingsRef}
-          className="w-full max-w-screen-md gap-4 p-6 duration-200 border shadow-md w-50 full bg-background sm:rounded-lg no-scrollbar relative"
+          className="w-full max-w-screen-md max-h-screen gap-4 p-6 duration-200 border shadow-md w-50 bg-background sm:rounded-lg relative overflow-y-scroll no-scrollbar py-20"
         >
           <SettingsForm isEdit={isEdit} setIsEdit={setIsEdit} />
 
           <LuX
             className={cn(
-              "absolute top-6 right-10 w-10 h-10 rounded-md cursor-pointer hover:bg-muted p-2 duration-300",
+              "absolute top-[5.4rem] right-5 w-10 h-10 rounded-md cursor-pointer hover:bg-muted p-2 duration-300",
               isEdit && "hidden"
             )}
             onClick={() => {

@@ -59,6 +59,7 @@ const RegisterForm = () => {
       backButtonHref="/login"
       backButtonLabel="Already have an account ? Login Now"
       showSocial
+      className="mb-20 mt-10"
     >
       <form onSubmit={handleSubmit(onSubmit)}>
         {/* User Inputs -- UserName */}

@@ -1,12 +1,13 @@
 {
-  "name": "good-buy",
-  "description": "E-commerce website",
+  "name": "gov-certify",
+  "description": "Your Digital Gateway to Official Certificates",
   "author": "Diwash Bhattarai <diwashb999@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/diwashbhattarai999/good-buy"
+    "url": "https://github.com/diwashbhattarai999/Gov-Certify"
   },
   "keywords": [
+    "react",
     "nextjs",
     "mongodb",
     "prisma"
@@ -41,6 +42,7 @@
     "react-icons": "^5.0.1",
     "react-select": "^5.8.0",
     "resend": "^3.2.0",
+    "swiper": "^11.0.7",
     "tailwind-merge": "^2.2.1",
     "uploadthing": "^6.6.0",
     "uuid": "^9.0.1",
