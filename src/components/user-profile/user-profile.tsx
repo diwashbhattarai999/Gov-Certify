@@ -42,30 +42,34 @@ const UserProfile = () => {
     },
     {
       label: "Birth Certificate",
-      icon: TbCertificate ,
+      icon: TbCertificate,
       onClick: () => {
-        router.push("/my-orders");
+        router.push("/birth-certificate");
+        setIsProfileOpen(false);
       },
     },
     {
       label: "Death Certificate",
       icon: TbCertificate,
       onClick: () => {
-        router.push("/my-cancellations");
+        router.push("/death-certificate");
+        setIsProfileOpen(false);
       },
     },
     {
       label: "Marriage Certificate",
-      icon: TbCertificate ,
+      icon: TbCertificate,
       onClick: () => {
-        router.push("/my-reviews");
+        router.push("/marriage-certificate");
+        setIsProfileOpen(false);
       },
     },
     {
       label: "Migration Certificate",
       icon: TbCertificate,
       onClick: () => {
-        router.push("/my-reviews");
+        router.push("/migration-certificate");
+        setIsProfileOpen(false);
       },
     },
   ];

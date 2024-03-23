@@ -1,12 +1,14 @@
 import AnimationWrapper from "@/components/animations/page-animation";
 import MaxWidthContainer from "@/components/max-width-container";
 
-const PrivacyPage = () => {
+const DeathCertificatePage = () => {
   return (
     <AnimationWrapper>
-      <MaxWidthContainer>Privacy</MaxWidthContainer>
+      <MaxWidthContainer>
+        <div>DeathCertificatePage</div>
+      </MaxWidthContainer>
     </AnimationWrapper>
   );
 };
 
-export default PrivacyPage;
+export default DeathCertificatePage;
