@@ -7,9 +7,8 @@ Welcome to GovCertify Portal! This platform is an online certificate registratio
 - **User Authentication**: Secure login and registration system for users.
 - **Certificate Application**: User-friendly form for applying for government-issued certificates.
 - **Document Verification**: System for government officials to verify uploaded documents and process applications.
-- **Payment Integration**: Integration of a payment gateway for processing application fees.
 - **Application Tracking**: Allows users to track the status of their certificate applications.
-- **Notifications**: Email or SMS notifications to keep users informed about application status.
+- **Notifications**: Email notifications to keep users informed about application status.
 - **FAQs and Support**: Comprehensive FAQs and support channels to assist users with queries.
 
 ## Technologies Used
