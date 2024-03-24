@@ -6,7 +6,7 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
     <div className="flex flex-col items-center justify-center">
       <Link
         href="/"
-        className="text-2xl font-bold tracking-tight text-primary-foreground max-md:flex items-center gap-4 mt-8 md:hidden"
+        className="text-2xl font-bold tracking-tight text-primary-foreground max-md:flex items-center gap-4 my-8 md:hidden"
       >
         <Image
           src="images/Emblem_of_Nepal.svg"
@@ -19,7 +19,7 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
           <h1>
             Gov <span>Certify</span>
           </h1>
-          <p className="text-sm font-normal hidden md:block -tracking-[0.06em]">
+          <p className="text-sm font-normal -tracking-[0.06em]">
             Your Digital Gateway to Official Certificates
           </p>
         </div>

@@ -62,7 +62,10 @@ const ChangeProfileImg = ({
                 toast.error(`ERROR! ${error.message}`);
               }}
             />
-            <Button onClick={handleProfileDelete} className="w-32">
+            <Button
+              onClick={handleProfileDelete}
+              className="w-32 bg-destructive text-destructive-foreground"
+            >
               Delete
             </Button>
           </div>
