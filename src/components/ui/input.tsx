@@ -1,6 +1,6 @@
 "use client";
 
-import { HTMLInputTypeAttribute, useState } from "react";
+import { HTMLInputTypeAttribute, ReactPropTypes, useState } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
 import { LuEye, LuEyeOff } from "react-icons/lu";
 import { IconType } from "react-icons/lib";

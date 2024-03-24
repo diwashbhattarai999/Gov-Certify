@@ -1,5 +1,5 @@
 import * as z from "zod";
-import { UserRole } from "@prisma/client";
+import { Gender, UserRole } from "@prisma/client";
 
 export const LoginSchema = z.object({
   email: z
@@ -28,6 +28,11 @@ export const RegisterSchema = z
       .refine((name) => name.length > 3 && name.length < 255, {
         message: "Full name must be between 3 and 255 characters",
       }),
+    gender: z.enum([Gender.MALE, Gender.FEMALE, Gender.OTHERS]),
+    phoneNumber: z
+      .string()
+      .min(10, { message: "Phone Number requires 10 digits." })
+      .max(10, { message: "Phone Number requires 10 digits." }),
     email: z
       .string()
       .trim()

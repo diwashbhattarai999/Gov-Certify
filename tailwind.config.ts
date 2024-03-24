@@ -28,7 +28,7 @@ const config: Config = {
           foreground: "hsl(var(--primary-foreground))",
         },
         secondary: {
-          DEFAULT: "hsl*(var(--secondary))",
+          DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",
         },
         muted: {
@@ -44,7 +44,7 @@ const config: Config = {
           foreground: "hsl(var(--destructive-foreground))",
         },
         success: {
-          DEFAULT: "hsl(var(--successs))",
+          DEFAULT: "hsl(var(--success))",
           foreground: "hsl(var(--success-foreground))",
         },
         border: {

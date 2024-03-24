@@ -5,7 +5,13 @@ import { useState, useTransition } from "react";
 import * as z from "zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { LuKeyRound, LuMail, LuUserCircle } from "react-icons/lu";
+import {
+  LuKeyRound,
+  LuMail,
+  LuPhone,
+  LuUserCircle,
+  LuUserPlus,
+} from "react-icons/lu";
 
 import { register } from "@/actions/register";
 
@@ -16,18 +22,32 @@ import Button from "@/components/ui/Button";
 import FormError from "@/components/ui/form-error";
 import FormSuccess from "@/components/ui/form-success";
 import CardWrapper from "@/components/ui/card-wrapper";
+import Select from "../ui/select";
+import { Gender } from "@prisma/client";
 
-const defaultValues = {
+type DefaultValuesType = {
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  gender: Gender;
+  phoneNumber: string;
+};
+
+const defaultValues: DefaultValuesType = {
   name: "",
   email: "",
   password: "",
   confirmPassword: "",
+  gender: Gender.MALE,
+  phoneNumber: "",
 };
 
 const RegisterForm = () => {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
+  const [selectGender, setSelectGender] = useState("Select a gender");
 
   const {
     register: reg,
@@ -85,6 +105,37 @@ const RegisterForm = () => {
           disabled={isPending}
           register={reg("email")}
         />
+
+        {/* User Inputs -- Gender */}
+        <Select
+          selectLabel="Gender"
+          name="gender"
+          value={selectGender}
+          setSelectValue={setSelectGender}
+          Icon={LuUserPlus}
+          error={errors.gender?.message}
+          disabled={isPending}
+          options={[
+            { label: "Male", value: "MALE" },
+            { label: "Female", value: "FEMALE" },
+            { label: "Others", value: "OTHERS" },
+          ]}
+          register={reg("gender")}
+        />
+
+        {/* User Inputs -- Phone Number */}
+        <Input
+          label="Phone Number"
+          name="phoneNumber"
+          type="number"
+          placeholder="+977 9876543210"
+          icon={LuPhone}
+          error={errors.phoneNumber?.message}
+          disabled={isPending}
+          register={reg("phoneNumber")}
+        />
+
+        {/* //TODO: Add Date of birth field */}
 
         {/* User Inputs -- Password */}
         <Input

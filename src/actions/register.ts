@@ -18,7 +18,8 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
     return { error: "Invalid fields!" };
   }
 
-  const { email, name, password, confirmPassword } = validatedFields.data;
+  const { email, name, password, confirmPassword, gender } =
+    validatedFields.data;
 
   if (password !== confirmPassword) {
     return { error: "Passwords do not match!" };
@@ -37,6 +38,7 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
       name,
       email,
       password: hashedPassword,
+      gender,
     },
   });
 

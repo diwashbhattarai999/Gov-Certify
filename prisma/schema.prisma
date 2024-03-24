@@ -13,12 +13,21 @@ enum UserRole {
   USER
 }
 
+enum Gender {
+  MALE
+  FEMALE
+  OTHERS
+}
+
 model User {
   id                      String                 @id @default(auto()) @map("_id") @db.ObjectId
   name                    String?
   email                   String?                @unique
   emailVerified           DateTime?
   image                   String?
+  gender                  Gender?
+  phoneNo                 String?
+  dateOfBirth             DateTime?
   password                String?
   role                    UserRole               @default(USER)
   accounts                Account[]

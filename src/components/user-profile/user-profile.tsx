@@ -6,13 +6,7 @@ import Image from "next/image";
 import { logout } from "@/actions/logout";
 
 import { useCurrentUser } from "@/hooks/use-current-user";
-import {
-  LuLogOut,
-  LuUserCircle2,
-  LuShoppingBag,
-  LuXCircle,
-  LuStar,
-} from "react-icons/lu";
+import { LuLogOut, LuUserCircle2 } from "react-icons/lu";
 import { TbCertificate } from "react-icons/tb";
 
 import MotionUserProfile from "../animations/user-profile-animation";
