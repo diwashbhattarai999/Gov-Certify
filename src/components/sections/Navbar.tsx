@@ -118,7 +118,7 @@ const Navbar = ({}: NavbarProps) => {
           </ul>
 
           <div
-            className="flex-col gap-1 px-2 py-1 duration-300 rounded-sm cursor-pointer lex md:hidden hover:bg-muted"
+            className="flex-col gap-1 px-2 py-1 duration-300 rounded-sm cursor-pointer lex md:hidden hover:bg-muted z-30"
             onClick={handleMenu}
           >
             {isMenuOpen ? <CgClose size={24} /> : <CgMenuRight size={24} />}

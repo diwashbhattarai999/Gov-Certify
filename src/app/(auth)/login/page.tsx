@@ -10,7 +10,7 @@ const LoginPage = () => {
     <Suspense>
       <AnimationWrapper>
         <div className="flex h-screen">
-          <div className="basis-[60%] h-full overflow-hidden">
+          <div className="lg:basis-[60%] lg:h-full lg:overflow-hidden max-lg:hidden">
             <SwiperWrapper>
               <Image
                 src="/images/auth-bg.jpeg"
@@ -28,7 +28,7 @@ const LoginPage = () => {
               />
             </SwiperWrapper>
           </div>
-          <div className="basis-[40%] overflow-y-auto no-scrollbar ">
+          <div className="lg:basis-[40%] lg:overflow-y-auto lg:no-scrollbar max-lg:w-full">
             <LoginForm />
           </div>
         </div>

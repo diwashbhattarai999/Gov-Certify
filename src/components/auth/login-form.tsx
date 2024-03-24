@@ -2,6 +2,7 @@
 
 import { useState, useTransition } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -72,82 +73,104 @@ const LoginForm = () => {
   };
 
   return (
-    <CardWrapper
-      headerLabel={showTwoFactor ? "Two Factor Code" : "Login"}
-      subHeaderLabel={showTwoFactor ? "" : "Welcome back"}
-      backButtonHref="/register"
-      backButtonLabel="Don't have an account ? Register Now"
-      showSocial={showTwoFactor ? false : true}
-      disabled={isPending}
-    >
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col items-start"
+    <>
+      <Link
+        href="/"
+        className="text-2xl font-bold tracking-tight text-primary-foreground md:flex items-center justify-center gap-4 my-8 max-md:hidden"
       >
-        {/* 2FA  */}
-
-        {showTwoFactor ? (
-          <>
-            {/* 2FA */}
-            {/* User Inputs -- Code */}
-            <Input
-              label="2FA Code"
-              name="code"
-              type="number"
-              placeholder="Code"
-              icon={LuHash}
-              error={errors.code?.message}
-              disabled={isPending}
-              register={register("code")}
-            />
-          </>
-        ) : (
-          <>
-            {/* User Inputs -- Email */}
-            <Input
-              label="Email"
-              name="email"
-              type="email"
-              placeholder="Email"
-              icon={LuMail}
-              error={errors.email?.message}
-              disabled={isPending}
-              register={register("email")}
-            />
-
-            {/* User Inputs -- Password */}
-            <Input
-              label="Password"
-              name="password"
-              type="password"
-              placeholder="******"
-              icon={LuKeyRound}
-              error={errors.password?.message}
-              disabled={isPending}
-              register={register("password")}
-            />
-          </>
-        )}
-
-        {/* Sucess Message */}
-        {success && <FormSuccess message={success} />}
-
-        {/* Error Message */}
-        {error && <FormError message={error || urlError} />}
-
-        <Link
-          href="/reset"
-          className="underline text-secondary-foreground hover:text-primary-foreground text-sm mb-6"
+        <Image
+          src="images/Emblem_of_Nepal.svg"
+          alt="Logo"
+          width={500}
+          height={500}
+          className="w-14 h-14"
+        />
+        <div>
+          <h1>
+            Gov <span>Certify</span>
+          </h1>
+          <p className="text-sm font-normal -tracking-[0.06em]">
+            Your Digital Gateway to Official Certificates
+          </p>
+        </div>
+      </Link>
+      <CardWrapper
+        headerLabel={showTwoFactor ? "Two Factor Code" : "Login"}
+        subHeaderLabel={showTwoFactor ? "" : "Welcome back"}
+        backButtonHref="/register"
+        backButtonLabel="Don't have an account ? Register Now"
+        showSocial={showTwoFactor ? false : true}
+        disabled={isPending}
+      >
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex flex-col items-start"
         >
-          Forgot Password?
-        </Link>
+          {/* 2FA  */}
 
-        {/* Submit Button */}
-        <Button disabled={isPending} type="submit" full>
-          {showTwoFactor ? "Confirm" : "Login"}
-        </Button>
-      </form>
-    </CardWrapper>
+          {showTwoFactor ? (
+            <>
+              {/* 2FA */}
+              {/* User Inputs -- Code */}
+              <Input
+                label="2FA Code"
+                name="code"
+                type="number"
+                placeholder="Code"
+                icon={LuHash}
+                error={errors.code?.message}
+                disabled={isPending}
+                register={register("code")}
+              />
+            </>
+          ) : (
+            <>
+              {/* User Inputs -- Email */}
+              <Input
+                label="Email"
+                name="email"
+                type="email"
+                placeholder="Email"
+                icon={LuMail}
+                error={errors.email?.message}
+                disabled={isPending}
+                register={register("email")}
+              />
+
+              {/* User Inputs -- Password */}
+              <Input
+                label="Password"
+                name="password"
+                type="password"
+                placeholder="******"
+                icon={LuKeyRound}
+                error={errors.password?.message}
+                disabled={isPending}
+                register={register("password")}
+              />
+            </>
+          )}
+
+          {/* Sucess Message */}
+          {success && <FormSuccess message={success} />}
+
+          {/* Error Message */}
+          {error && <FormError message={error || urlError} />}
+
+          <Link
+            href="/reset"
+            className="underline text-secondary-foreground hover:text-primary-foreground text-sm mb-6"
+          >
+            Forgot Password?
+          </Link>
+
+          {/* Submit Button */}
+          <Button disabled={isPending} type="submit" full>
+            {showTwoFactor ? "Confirm" : "Login"}
+          </Button>
+        </form>
+      </CardWrapper>
+    </>
   );
 };
 

@@ -21,7 +21,7 @@ const MobileMenu = ({
   return (
     <div
       className={`
-        absolute top-0 right-0 border-l border-l-border bg-popover text-popover-foreground py-16 px-8 h-screen w-[65%] md:hidden transition-all ease duration-500 z-20 shadow-md flex justify-center
+        absolute top-0 right-0 border-l border-l-border bg-popover text-popover-foreground py-16 px-8 h-screen w-[65%] md:hidden transition-all ease duration-500 z-20 shadow-md max-md:flex justify-center
         ${isMenuOpen ? "translate-x-0" : "translate-x-[100vw]"} 
     `}
     >
