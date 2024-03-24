@@ -222,23 +222,35 @@ const SettingsForm = ({ isEdit, setIsEdit }: SettingsFormProp) => {
             </div>
 
             <div className="flex items-center my-1 py-2">
-              <h2 className="text-primary-foreground font-medium text-lg w-32">
+              <h2 className="text-primary-foreground font-medium text-lg w-36">
                 Username
               </h2>
               <p className="text-muted-foreground  pt-1">{user?.name}</p>
             </div>
 
             <div className="flex items-center my-1 py-2">
-              <h2 className="text-primary-foreground font-medium text-lg w-32">
+              <h2 className="text-primary-foreground font-medium text-lg w-36">
                 Email
               </h2>
               <p className="text-muted-foreground  pt-1">{user?.email}</p>
             </div>
             <div className="flex items-center my-1 py-2">
-              <h2 className="text-primary-foreground font-medium text-lg w-32">
+              <h2 className="text-primary-foreground font-medium text-lg w-36">
                 Role
               </h2>
               <p className="text-muted-foreground  pt-1">{user?.role}</p>
+            </div>
+            <div className="flex items-center my-1 py-2">
+              <h2 className="text-primary-foreground font-medium text-lg w-36">
+                Phone Number
+              </h2>
+              <p className="text-muted-foreground  pt-1">{user?.phoneNumber}</p>
+            </div>
+            <div className="flex items-center my-1 py-2">
+              <h2 className="text-primary-foreground font-medium text-lg w-36">
+                Gender
+              </h2>
+              <p className="text-muted-foreground  pt-1">{user?.gender}</p>
             </div>
           </div>
         </AnimationWrapper>
