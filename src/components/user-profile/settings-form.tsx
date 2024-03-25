@@ -214,7 +214,7 @@ const SettingsForm = ({ isEdit, setIsEdit }: SettingsFormProp) => {
       ) : (
         <AnimationWrapper initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           <div className="z-0 flex flex-col items-start my-5">
-            <div className="flex justify-between items-center w-full py-2 border-b border-b-border">
+            <div className="flex max-md:flex-col justify-between items-center w-full py-2 border-b border-b-border">
               <ChangeProfileImg value={defaultValues.image} />
               <Button className="w-32" onClick={() => setIsEdit(true)}>
                 Edit Profile
