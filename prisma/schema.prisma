@@ -19,6 +19,27 @@ enum Gender {
   OTHERS
 }
 
+enum Relationship {
+  FATHER
+  MOTHER
+  BROTHER
+  SISTER
+  UNCLE
+  AUNT
+  GRANDFATHER
+  GRANDMOTHER
+  SON
+  DAUGHTER
+  SPOUSE
+  SELF
+  OTHERS
+}
+
+enum DeliveryOption {
+  DELIVERY
+  PICK_UP
+}
+
 model User {
   id                      String                 @id @default(auto()) @map("_id") @db.ObjectId
   name                    String?
@@ -34,6 +55,7 @@ model User {
   isTwoFactorEnabled      Boolean                @default(false)
   twoFactorConfirmation   TwoFactorConfirmation?
   twoFactorConfirmationId String?                @db.ObjectId
+  BirthCertificate        BirthCertificate[]
 }
 
 model Account {
@@ -89,4 +111,57 @@ model TwoFactorConfirmation {
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId])
+}
+
+model BirthCertificate {
+  id                   String           @id @default(auto()) @map("_id") @db.ObjectId
+  userId               String           @db.ObjectId
+  requesterId          String           @db.ObjectId
+  firstName            String
+  middleName           String?
+  lastName             String
+  placeOfBirthCountry  String
+  placeOfBirthProvince String
+  placeOfBirthCity     String
+  DateOfBirth          DateTime
+  gender               Gender
+  fatherFirstName      String
+  fatherMiddleName     String?
+  fatherLastName       String
+  motherFirstName      String
+  motherMiddleName     String?
+  motherLastName       String
+  deliveryDetails      DeliveryDetails?
+
+  requester Requester @relation(fields: [requesterId], references: [id])
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, requesterId])
+}
+
+model Requester {
+  id                  String             @id @default(auto()) @map("_id") @db.ObjectId
+  firstName           String
+  middleName          String?
+  lastName            String
+  email               String
+  mobileNumber        String
+  relationshipToOwner Relationship
+  BirthCertificate    BirthCertificate[]
+}
+
+model DeliveryDetails {
+  id                   String         @id @default(auto()) @map("_id") @db.ObjectId
+  deliveryOption       DeliveryOption
+  deliveryProvince     String
+  deliveryDistrict     String
+  deliveryAddress      String
+  deliveryMunicipality String?
+  deliveryWard         String?
+  deliveryPostalCode   String
+
+  birthCertificate   BirthCertificate? @relation(fields: [birthCertificateId], references: [id])
+  birthCertificateId String            @db.ObjectId
+
+  @@unique([birthCertificateId])
 }
