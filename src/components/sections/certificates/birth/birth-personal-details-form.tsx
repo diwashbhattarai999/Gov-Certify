@@ -8,7 +8,7 @@ type TFormValues = {
 };
 
 const BirthPersonalDetailsForm = () => {
-  const { onHandleNext, setFormData, onHandleBack, formData } = useFormState();
+  const { onHandleNext, setFormData, formData } = useFormState();
   const { register, handleSubmit } = useForm<TFormValues>({
     defaultValues: formData,
   });
@@ -34,13 +34,6 @@ const BirthPersonalDetailsForm = () => {
         type="email"
       />
       <div className="flex gap-4 justify-end mt-4">
-        <button
-          type="button"
-          onClick={onHandleBack}
-          className="h-11 px-6 inline-block bg-blue-600 font-semibold text-white rounded-md"
-        >
-          Back
-        </button>
         <button className="h-11 px-6 inline-block bg-blue-600 font-semibold text-white rounded-md">
           Next
         </button>
