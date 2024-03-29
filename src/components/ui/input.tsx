@@ -71,10 +71,11 @@ const Input = ({
             id={name}
             disabled={disabled}
             className={cn(
-              "w-full h-full py-4 pl-10 bg-transparent border rounded-md text-primary-foreground placeholder:text-secondary-foreground outline-none disabled:cursor-not-allowed disabled:opacity-50",
+              "w-full h-full bg-transparent border rounded-md text-primary-foreground placeholder:text-secondary-foreground outline-none disabled:cursor-not-allowed disabled:opacity-50",
               error
                 ? "border-destructive focus:border-destructive"
-                : "border-input focus:border-secondary-foreground"
+                : "border-input focus:border-secondary-foreground",
+              Icon ? "pl-10 py-4" : "px-4 py-2"
             )}
           />
         </div>

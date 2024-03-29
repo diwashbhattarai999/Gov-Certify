@@ -123,7 +123,7 @@ model BirthCertificate {
   placeOfBirthCountry  String
   placeOfBirthProvince String
   placeOfBirthCity     String
-  DateOfBirth          DateTime
+  DateOfBirth          String
   gender               Gender
   fatherFirstName      String
   fatherMiddleName     String?
@@ -140,14 +140,14 @@ model BirthCertificate {
 }
 
 model Requester {
-  id                  String             @id @default(auto()) @map("_id") @db.ObjectId
-  firstName           String
-  middleName          String?
-  lastName            String
-  email               String
-  mobileNumber        String
-  relationshipToOwner Relationship
-  BirthCertificate    BirthCertificate[]
+  id                           String             @id @default(auto()) @map("_id") @db.ObjectId
+  requesterFirstName           String
+  requesterMiddleName          String?
+  requesterLastName            String
+  requesterEmail               String
+  requesterMobileNumber        String
+  requesterRelationshipToOwner Relationship
+  BirthCertificate             BirthCertificate[]
 }
 
 model DeliveryDetails {
@@ -158,7 +158,7 @@ model DeliveryDetails {
   deliveryAddress      String
   deliveryMunicipality String?
   deliveryWard         String?
-  deliveryPostalCode   String
+  deliveryPostalCode   String?
 
   birthCertificate   BirthCertificate? @relation(fields: [birthCertificateId], references: [id])
   birthCertificateId String            @db.ObjectId

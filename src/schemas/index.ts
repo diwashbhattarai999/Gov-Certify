@@ -143,3 +143,91 @@ export const SettingsSchema = z
       path: ["newPassword"],
     }
   );
+
+export const PersonalDetailsSchema = z.object({
+  firstName: z.string().trim().min(1, { message: "First name is required" }),
+  middleName: z.string().trim().optional(),
+  lastName: z.string().trim().min(1, { message: "Last name is required" }),
+
+  placeOfBirthCountry: z
+    .string()
+    .trim()
+    .min(1, { message: "Country is required" }),
+  placeOfBirthProvince: z
+    .string()
+    .trim()
+    .min(1, { message: "Province is required" }),
+  placeOfBirthCity: z.string().trim().min(1, { message: "City is required" }),
+
+  dateOfBirth: z.string().min(1, { message: "Date of Birth is required" }),
+
+  gender: z.enum(["MALE", "FEMALE", "OTHERS"]),
+
+  fatherFirstName: z
+    .string()
+    .trim()
+    .min(1, { message: "Father's first name is required" }),
+  fatherMiddleName: z.string().trim().optional(),
+  fatherLastName: z
+    .string()
+    .trim()
+    .min(1, { message: "Father's last name is required" }),
+
+  motherFirstName: z
+    .string()
+    .trim()
+    .min(1, { message: "Mother's first name is required" }),
+  motherMiddleName: z.string().trim().optional(),
+  motherLastName: z
+    .string()
+    .trim()
+    .min(1, { message: "Mother's last name is required" }),
+});
+
+export const RequesterDetailsSchema = z.object({
+  requesterFirstName: z
+    .string()
+    .trim()
+    .min(1, { message: "First name is required" }),
+  requesterMiddleName: z.string().trim().optional(),
+  requesterLastName: z
+    .string()
+    .trim()
+    .min(1, { message: "Last name is required" }),
+  requesterEmail: z.string().trim().min(1, { message: "Email is required" }),
+  requesterMobileNumber: z
+    .string()
+    .trim()
+    .min(1, { message: "Phone number is required" }),
+  requesterRelationshipToOwner: z.enum([
+    "FATHER",
+    "MOTHER",
+    "BROTHER",
+    "SISTER",
+    "UNCLE",
+    "AUNT",
+    "GRANDFATHER",
+    "GRANDMOTHER",
+    "SON",
+    "DAUGHTER",
+    "SPOUSE",
+    "SELF",
+    "OTHERS",
+  ]),
+});
+
+export const DeliveryDetailsSchema = z.object({
+  DeliveryOption: z.enum(["DELIVERY", "PICK_UP"]),
+  deliveryProvince: z
+    .string()
+    .trim()
+    .min(1, { message: "Province is required" }),
+  deliveryDistrict: z
+    .string()
+    .trim()
+    .min(1, { message: "District is required" }),
+  deliveryAddress: z.string().trim().min(1, { message: "Address is required" }),
+  deliveryMunicipality: z.string().trim().optional(),
+  deliveryWard: z.string().trim().optional(),
+  deliveryPostalCode: z.string().trim().optional(),
+});

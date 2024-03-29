@@ -7,9 +7,13 @@ import {
   useState,
 } from "react";
 
+import { IBirthFormData } from "@/types";
+
+type IFormData = IBirthFormData;
+
 interface IFormContext {
-  formData: any;
-  setFormData: Dispatch<SetStateAction<any>>;
+  formData: IFormData;
+  setFormData: Dispatch<SetStateAction<IFormData>>;
   resetFormData: () => void;
   onHandleBack: () => void;
   onHandleNext: () => void;
@@ -17,7 +21,7 @@ interface IFormContext {
 }
 
 const FormContext = createContext<IFormContext>({
-  formData: {},
+  formData: {} as IFormData,
   onHandleBack: () => {},
   onHandleNext: () => {},
   setFormData: () => {},
@@ -27,10 +31,11 @@ const FormContext = createContext<IFormContext>({
 
 interface IProps {
   children: ReactNode;
+  initialFormData: IFormData;
 }
 
-export function FormProvider({ children }: IProps) {
-  const [formData, setFormData] = useState<any>({});
+export function FormProvider({ children, initialFormData }: IProps) {
+  const [formData, setFormData] = useState<IFormData>(initialFormData);
   const [step, setStep] = useState(1);
 
   function onHandleNext() {
@@ -42,7 +47,7 @@ export function FormProvider({ children }: IProps) {
   }
 
   function resetFormData() {
-    setFormData({});
+    setFormData(initialFormData);
   }
 
   return (

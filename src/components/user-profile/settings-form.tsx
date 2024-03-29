@@ -9,8 +9,8 @@ import {
   LuArrowLeftCircle,
   LuKeyRound,
   LuMail,
-  LuSettings,
   LuUserCircle2,
+  LuUserCog2,
 } from "react-icons/lu";
 import { useSession } from "next-auth/react";
 
@@ -175,6 +175,7 @@ const SettingsForm = ({ isEdit, setIsEdit }: SettingsFormProp) => {
               <Select
                 selectLabel="Role"
                 name="role"
+                Icon={LuUserCog2}
                 value={selectValue}
                 setSelectValue={setSelectValue}
                 error={errors.role?.message}
