@@ -7,12 +7,16 @@ import {
   authRoutes,
   publicRoutes,
 } from "@/routes";
+import { currentRole } from "./lib/auth";
+import { UserRole } from "@prisma/client";
 
 const { auth } = NextAuth(authConfig);
 
 export default auth(async (req) => {
   const { nextUrl } = req;
   const isLoggedIn = !!req.auth;
+
+  const role = await currentRole();
 
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
   const isPublicRoute = publicRoutes.includes(nextUrl.pathname);
@@ -43,6 +47,10 @@ export default auth(async (req) => {
 
   if (isLoggedIn && isAdmin) {
     return Response.redirect(new URL("/admin/dashboard", nextUrl));
+  }
+
+  if (isLoggedIn && role === UserRole.ADMIN) {
+    return Response.redirect(new URL("/admin/dashboard"));
   }
 });
 

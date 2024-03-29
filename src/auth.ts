@@ -75,8 +75,6 @@ export const {
         session.user.dateOfBirth = token.dateOfBirth as Date;
       }
 
-      console.log(session.user);
-
       return session;
     },
     async jwt({ token }) {
