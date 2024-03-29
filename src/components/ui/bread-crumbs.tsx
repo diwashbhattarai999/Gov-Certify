@@ -12,7 +12,7 @@ interface BreadCrumbProps {
   capitalizeLinks?: boolean;
 }
 
-const Breadcrumb = ({
+const Breadcrumbs = ({
   containerClasses,
   listClasses,
   activeClasses,
@@ -49,4 +49,4 @@ const Breadcrumb = ({
   );
 };
 
-export default Breadcrumb;
+export default Breadcrumbs;
