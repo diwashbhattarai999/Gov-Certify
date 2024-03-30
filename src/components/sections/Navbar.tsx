@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Fira_Sans } from "next/font/google";
+import Link from "next/link";
+import Image from "next/image";
 import { CgMenuRight, CgClose } from "react-icons/cg";
-
-import { logout } from "@/actions/logout";
 
 import { NAV_LINKS } from "@/constants";
 
@@ -14,8 +14,9 @@ import { useCurrentUser } from "@/hooks/use-current-user";
 
 import Container from "@/components/max-width-container";
 import MobileMenu from "@/components/ui/mobile-menu";
-import UserProfile from "../user-profile/user-profile";
-import Image from "next/image";
+import UserProfile from "@/components/user-profile/user-profile";
+
+const font = Fira_Sans({ subsets: ["latin"], weight: ["400", "500", "600"] });
 
 interface NavbarProps {}
 
@@ -59,7 +60,7 @@ const Navbar = ({}: NavbarProps) => {
             height={500}
             className="w-14 h-14"
           />
-          <div>
+          <div className={font.className}>
             <h1>
               Gov <span>Certify</span>
             </h1>

@@ -73,7 +73,7 @@ const BirthPersonalDetailsForm = () => {
       </div>
 
       <div className="flex max-md:flex-col gap-4">
-        {/* User Inputs -- First Name */}
+        {/* User Inputs -- Place of Birth (Country) */}
         <Input
           label="Place of Birth (Country)"
           name="placeOfBirthCountry"
@@ -83,7 +83,7 @@ const BirthPersonalDetailsForm = () => {
           register={register("placeOfBirthCountry")}
         />
 
-        {/* User Inputs -- Middle Name */}
+        {/* User Inputs -- Place of Birth (Province) */}
         <Input
           label="Place of Birth (Province)"
           name="placeOfBirthProvince"
@@ -93,7 +93,7 @@ const BirthPersonalDetailsForm = () => {
           register={register("placeOfBirthProvince")}
         />
 
-        {/* User Inputs -- Last Name */}
+        {/* User Inputs -- Place of Birth (City) */}
         <Input
           label="Place of Birth (City)"
           name="placeOfBirthCity"
@@ -105,7 +105,7 @@ const BirthPersonalDetailsForm = () => {
       </div>
 
       <div className="flex max-md:flex-col gap-4">
-        {/* User Inputs -- First Name */}
+        {/* User Inputs -- Date of Birth */}
         <Input
           label="Date of Birth"
           name="dateOfBirth"
@@ -115,7 +115,7 @@ const BirthPersonalDetailsForm = () => {
           register={register("dateOfBirth")}
         />
 
-        {/* User Inputs -- First Name */}
+        {/* User Inputs -- Gender */}
         <Select
           selectLabel="Gender"
           name="gender"
@@ -132,7 +132,7 @@ const BirthPersonalDetailsForm = () => {
       </div>
 
       <div className="flex max-md:flex-col gap-4">
-        {/* User Inputs -- First Name */}
+        {/* User Inputs -- Father's FirstName */}
         <Input
           label="Father's FirstName"
           name="fatherFirstName"
@@ -142,7 +142,7 @@ const BirthPersonalDetailsForm = () => {
           register={register("fatherFirstName")}
         />
 
-        {/* User Inputs -- Middle Name */}
+        {/* User Inputs -- Father's MiddleName */}
         <Input
           label="Father's MiddleName (Optional)"
           name="fatherMiddleName"
@@ -152,7 +152,7 @@ const BirthPersonalDetailsForm = () => {
           register={register("fatherMiddleName")}
         />
 
-        {/* User Inputs -- Middle Name */}
+        {/* User Inputs -- Father's LastName */}
         <Input
           label="Father's LastName"
           name="fatherLastName"
@@ -164,7 +164,7 @@ const BirthPersonalDetailsForm = () => {
       </div>
 
       <div className="flex max-md:flex-col gap-4">
-        {/* User Inputs -- First Name */}
+        {/* User Inputs -- Mother's FirstName */}
         <Input
           label="Mother's FirstName"
           name="motherFirstName"
@@ -174,7 +174,7 @@ const BirthPersonalDetailsForm = () => {
           register={register("motherFirstName")}
         />
 
-        {/* User Inputs -- Middle Name */}
+        {/* User Inputs -- Mother's MiddleName */}
         <Input
           label="Mother's MiddleName (Optional)"
           name="motherMiddleName"
@@ -184,7 +184,7 @@ const BirthPersonalDetailsForm = () => {
           register={register("motherMiddleName")}
         />
 
-        {/* User Inputs -- Middle Name */}
+        {/* User Inputs -- Mother's LastName */}
         <Input
           label="Mother's LastName"
           name="motherLastName"

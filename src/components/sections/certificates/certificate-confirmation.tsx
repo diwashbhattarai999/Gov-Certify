@@ -3,10 +3,14 @@ import { LuX } from "react-icons/lu";
 
 interface ICertificateConfirmationProps {
   setShowConfirmation: React.Dispatch<React.SetStateAction<boolean>>;
+  handleSubmit: () => void;
+  isPending: boolean;
 }
 
 const CertificateConfirmation = ({
   setShowConfirmation,
+  handleSubmit,
+  isPending,
 }: ICertificateConfirmationProps) => {
   return (
     <div className="fixed top-0 left-0 bg-black/40 h-screen w-full z-50 backdrop-blur-sm flex items-center justify-center">
@@ -61,11 +65,20 @@ const CertificateConfirmation = ({
           <Button
             className="w-36"
             destructive
-            onClick={() => setShowConfirmation(false)}
+            onClick={() => {
+              setShowConfirmation(false);
+            }}
           >
             No, Cancel
           </Button>
-          <Button className="w-36" onClick={() => setShowConfirmation(false)}>
+          <Button
+            className="w-36"
+            onClick={() => {
+              handleSubmit();
+              setShowConfirmation(false);
+            }}
+            disabled={isPending}
+          >
             Yes, I Agree
           </Button>
         </div>

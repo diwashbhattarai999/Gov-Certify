@@ -53,9 +53,6 @@ const Select = ({
     onChange && onChange(option.value);
   };
 
-  const defaultOption: Options = { value: "", label: "Select..." };
-  const optionsWithDefault = [defaultOption, ...options];
-
   return (
     <div
       className={cn(
@@ -107,16 +104,16 @@ const Select = ({
 
       <div
         className={cn(
-          "w-full h-fit bg-background shadow-md absolute left-0 top-[4.8rem] py-2 rounded-md text-left duration-300 z-50 overflow-y-auto max-h-62",
+          "w-full h-fit bg-primary shadow-md absolute left-0 top-[4.8rem] py-2 rounded-md text-left duration-300 z-50 overflow-y-auto max-h-60",
           selectOpen
             ? "translate-y-0 opacity-100 h-auto pointer-events-auto"
             : "-translate-y-5 opacity-0 -h-4 pointer-events-none"
         )}
       >
-        {optionsWithDefault.map((option) => (
+        {options.map((option) => (
           <div
             key={option.value}
-            className="py-3 hover:bg-primary cursor-pointer rounded-md px-10 duration-300 m-2 capitalize flex justify-between group"
+            className="py-3 hover:bg-background cursor-pointer rounded-md px-10 duration-300 m-2 capitalize flex justify-between group"
             onClick={() => handleSelect(option)}
           >
             <p className="flex-1 group-hover:text-foreground">{option.label}</p>

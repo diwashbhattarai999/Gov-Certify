@@ -1,29 +1,37 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import * as z from "zod";
 
 import { useFormState } from "@/context/form-context";
 
 import CertificateConfirmation from "../certificate-confirmation";
 import Button from "@/components/ui/Button";
 import CertificateSuccess from "../certificate-success";
+import {
+  DeliveryDetailsSchema,
+  PersonalDetailsSchema,
+  RequesterDetailsSchema,
+} from "@/schemas";
+import { IBirthFormData } from "@/types";
+import { birth } from "@/actions/certificates/birth";
 
 const BirthFormSummary = () => {
   const [showConfirmation, setShowConfirmation] = useState(false);
-  const [showSuccess, setShowSucess] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
   const [isPending, startTransition] = useTransition();
   const { formData, onHandleBack, onHandleNext } = useFormState();
 
   const handleSubmit = () => {
     startTransition(() => {
-      setShowConfirmation(true);
-
-      // TODO: Call a server action and pass the formData
-
-      console.log(formData);
-
-      // TODO: setShowSuccess(true) in then of server action
-      setShowSucess(true);
+      birth(formData)
+        .then((res) => {
+          setShowSuccess(true);
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     });
   };
 
@@ -35,63 +43,79 @@ const BirthFormSummary = () => {
         </h1>
 
         <div className="flex flex-col gap-8">
-          {/* Personal Detail's */}
-          <div className="flex flex-col gap-3 pb-2 border-b border-border">
-            <h3 className="text-lg text-primary-foreground">
-              Personal Details:
-            </h3>
-            <div className="flex items-center">
-              <h2 className="text-primary-foreground w-36">{`Applicant's Name`}</h2>
-              <p className="text-muted-foreground">{formData.firstName}</p>
-            </div>
-          </div>
-
-          {/* Requester Detail's */}
-          <div className="flex flex-col gap-3 pb-2 border-b border-border">
-            <h3 className="text-lg text-primary-foreground">
-              Requester Details:
-            </h3>
-            <div className="flex items-center">
-              <h2 className="text-primary-foreground w-36">{`Requester's Name`}</h2>
-              <p className="text-muted-foreground">
-                {formData.requesterFirstName}
-              </p>
-            </div>
-          </div>
-
-          {/* Delivery Detail's */}
-          <div className="flex flex-col gap-3 pb-2 border-b border-border">
-            <h3 className="text-lg text-primary-foreground">
-              Delivery Details:
-            </h3>
-            <div className="flex items-center">
-              <h2 className="text-primary-foreground w-36">Delivery Address</h2>
-              <p className="text-muted-foreground">
-                {formData.deliveryAddress}
-              </p>
-            </div>
-          </div>
+          <Details
+            schema={PersonalDetailsSchema}
+            formData={formData}
+            title="Personal Details"
+          />
+          <Details
+            schema={RequesterDetailsSchema}
+            formData={formData}
+            title="Requester Details"
+          />
+          <Details
+            schema={DeliveryDetailsSchema}
+            formData={formData}
+            title="Delivery Details"
+          />
         </div>
       </div>
 
       <div className="mt-6 mb-2 flex items-center justify-between gap-4">
-        <Button className="w-28" onClick={handleSubmit}>
+        <Button
+          type="button"
+          className="w-28"
+          onClick={() => setShowConfirmation(true)}
+        >
           Submit
         </Button>
-        <Button className="w-28" destructive onClick={onHandleBack}>
+        <Button
+          type="button"
+          className="w-28"
+          destructive
+          onClick={onHandleBack}
+        >
           Back
         </Button>
       </div>
 
       {showConfirmation && (
-        <CertificateConfirmation setShowConfirmation={setShowConfirmation} />
+        <CertificateConfirmation
+          setShowConfirmation={setShowConfirmation}
+          handleSubmit={handleSubmit}
+          isPending={isPending}
+        />
       )}
 
       {showSuccess && !showConfirmation && (
-        <CertificateSuccess setShowSuccess={setShowSucess} />
+        <CertificateSuccess setShowSuccess={setShowSuccess} />
       )}
     </>
   );
 };
 
 export default BirthFormSummary;
+
+interface IDetailsProps {
+  schema: z.ZodObject<any>;
+  formData: IBirthFormData;
+  title: string;
+}
+
+const Details = ({ schema, formData, title }: IDetailsProps) => {
+  return (
+    <div>
+      <h2 className="font-semibold text-lg my-4 underline">{title}</h2>
+      <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {Object.entries(schema.shape).map(([key, _]) => (
+          <li key={key} className="flex gap-4 min-w-72">
+            <h3 className="capitalize font-medium text-secondary-foreground ">{`${key}:`}</h3>
+            <p className="text-muted-foreground">{`${
+              formData[key as keyof IBirthFormData]
+            }`}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};

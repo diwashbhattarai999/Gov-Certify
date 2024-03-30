@@ -71,7 +71,7 @@ const Input = ({
             id={name}
             disabled={disabled}
             className={cn(
-              "w-full h-full bg-transparent border rounded-md text-primary-foreground placeholder:text-secondary-foreground outline-none disabled:cursor-not-allowed disabled:opacity-50",
+              "w-full h-full bg-transparent border rounded-md text-primary-foreground placeholder:text-muted-foreground/80 outline-none disabled:cursor-not-allowed disabled:opacity-50",
               error
                 ? "border-destructive focus:border-destructive"
                 : "border-input focus:border-secondary-foreground",

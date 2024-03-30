@@ -144,8 +144,8 @@ model Requester {
   requesterFirstName           String
   requesterMiddleName          String?
   requesterLastName            String
-  requesterEmail               String
-  requesterMobileNumber        String
+  requesterEmail               String             @unique
+  requesterMobileNumber        String             @unique
   requesterRelationshipToOwner Relationship
   BirthCertificate             BirthCertificate[]
 }
