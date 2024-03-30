@@ -2,18 +2,15 @@
 
 import { useForm } from "react-hook-form";
 import { useFormState } from "@/context/form-context";
-
-type TFormValues = {
-  phone: string;
-};
+import { IBirthFormData } from "@/types";
 
 const BirthDeliveryDetailsForm = () => {
   const { onHandleNext, setFormData, onHandleBack, formData } = useFormState();
-  const { register, handleSubmit } = useForm<TFormValues>({
+  const { register, handleSubmit } = useForm<IBirthFormData>({
     defaultValues: formData,
   });
 
-  const onHandleFormSubmit = (data: TFormValues) => {
+  const onHandleFormSubmit = (data: IBirthFormData) => {
     setFormData((prev: any) => ({ ...prev, ...data }));
     onHandleNext();
   };
@@ -24,11 +21,11 @@ const BirthDeliveryDetailsForm = () => {
       onSubmit={handleSubmit(onHandleFormSubmit)}
     >
       <h1>Birth Delivery Details Form</h1>
-      <label htmlFor="phone">Phone</label>
+      <label htmlFor="deliveryAddress">Delivery Address</label>
       <input
         autoFocus
-        id="phone"
-        {...register("phone")}
+        id="deliveryAddress"
+        {...register("deliveryAddress")}
         className="border h-11 px-4 rounded-md focus:outline-blue-500 "
         required={true}
         type="text"

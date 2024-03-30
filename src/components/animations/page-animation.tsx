@@ -57,7 +57,7 @@ interface AnimationWrapper {
 export default function AnimationWrapper({
   keyValue,
   delayOffset,
-  initial = { opacity: 0 },
+  initial = { opacity: 0.5 },
   animate = { opacity: 1 },
   transition = {
     type: "spring",

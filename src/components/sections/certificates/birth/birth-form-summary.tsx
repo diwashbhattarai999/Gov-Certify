@@ -41,8 +41,8 @@ const BirthFormSummary = () => {
               Personal Details:
             </h3>
             <div className="flex items-center">
-              <h2 className="text-primary-foreground w-36">Email</h2>
-              <p className="text-muted-foreground">{formData.email}</p>
+              <h2 className="text-primary-foreground w-36">{`Applicant's Name`}</h2>
+              <p className="text-muted-foreground">{formData.firstName}</p>
             </div>
           </div>
 
@@ -52,8 +52,10 @@ const BirthFormSummary = () => {
               Requester Details:
             </h3>
             <div className="flex items-center">
-              <h2 className="text-primary-foreground w-36">Password</h2>
-              <p className="text-muted-foreground">{formData.password}</p>
+              <h2 className="text-primary-foreground w-36">{`Requester's Name`}</h2>
+              <p className="text-muted-foreground">
+                {formData.requesterFirstName}
+              </p>
             </div>
           </div>
 
@@ -63,8 +65,10 @@ const BirthFormSummary = () => {
               Delivery Details:
             </h3>
             <div className="flex items-center">
-              <h2 className="text-primary-foreground w-36">Phone Number</h2>
-              <p className="text-muted-foreground">{formData.phone}</p>
+              <h2 className="text-primary-foreground w-36">Delivery Address</h2>
+              <p className="text-muted-foreground">
+                {formData.deliveryAddress}
+              </p>
             </div>
           </div>
         </div>

@@ -2,18 +2,15 @@
 
 import { useForm } from "react-hook-form";
 import { useFormState } from "@/context/form-context";
-
-type TFormValues = {
-  password: string;
-};
+import { IBirthFormData } from "@/types";
 
 const BirthRequestorsDetailsForm = () => {
   const { onHandleNext, setFormData, onHandleBack, formData } = useFormState();
-  const { register, handleSubmit } = useForm<TFormValues>({
+  const { register, handleSubmit } = useForm<IBirthFormData>({
     defaultValues: formData,
   });
 
-  const onHandleFormSubmit = (data: TFormValues) => {
+  const onHandleFormSubmit = (data: IBirthFormData) => {
     setFormData((prev: any) => ({ ...prev, ...data }));
     onHandleNext();
   };
@@ -24,11 +21,11 @@ const BirthRequestorsDetailsForm = () => {
       onSubmit={handleSubmit(onHandleFormSubmit)}
     >
       <h1>Birth Requestors Details Form</h1>
-      <label htmlFor="password">Password</label>
+      <label htmlFor="requesterFirstName">Name</label>
       <input
         autoFocus
-        id="password"
-        {...register("password")}
+        id="requesterFirstName"
+        {...register("requesterFirstName")}
         className="border h-11 px-4 rounded-md focus:outline-blue-500 "
         required={true}
         type="text"
