@@ -2,7 +2,7 @@ import Input from "@/components/ui/input";
 import Image from "next/image";
 import { LuSearch } from "react-icons/lu";
 
-const HeroSection = () => {
+const Hero = () => {
   return (
     <div className="w-full mt-5">
       <div className="relative bg-primary rounded-lg flex justify-between items-center">
@@ -23,9 +23,12 @@ const HeroSection = () => {
             anytime.
           </p>
 
-          <div className="relative w-full md:w-[70%] mt-10">
-            <input className="pl-12 bg-background text-foreground rounded-xl mt-10 p-3 w-full h-full border-2 border-muted-foreground  focus:border-primary-foreground outline-none py-4 placeholder:text-secondary-foreground disabled:cursor-not-allowed disabled:opacity-50" />
-            <LuSearch className="absolute top-[3.5rem] left-5 h-6 w-6 pointer-events-none" />
+          <div className="relative w-full md:w-[80%] mt-20 flex items-center">
+            <input className="pl-12 bg-background text-foreground rounded-xl p-3 w-full h-full border-2 border-muted-foreground  focus:border-primary-foreground outline-none py-4 placeholder:text-secondary-foreground disabled:cursor-not-allowed disabled:opacity-50" />
+            <LuSearch className="absolute top-[1rem] left-5 h-6 w-6 pointer-events-none" />
+            <div className="absolute top-0 right-0 rounded-r-xl px-8 bg-accent text-accent-foreground h-full flex items-center justify-center border-l-2 border-muted-foreground cursor-pointer hover:bg-accent/90 duration-300 font-semibold">
+              Search
+            </div>
           </div>
         </div>
 
@@ -42,4 +45,4 @@ const HeroSection = () => {
   );
 };
 
-export default HeroSection;
+export default Hero;

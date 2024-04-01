@@ -15,12 +15,13 @@ import {
 } from "@/schemas";
 import { IBirthFormData } from "@/types";
 import { birth } from "@/actions/certificates/birth";
+import Loader from "@/components/loader";
 
 const BirthFormSummary = () => {
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [isPending, startTransition] = useTransition();
-  const { formData, onHandleBack, onHandleNext } = useFormState();
+  const { formData, onHandleBack } = useFormState();
 
   const handleSubmit = () => {
     startTransition(() => {
@@ -37,6 +38,7 @@ const BirthFormSummary = () => {
 
   return (
     <>
+      {isPending && <Loader />}
       <div className="mt-5 flex flex-col gap-4">
         <h1 className="text-xl text-secondary-foreground/90 font-medium">
           Review your form

@@ -1,4 +1,4 @@
-import HeroSection from "./hero-section";
+import Hero from "./hero";
 import Services from "./services";
 
 interface HomeProps {}
@@ -6,8 +6,7 @@ interface HomeProps {}
 const Home = ({}: HomeProps) => {
   return (
     <div>
-      <HeroSection />
-      {/* Services - Birth, death, marriage, migration */}
+      <Hero />
       <Services />
       {/*  */}
       {/*  */}

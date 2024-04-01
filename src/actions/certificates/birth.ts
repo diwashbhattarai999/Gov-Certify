@@ -7,6 +7,7 @@ import { getUserById } from "@/data/user";
 import { currentUser } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { getRequesterByEmail } from "@/data/certificates/birth";
+import { Status } from "@prisma/client";
 
 export const birth = async (formData: IBirthFormData) => {
   const user = await currentUser();
@@ -66,6 +67,8 @@ export const birth = async (formData: IBirthFormData) => {
       },
     });
 
+    const applicationNumber = await generateApplicationNumber();
+
     const newBirthCertificate = await db.birthCertificate.create({
       data: {
         firstName,
@@ -84,6 +87,8 @@ export const birth = async (formData: IBirthFormData) => {
         motherLastName,
         requesterId: existingRequester.id,
         userId: dbUser.id,
+        status: Status.PENDING,
+        applicationNumber,
       },
     });
 
@@ -111,6 +116,8 @@ export const birth = async (formData: IBirthFormData) => {
       },
     });
 
+    const applicationNumber = await generateApplicationNumber();
+
     const newBirthCertificate = await db.birthCertificate.create({
       data: {
         firstName,
@@ -129,6 +136,8 @@ export const birth = async (formData: IBirthFormData) => {
         motherLastName,
         requesterId: newRequester.id,
         userId: dbUser.id,
+        status: Status.PENDING,
+        applicationNumber,
       },
     });
 
@@ -148,3 +157,18 @@ export const birth = async (formData: IBirthFormData) => {
 
   return { success: "Form Submitted" };
 };
+
+async function generateApplicationNumber() {
+  const lastApplication = await db.birthCertificate.findFirst({
+    orderBy: { createdAt: "desc" },
+  });
+
+  if (lastApplication) {
+    const lastApplicationNumber = lastApplication.applicationNumber;
+    const lastNumber = parseInt(lastApplicationNumber.replace("AP", ""));
+    const nextNumber = lastNumber + 1;
+    return `AP${nextNumber.toString().padStart(3, "0")}`;
+  } else {
+    return "AP001";
+  }
+}

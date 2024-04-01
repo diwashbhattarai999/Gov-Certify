@@ -31,7 +31,7 @@ const CertificateSuccess = ({ setShowSuccess }: ICertificateSuccessProps) => {
           <Button
             className="w-36"
             onClick={() => {
-              router.push("/");
+              router.push("/your-certificates");
               setShowSuccess(false);
             }}
           >

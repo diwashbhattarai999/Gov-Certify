@@ -19,6 +19,12 @@ enum Gender {
   OTHERS
 }
 
+enum Status {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
 enum Relationship {
   FATHER
   MOTHER
@@ -117,6 +123,8 @@ model BirthCertificate {
   id                   String           @id @default(auto()) @map("_id") @db.ObjectId
   userId               String           @db.ObjectId
   requesterId          String           @db.ObjectId
+  applicationNumber    String
+  status               Status
   firstName            String
   middleName           String?
   lastName             String
@@ -132,11 +140,13 @@ model BirthCertificate {
   motherMiddleName     String?
   motherLastName       String
   deliveryDetails      DeliveryDetails?
+  createdAt            DateTime         @default(now())
+  updatedAt            DateTime         @updatedAt
 
   requester Requester @relation(fields: [requesterId], references: [id])
   user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@unique([userId, requesterId])
+  @@index([userId])
 }
 
 model Requester {
@@ -145,7 +155,7 @@ model Requester {
   requesterMiddleName          String?
   requesterLastName            String
   requesterEmail               String             @unique
-  requesterMobileNumber        String             @unique
+  requesterMobileNumber        String
   requesterRelationshipToOwner Relationship
   BirthCertificate             BirthCertificate[]
 }
