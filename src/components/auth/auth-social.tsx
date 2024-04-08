@@ -38,6 +38,7 @@ const AuthSocial = ({ disabled }: { disabled?: boolean }) => {
               handleSocialLogin(link.label === "google" ? "google" : "facebook")
             }
             disabled={disabled}
+            loader={disabled}
           >
             <link.icon className="w-6 h-6 text-blue-600" />
           </Button>

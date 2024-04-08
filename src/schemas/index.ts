@@ -83,6 +83,12 @@ export const SettingsSchema = z
   .object({
     image: z.optional(z.string()),
     name: z.optional(z.string()),
+    phone: z.optional(
+      z
+        .string()
+        .min(10, { message: "Phone Number must be 10 characters" })
+        .max(10, { message: "Phone Number must be 10 characters" })
+    ),
     isTwoFactorEnabled: z.optional(z.boolean()),
     role: z.enum([UserRole.ADMIN, UserRole.USER]),
     email: z.optional(z.string().email()),

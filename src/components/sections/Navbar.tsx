@@ -15,6 +15,7 @@ import { useCurrentUser } from "@/hooks/use-current-user";
 import Container from "@/components/max-width-container";
 import MobileMenu from "@/components/ui/mobile-menu";
 import UserProfile from "@/components/user-profile/user-profile";
+import Button from "@/components/ui/Button";
 
 const font = Fira_Sans({ subsets: ["latin"], weight: ["400", "500", "600"] });
 
@@ -93,24 +94,14 @@ const Navbar = ({}: NavbarProps) => {
             {!user && (
               <>
                 <li>
-                  <Link
-                    href="/login"
-                    className={`p-2 rounded-md hover:bg-muted transition ease-linear duration-300 ${
-                      `/${pathname}` === "/login" && "bg-muted"
-                    }`}
-                  >
-                    SignIn
+                  <Link href="/login">
+                    <Button className="w-24">SignIn</Button>
                   </Link>
                 </li>
 
                 <li>
-                  <Link
-                    href="/register"
-                    className={`p-2 rounded-md hover:bg-muted transition ease-linear duration-300  ${
-                      `/${pathname}` === "/register" && "bg-muted"
-                    }`}
-                  >
-                    SignUp
+                  <Link href="/register">
+                    <Button className="w-24">SignUp</Button>
                   </Link>
                 </li>
               </>

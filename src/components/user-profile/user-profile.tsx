@@ -13,6 +13,8 @@ import { useCurrentUser } from "@/hooks/use-current-user";
 
 import ProfileSettings from "./profile-settings";
 import { cn } from "@/lib/utils";
+import { IconType } from "react-icons/lib";
+import Link from "next/link";
 
 const UserProfile = () => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
@@ -26,7 +28,12 @@ const UserProfile = () => {
 
   const user = useCurrentUser();
 
-  const MENU_ITEMS = [
+  const MENU_ITEMS: {
+    label: string;
+    icon: IconType;
+    onClick: () => void;
+    link?: string;
+  }[] = [
     {
       label: "Manage Profile",
       icon: LuUserCircle2,
@@ -39,41 +46,41 @@ const UserProfile = () => {
       label: "You Certificates",
       icon: VscFileSubmodule,
       onClick: () => {
-        router.push("/your-certificates");
         setIsProfileOpen(false);
       },
+      link: "/your-certificates",
     },
     {
       label: "Birth Certificate",
       icon: TbCertificate,
       onClick: () => {
-        router.push("/birth-certificate");
         setIsProfileOpen(false);
       },
+      link: "/birth-certificate",
     },
     {
       label: "Death Certificate",
       icon: TbCertificate,
       onClick: () => {
-        router.push("/death-certificate");
         setIsProfileOpen(false);
       },
+      link: "/death-certificate",
     },
     {
       label: "Marriage Certificate",
       icon: TbCertificate,
       onClick: () => {
-        router.push("/marriage-certificate");
         setIsProfileOpen(false);
       },
+      link: "/marriage-certificate",
     },
     {
       label: "Migration Certificate",
       icon: TbCertificate,
       onClick: () => {
-        router.push("/migration-certificate");
         setIsProfileOpen(false);
       },
+      link: "/migration-certificate",
     },
   ];
 
@@ -112,8 +119,19 @@ const UserProfile = () => {
                 onClick={item.onClick}
                 className="flex items-center gap-3 px-2 font-medium transition-colors rounded-md cursor-pointer hover:bg-popover"
               >
-                <item.icon className="w-auto py-3 h-11" />
-                <h3>{item.label}</h3>
+                {item.link ? (
+                  <Link href={item.link}>
+                    <div className="flex items-center gap-3">
+                      <item.icon className="w-auto py-3 h-11" />
+                      <h3>{item.label}</h3>
+                    </div>
+                  </Link>
+                ) : (
+                  <div className="flex items-center gap-3">
+                    <item.icon className="w-auto py-3 h-11" />
+                    <h3>{item.label}</h3>
+                  </div>
+                )}
               </li>
             );
           })}

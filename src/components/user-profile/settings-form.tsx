@@ -9,6 +9,7 @@ import {
   LuArrowLeftCircle,
   LuKeyRound,
   LuMail,
+  LuPhone,
   LuUserCircle2,
   LuUserCog2,
 } from "react-icons/lu";
@@ -49,6 +50,7 @@ const SettingsForm = ({ isEdit, setIsEdit }: SettingsFormProp) => {
     image: user?.image || undefined,
     name: user?.name || undefined,
     email: user?.email || undefined,
+    phone: user?.phoneNumber || undefined,
     password: undefined,
     newPassword: undefined,
     role: user?.role || undefined,
@@ -73,7 +75,6 @@ const SettingsForm = ({ isEdit, setIsEdit }: SettingsFormProp) => {
 
   const onSubmit = (values: z.infer<typeof SettingsSchema>) => {
     startTransition(() => {
-      console.log(values);
       settings(values)
         .then((data) => {
           if (data.error) {
@@ -171,6 +172,18 @@ const SettingsForm = ({ isEdit, setIsEdit }: SettingsFormProp) => {
                   />
                 </>
               )}
+              {/* User Inputs -- Phone Number */}
+              <Input
+                label="Phone Number"
+                name="phone"
+                type="text"
+                placeholder="Phone Number"
+                icon={LuPhone}
+                error={errors.phone?.message}
+                disabled={isPending}
+                register={register("phone")}
+              />
+
               {/* User Inputs -- Role */}
               <Select
                 selectLabel="Role"
@@ -206,7 +219,12 @@ const SettingsForm = ({ isEdit, setIsEdit }: SettingsFormProp) => {
               {error && <FormError message={error} />}
 
               {/* Submit Button */}
-              <Button disabled={isPending} type="submit" className="w-24 px-6">
+              <Button
+                disabled={isPending}
+                loader={isPending}
+                type="submit"
+                className="w-24 px-6"
+              >
                 Save
               </Button>
             </form>

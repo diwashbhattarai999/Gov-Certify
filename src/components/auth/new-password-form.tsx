@@ -78,7 +78,7 @@ const NewPasswordForm = () => {
         {error && <FormError message={error} />}
 
         {/* Submit Button */}
-        <Button disabled={isPending} type="submit" full>
+        <Button disabled={isPending} loader={isPending} type="submit" full>
           Reset Password
         </Button>
       </form>

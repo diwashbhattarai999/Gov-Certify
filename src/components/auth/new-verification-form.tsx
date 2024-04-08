@@ -8,6 +8,7 @@ import { newVerification } from "@/actions/new-verification";
 import FormError from "@/components/ui/form-error";
 import FormSuccess from "@/components/ui/form-success";
 import CardWrapper from "@/components/ui/card-wrapper";
+import { Triangle } from "react-loader-spinner";
 
 const NewVerificationForm = () => {
   const [error, setError] = useState<string | undefined>();
@@ -46,8 +47,7 @@ const NewVerificationForm = () => {
       backButtonHref="/login"
     >
       <div className="flex items-center justify-center w-full">
-        {/* {!success && !error && <BeatLoader />} */}
-        {!success && !error && <h2>Loading...</h2>}
+        {!success && !error && <Triangle width={50} />}
         <FormSuccess message={success} />
         {!success && <FormError message={error} />}
       </div>

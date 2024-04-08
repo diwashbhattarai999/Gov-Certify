@@ -102,7 +102,8 @@ const RegisterForm = () => {
         backButtonHref="/login"
         backButtonLabel="Already have an account ? Login Now"
         showSocial
-        className="mb-20 mt-10"
+        className="mb-20"
+        wrapperClassName="min-h-fit"
       >
         <form onSubmit={handleSubmit(onSubmit)}>
           {/* User Inputs -- UserName */}
@@ -191,7 +192,7 @@ const RegisterForm = () => {
           {error && <FormError message={error} />}
 
           {/* Submit Button */}
-          <Button disabled={isPending} type="submit" full>
+          <Button disabled={isPending} loader={isPending} type="submit" full>
             Register
           </Button>
         </form>

@@ -16,6 +16,7 @@ interface CardWrapperProps {
   disabled?: boolean;
   maxWidthFull?: boolean;
   className?: string;
+  wrapperClassName?: string;
 }
 
 const CardWrapper = ({
@@ -29,12 +30,14 @@ const CardWrapper = ({
   disabled,
   maxWidthFull,
   className,
+  wrapperClassName,
 }: CardWrapperProps) => {
   return (
     <div
       className={cn(
-        "w-full  flex items-center justify-center bg-background",
-        disabled && "cursor-not-allowed opacity-50 z-0"
+        "w-full min-h-screen flex items-center justify-center bg-background",
+        disabled && "cursor-not-allowed z-0",
+        wrapperClassName
       )}
     >
       <div

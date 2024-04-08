@@ -72,6 +72,10 @@ export const settings = async (values: z.infer<typeof SettingsSchema>) => {
     values.password = undefined;
   }
 
+  if (values.phone && (values.phone.length < 10 || values.phone.length > 10)) {
+    return { error: "Phone Number should be of 10 digits!" };
+  }
+
   await db.user.update({
     where: { id: dbUser.id },
     data: {
@@ -80,6 +84,7 @@ export const settings = async (values: z.infer<typeof SettingsSchema>) => {
       name: values.name,
       isTwoFactorEnabled: values.isTwoFactorEnabled,
       email: values.email,
+      phoneNo: values.phone,
       password: values.password,
     },
   });

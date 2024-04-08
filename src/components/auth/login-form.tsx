@@ -101,6 +101,7 @@ const LoginForm = () => {
         backButtonLabel="Don't have an account ? Register Now"
         showSocial={showTwoFactor ? false : true}
         disabled={isPending}
+        wrapperClassName="min-h-fit"
       >
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -165,7 +166,7 @@ const LoginForm = () => {
           </Link>
 
           {/* Submit Button */}
-          <Button disabled={isPending} type="submit" full>
+          <Button disabled={isPending} loader={isPending} type="submit" full>
             {showTwoFactor ? "Confirm" : "Login"}
           </Button>
         </form>

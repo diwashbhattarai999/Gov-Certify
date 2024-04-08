@@ -14,7 +14,7 @@ const MaxWidthContainer = ({
     <div
       ref={ref}
       className={cn(
-        "max-w-[1500px] mx-auto xl:px-16 md:px-10 sm:px-6 px-4",
+        "max-w-[1800px] mx-auto xl:px-16 md:px-10 sm:px-6 px-4",
         className
       )}
     >

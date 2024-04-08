@@ -78,6 +78,7 @@ const CertificateConfirmation = ({
               setShowConfirmation(false);
             }}
             disabled={isPending}
+            loader={isPending}
           >
             Yes, I Agree
           </Button>
