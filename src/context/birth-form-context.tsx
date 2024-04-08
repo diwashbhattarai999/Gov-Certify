@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Dispatch,
   ReactNode,
@@ -11,7 +13,7 @@ import { IBirthFormData } from "@/types";
 
 type IFormData = IBirthFormData;
 
-interface IFormContext {
+interface IBirthFormContext {
   formData: IFormData;
   setFormData: Dispatch<SetStateAction<IFormData>>;
   resetFormData: () => void;
@@ -20,7 +22,7 @@ interface IFormContext {
   step: number;
 }
 
-const FormContext = createContext<IFormContext>({
+const BirthFormContext = createContext<IBirthFormContext>({
   formData: {} as IFormData,
   onHandleBack: () => {},
   onHandleNext: () => {},
@@ -34,7 +36,7 @@ interface IProps {
   initialFormData: IFormData;
 }
 
-export function FormProvider({ children, initialFormData }: IProps) {
+export function BirthFormProvider({ children, initialFormData }: IProps) {
   const [formData, setFormData] = useState<IFormData>(initialFormData);
   const [step, setStep] = useState(1);
 
@@ -51,7 +53,7 @@ export function FormProvider({ children, initialFormData }: IProps) {
   }
 
   return (
-    <FormContext.Provider
+    <BirthFormContext.Provider
       value={{
         formData,
         setFormData,
@@ -62,10 +64,10 @@ export function FormProvider({ children, initialFormData }: IProps) {
       }}
     >
       {children}
-    </FormContext.Provider>
+    </BirthFormContext.Provider>
   );
 }
 
-export function useFormState() {
-  return useContext(FormContext);
+export function useBirthFormState() {
+  return useContext(BirthFormContext);
 }

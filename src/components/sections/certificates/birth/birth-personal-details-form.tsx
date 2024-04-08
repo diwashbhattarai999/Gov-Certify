@@ -1,32 +1,32 @@
 "use client";
 
+import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
-import { PersonalDetailsSchema } from "@/schemas";
+import { BirthDetailsSchema } from "@/schemas";
 
-import { useFormState } from "@/context/form-context";
+import { useBirthFormState } from "@/context/birth-form-context";
 
 import Input from "@/components/ui/input";
 import Button from "@/components/ui/Button";
 import Select from "@/components/ui/select";
-import { useState } from "react";
 
 const BirthPersonalDetailsForm = () => {
-  const { onHandleNext, setFormData, formData } = useFormState();
+  const { onHandleNext, setFormData, formData } = useBirthFormState();
   const [selectGender, setSelectGender] = useState(formData.gender);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<z.infer<typeof PersonalDetailsSchema>>({
-    resolver: zodResolver(PersonalDetailsSchema),
+  } = useForm<z.infer<typeof BirthDetailsSchema>>({
+    resolver: zodResolver(BirthDetailsSchema),
     defaultValues: formData,
   });
 
-  const onHandleFormSubmit = (data: z.infer<typeof PersonalDetailsSchema>) => {
+  const onHandleFormSubmit = (data: z.infer<typeof BirthDetailsSchema>) => {
     setFormData((prev) => ({ ...prev, ...data }));
     onHandleNext();
   };
@@ -91,6 +91,16 @@ const BirthPersonalDetailsForm = () => {
           placeholder="Province"
           error={errors.placeOfBirthProvince?.message}
           register={register("placeOfBirthProvince")}
+        />
+
+        {/* User Inputs -- Place of Birth (District) */}
+        <Input
+          label="Place of Birth (District)"
+          name="placeOfBirthDistrict"
+          type="text"
+          placeholder="District"
+          error={errors.placeOfBirthDistrict?.message}
+          register={register("placeOfBirthDistrict")}
         />
 
         {/* User Inputs -- Place of Birth (City) */}

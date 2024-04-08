@@ -1,13 +1,14 @@
 "use server";
 
-import { IBirthFormData } from "@/types";
+import { Status } from "@prisma/client";
 
-import { getUserById } from "@/data/user";
+import { IBirthFormData } from "@/types";
 
 import { currentUser } from "@/lib/auth";
 import { db } from "@/lib/db";
+
+import { getUserById } from "@/data/user";
 import { getRequesterByEmail } from "@/data/certificates/birth";
-import { Status } from "@prisma/client";
 
 export const birth = async (formData: IBirthFormData) => {
   const user = await currentUser();
@@ -30,6 +31,7 @@ export const birth = async (formData: IBirthFormData) => {
     gender,
     placeOfBirthCountry,
     placeOfBirthProvince,
+    placeOfBirthDistrict,
     placeOfBirthCity,
     fatherFirstName,
     fatherMiddleName,
@@ -78,6 +80,7 @@ export const birth = async (formData: IBirthFormData) => {
         gender,
         placeOfBirthCountry,
         placeOfBirthProvince,
+        placeOfBirthDistrict,
         placeOfBirthCity,
         fatherFirstName,
         fatherMiddleName,
@@ -127,6 +130,7 @@ export const birth = async (formData: IBirthFormData) => {
         gender,
         placeOfBirthCountry,
         placeOfBirthProvince,
+        placeOfBirthDistrict,
         placeOfBirthCity,
         fatherFirstName,
         fatherMiddleName,
@@ -165,10 +169,10 @@ async function generateApplicationNumber() {
 
   if (lastApplication) {
     const lastApplicationNumber = lastApplication.applicationNumber;
-    const lastNumber = parseInt(lastApplicationNumber.replace("AP", ""));
+    const lastNumber = parseInt(lastApplicationNumber.replace("APB", ""));
     const nextNumber = lastNumber + 1;
-    return `AP${nextNumber.toString().padStart(3, "0")}`;
+    return `APB${nextNumber.toString().padStart(3, "0")}`;
   } else {
-    return "AP001";
+    return "APB001";
   }
 }

@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { DeliveryOption } from "@prisma/client";
 
-import { useFormState } from "@/context/form-context";
+import { useBirthFormState } from "@/context/birth-form-context";
 
 import { DeliveryDetailsSchema } from "@/schemas";
 
@@ -21,7 +21,8 @@ const deliveryOptions = Object.keys(DeliveryOption).map((key) => ({
 }));
 
 const BirthDeliveryDetailsForm = () => {
-  const { onHandleNext, setFormData, onHandleBack, formData } = useFormState();
+  const { onHandleNext, setFormData, onHandleBack, formData } =
+    useBirthFormState();
   const [selectDelivery, setSelectDelivery] = useState(formData.DeliveryOption);
 
   const {
