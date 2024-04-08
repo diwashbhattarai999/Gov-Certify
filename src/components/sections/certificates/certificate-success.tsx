@@ -4,6 +4,7 @@ import { GiConfirmed } from "react-icons/gi";
 
 import Button from "@/components/ui/Button";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 interface ICertificateSuccessProps {
   setShowSuccess: React.Dispatch<React.SetStateAction<boolean>>;
@@ -28,15 +29,16 @@ const CertificateSuccess = ({ setShowSuccess }: ICertificateSuccessProps) => {
         </div>
 
         <div className="flex justify-end gap-4">
-          <Button
-            className="w-36"
-            onClick={() => {
-              router.push("/your-certificates");
-              setShowSuccess(false);
-            }}
-          >
-            Close
-          </Button>
+          <Link href="/your-certificates">
+            <Button
+              className="w-36"
+              onClick={() => {
+                setShowSuccess(false);
+              }}
+            >
+              Close
+            </Button>
+          </Link>
         </div>
       </div>
     </div>

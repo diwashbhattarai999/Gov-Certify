@@ -18,7 +18,7 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
     return { error: "Invalid fields!" };
   }
 
-  const { email, name, password, confirmPassword, gender } =
+  const { email, name, password, confirmPassword, gender, phoneNumber } =
     validatedFields.data;
 
   if (password !== confirmPassword) {
@@ -33,12 +33,20 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
     return { error: "Email already in use!" };
   }
 
+  if (
+    values.phoneNumber &&
+    (values.phoneNumber.length < 10 || values.phoneNumber.length > 10)
+  ) {
+    return { error: "Phone Number should be of 10 digits!" };
+  }
+
   await db.user.create({
     data: {
       name,
       email,
       password: hashedPassword,
       gender,
+      phoneNo: phoneNumber,
     },
   });
 
