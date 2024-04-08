@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Relationship } from "@prisma/client";
 
-import { useFormState } from "@/context/form-context";
+import { useBirthFormState } from "@/context/birth-form-context";
 
 import { RequesterDetailsSchema } from "@/schemas";
 
@@ -21,7 +21,8 @@ const relationshipOptions = Object.keys(Relationship).map((key) => ({
 }));
 
 const BirthRequestorsDetailsForm = () => {
-  const { onHandleNext, setFormData, onHandleBack, formData } = useFormState();
+  const { onHandleNext, setFormData, onHandleBack, formData } =
+    useBirthFormState();
   const [selectRelation, setSelectRelation] = useState(
     formData.requesterRelationshipToOwner
   );

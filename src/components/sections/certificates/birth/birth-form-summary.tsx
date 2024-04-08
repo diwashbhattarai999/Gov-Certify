@@ -3,14 +3,14 @@
 import { useState, useTransition } from "react";
 import * as z from "zod";
 
-import { useFormState } from "@/context/form-context";
+import { useBirthFormState } from "@/context/birth-form-context";
 
 import CertificateConfirmation from "../certificate-confirmation";
 import Button from "@/components/ui/Button";
 import CertificateSuccess from "../certificate-success";
 import {
   DeliveryDetailsSchema,
-  PersonalDetailsSchema,
+  BirthDetailsSchema,
   RequesterDetailsSchema,
 } from "@/schemas";
 import { IBirthFormData } from "@/types";
@@ -21,7 +21,7 @@ const BirthFormSummary = () => {
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [isPending, startTransition] = useTransition();
-  const { formData, onHandleBack } = useFormState();
+  const { formData, onHandleBack } = useBirthFormState();
 
   const handleSubmit = () => {
     startTransition(() => {
@@ -46,7 +46,7 @@ const BirthFormSummary = () => {
 
         <div className="flex flex-col gap-8">
           <Details
-            schema={PersonalDetailsSchema}
+            schema={BirthDetailsSchema}
             formData={formData}
             title="Personal Details"
           />

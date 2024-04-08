@@ -1,7 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { FormProvider, useFormState } from "@/context/form-context";
+import {
+  BirthFormProvider,
+  useBirthFormState,
+} from "@/context/birth-form-context";
 
 import { DeliveryOption, Gender, Relationship } from "@prisma/client";
 
@@ -19,6 +22,7 @@ const initialFormData: IBirthFormData = {
   dateOfBirth: "",
   gender: Gender.MALE,
   placeOfBirthCountry: "Nepal",
+  placeOfBirthDistrict: "",
   placeOfBirthProvince: "",
   placeOfBirthCity: "",
   fatherFirstName: "",
@@ -43,7 +47,7 @@ const initialFormData: IBirthFormData = {
 };
 
 const ActiveStepFormComponent = () => {
-  const { step, resetFormData } = useFormState();
+  const { step, resetFormData } = useBirthFormState();
   const [shouldResetFormData, setShouldResetFormData] = useState(true);
 
   useEffect(() => {
@@ -69,11 +73,11 @@ const ActiveStepFormComponent = () => {
 
 const BirthCertificate = () => {
   return (
-    <FormProvider initialFormData={initialFormData}>
+    <BirthFormProvider initialFormData={initialFormData}>
       <CertificateWrapper certificateTitle="Birth">
         <ActiveStepFormComponent />
       </CertificateWrapper>
-    </FormProvider>
+    </BirthFormProvider>
   );
 };
 
