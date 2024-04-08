@@ -47,21 +47,24 @@ enum DeliveryOption {
 }
 
 model User {
-  id                      String                 @id @default(auto()) @map("_id") @db.ObjectId
+  id                      String                   @id @default(auto()) @map("_id") @db.ObjectId
   name                    String?
-  email                   String?                @unique
+  email                   String?                  @unique
   emailVerified           DateTime?
   image                   String?
   gender                  Gender?
   phoneNo                 String?
   dateOfBirth             DateTime?
   password                String?
-  role                    UserRole               @default(USER)
+  role                    UserRole                 @default(USER)
   accounts                Account[]
-  isTwoFactorEnabled      Boolean                @default(false)
+  isTwoFactorEnabled      Boolean                  @default(false)
   twoFactorConfirmation   TwoFactorConfirmation?
-  twoFactorConfirmationId String?                @db.ObjectId
+  twoFactorConfirmationId String?                  @db.ObjectId
   BirthCertificate        BirthCertificate[]
+  DeathCertificate        DeathCertificate[]
+  MarriageCertificate     MarriageCertificate[]
+  ResidentialCertificate  ResidentialCertificate[]
 }
 
 model Account {
@@ -130,6 +133,7 @@ model BirthCertificate {
   lastName             String
   placeOfBirthCountry  String
   placeOfBirthProvince String
+  placeOfBirthDistrict String
   placeOfBirthCity     String
   DateOfBirth          String
   gender               Gender
@@ -149,15 +153,109 @@ model BirthCertificate {
   @@index([userId])
 }
 
+model DeathCertificate {
+  id                   String           @id @default(auto()) @map("_id") @db.ObjectId
+  userId               String           @db.ObjectId
+  requesterId          String           @db.ObjectId
+  applicationNumber    String
+  status               Status
+  firstName            String
+  middleName           String?
+  lastName             String
+  placeOfDeathCountry  String
+  placeOfDeathProvince String
+  placeOfDeathDistrict String
+  placeOfDeathCity     String
+  dateOfDeath          DateTime
+  gender               Gender
+  causeOfDeath         String
+  deliveryDetails      DeliveryDetails?
+  createdAt            DateTime         @default(now())
+  updatedAt            DateTime         @updatedAt
+
+  requester Requester @relation(fields: [requesterId], references: [id])
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model MarriageCertificate {
+  id                      String           @id @default(auto()) @map("_id") @db.ObjectId
+  userId                  String           @db.ObjectId
+  requesterId             String           @db.ObjectId
+  applicationNumber       String
+  status                  Status
+  husbandFirstName        String
+  husbandMiddleName       String?
+  husbandLastName         String
+  WifeFirstName           String
+  wifeMiddleName          String?
+  wifeLastName            String
+  placeOfMarriageCountry  String
+  placeOfMarriageProvince String
+  placeOfMarriageDistrict String
+  placeOfMarriageCity     String
+  dateOfMarriage          DateTime
+  deliveryDetails         DeliveryDetails?
+  createdAt               DateTime         @default(now())
+  updatedAt               DateTime         @updatedAt
+
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  requester Requester @relation(fields: [requesterId], references: [id])
+
+  @@index([userId])
+}
+
+model ResidentialCertificate {
+  id                         String           @id @default(auto()) @map("_id") @db.ObjectId
+  userId                     String           @db.ObjectId
+  requesterId                String           @db.ObjectId
+  applicationNumber          String
+  status                     Status
+  currentCountry             String
+  currentProvince            String
+  currentCity                String
+  destinationCountry         String
+  destinationProvince        String
+  destinationDistrict        String
+  destinationCity            String
+  dateOfResidentialMigration DateTime
+  deliveryDetails            DeliveryDetails?
+  createdAt                  DateTime         @default(now())
+  updatedAt                  DateTime         @updatedAt
+
+  user         User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  requester    Requester      @relation(fields: [requesterId], references: [id])
+  FamilyMember FamilyMember[]
+
+  @@index([userId])
+}
+
+model FamilyMember {
+  id                       String                 @id @default(auto()) @map("_id") @db.ObjectId
+  firstName                String
+  middleName               String?
+  lastName                 String
+  dateOfBirth              DateTime
+  placeOfBirth             String
+  gender                   Gender
+  relationshipToRequester  Relationship
+  residentialCertificate   ResidentialCertificate @relation(fields: [residentialCertificateId], references: [id])
+  residentialCertificateId String                 @db.ObjectId
+}
+
 model Requester {
-  id                           String             @id @default(auto()) @map("_id") @db.ObjectId
+  id                           String                   @id @default(auto()) @map("_id") @db.ObjectId
   requesterFirstName           String
   requesterMiddleName          String?
   requesterLastName            String
-  requesterEmail               String             @unique
+  requesterEmail               String                   @unique
   requesterMobileNumber        String
   requesterRelationshipToOwner Relationship
   BirthCertificate             BirthCertificate[]
+  DeathCertificate             DeathCertificate[]
+  MarriageCertificate          MarriageCertificate[]
+  ResidentialCertificate       ResidentialCertificate[]
 }
 
 model DeliveryDetails {
@@ -171,7 +269,14 @@ model DeliveryDetails {
   deliveryPostalCode   String?
 
   birthCertificate   BirthCertificate? @relation(fields: [birthCertificateId], references: [id])
-  birthCertificateId String            @db.ObjectId
+  birthCertificateId String?           @unique @db.ObjectId
 
-  @@unique([birthCertificateId])
+  deathCertificate   DeathCertificate? @relation(fields: [deathCertificateId], references: [id])
+  deathCertificateId String?           @unique @db.ObjectId
+
+  marriageCertificate   MarriageCertificate? @relation(fields: [marriageCertificateId], references: [id])
+  marriageCertificateId String?              @unique @db.ObjectId
+
+  residentialCertificate   ResidentialCertificate? @relation(fields: [residentialCertificateId], references: [id])
+  residentialCertificateId String?                 @unique @db.ObjectId
 }
