@@ -150,11 +150,10 @@ export const SettingsSchema = z
     }
   );
 
-export const PersonalDetailsSchema = z.object({
+export const BirthDetailsSchema = z.object({
   firstName: z.string().trim().min(1, { message: "First name is required" }),
   middleName: z.string().trim().optional(),
   lastName: z.string().trim().min(1, { message: "Last name is required" }),
-
   placeOfBirthCountry: z
     .string()
     .trim()
@@ -163,12 +162,13 @@ export const PersonalDetailsSchema = z.object({
     .string()
     .trim()
     .min(1, { message: "Province is required" }),
+  placeOfBirthDistrict: z
+    .string()
+    .trim()
+    .min(1, { message: "Province is required" }),
   placeOfBirthCity: z.string().trim().min(1, { message: "City is required" }),
-
   dateOfBirth: z.string().min(1, { message: "Date of Birth is required" }),
-
   gender: z.enum(["MALE", "FEMALE", "OTHERS"]),
-
   fatherFirstName: z
     .string()
     .trim()
@@ -188,6 +188,134 @@ export const PersonalDetailsSchema = z.object({
     .string()
     .trim()
     .min(1, { message: "Mother's last name is required" }),
+});
+
+export const DeathDetailsSchema = z.object({
+  firstName: z
+    .string()
+    .trim()
+    .min(1, { message: "Deceased's first name is required" }),
+  middleName: z.string().trim().optional(),
+  lastName: z
+    .string()
+    .trim()
+    .min(1, { message: "Deceased's last name is required" }),
+  placeOfDeathCountry: z
+    .string()
+    .trim()
+    .min(1, { message: "Country is required" }),
+  placeOfDeathProvince: z
+    .string()
+    .trim()
+    .min(1, { message: "Province is required" }),
+  placeOfDeathDistrict: z
+    .string()
+    .trim()
+    .min(1, { message: "Province is required" }),
+  placeOfDeathCity: z.string().trim().min(1, { message: "City is required" }),
+  dateOfDeath: z.string().min(1, { message: "Date of death is required" }),
+  gender: z.enum(["MALE", "FEMALE", "OTHERS"]),
+  causeOfDeath: z.string().min(1, { message: "Cause of death is required" }),
+});
+
+export const MarriageDetailsSchema = z.object({
+  husbandFirstName: z
+    .string()
+    .trim()
+    .min(1, { message: "Husband first name is required" }),
+  husbandMiddleName: z.string().trim().optional(),
+  husbandLastName: z
+    .string()
+    .trim()
+    .min(1, { message: "Husband last name is required" }),
+  WifeFirstName: z
+    .string()
+    .trim()
+    .min(1, { message: "Wife first name is required" }),
+  wifeMiddleName: z.string().trim().optional(),
+  wifeLastName: z
+    .string()
+    .trim()
+    .min(1, { message: "Wife last name is required" }),
+  placeOfMarriageCountry: z
+    .string()
+    .trim()
+    .min(1, { message: "Country is required" }),
+  placeOfMarriageProvince: z
+    .string()
+    .trim()
+    .min(1, { message: "Province is required" }),
+  placeOfMarriageDistrict: z
+    .string()
+    .trim()
+    .min(1, { message: "Province is required" }),
+  placeOfMarriageCity: z
+    .string()
+    .trim()
+    .min(1, { message: "City is required" }),
+  dateOfMarriage: z
+    .string()
+    .min(1, { message: "Date of Marriage is required" }),
+});
+
+export const FamilyMemberSchema = z.object({
+  firstName: z.string().trim().min(1, { message: "First name is required" }),
+  middleName: z.string().trim().optional(),
+  lastName: z.string().trim().min(1, { message: "Last name is required" }),
+  relationshipToRequester: z.enum([
+    "FATHER",
+    "MOTHER",
+    "BROTHER",
+    "SISTER",
+    "UNCLE",
+    "AUNT",
+    "GRANDFATHER",
+    "GRANDMOTHER",
+    "SON",
+    "DAUGHTER",
+    "SPOUSE",
+    "SELF",
+    "OTHERS",
+  ]),
+});
+
+export const ResidentialDetailsSchema = z.object({
+  currentCountry: z
+    .string()
+    .trim()
+    .min(1, { message: "Current Country is required" }),
+  destinationCountry: z
+    .string()
+    .trim()
+    .min(1, { message: "Destination Country is required" }),
+  currentProvince: z
+    .string()
+    .trim()
+    .min(1, { message: "Current Province is required" }),
+  destinationProvince: z
+    .string()
+    .trim()
+    .min(1, { message: "Destination Province is required" }),
+  currentDistrict: z
+    .string()
+    .trim()
+    .min(1, { message: "Destination District is required" }),
+  destinationDistrict: z
+    .string()
+    .trim()
+    .min(1, { message: "Destination District is required" }),
+  currentCity: z
+    .string()
+    .trim()
+    .min(1, { message: "Current City is required" }),
+  destinationCity: z
+    .string()
+    .trim()
+    .min(1, { message: "Destination City is required" }),
+  dateOfResidentialMigration: z
+    .string()
+    .min(1, { message: "Date of Residential Migration is required" }),
+  FamilyMembers: z.array(FamilyMemberSchema),
 });
 
 export const RequesterDetailsSchema = z.object({

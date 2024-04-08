@@ -1,5 +1,6 @@
 import AnimationWrapper from "@/components/animations/page-animation";
 import MaxWidthContainer from "@/components/max-width-container";
+import DeathCertificate from "@/components/sections/certificates/death/death-certificate";
 import Breadcrumbs from "@/components/ui/bread-crumbs";
 
 const DeathCertificatePage = () => {
@@ -12,7 +13,7 @@ const DeathCertificatePage = () => {
           listClasses="hover:underline font-bold"
           capitalizeLinks
         />
-        DeathCertificatePage
+        <DeathCertificate />
       </MaxWidthContainer>
     </AnimationWrapper>
   );

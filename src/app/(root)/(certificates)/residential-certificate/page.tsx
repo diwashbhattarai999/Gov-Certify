@@ -1,8 +1,9 @@
 import AnimationWrapper from "@/components/animations/page-animation";
 import MaxWidthContainer from "@/components/max-width-container";
+import ResidentialCertificate from "@/components/sections/certificates/residential/residential-certificate";
 import Breadcrumbs from "@/components/ui/bread-crumbs";
 
-const MigrationCertificatePage = () => {
+const ResidentialCertificatePage = () => {
   return (
     <AnimationWrapper>
       <MaxWidthContainer>
@@ -12,10 +13,10 @@ const MigrationCertificatePage = () => {
           listClasses="hover:underline font-bold"
           capitalizeLinks
         />
-        MigrationCertificatePage
+        <ResidentialCertificate />
       </MaxWidthContainer>
     </AnimationWrapper>
   );
 };
 
-export default MigrationCertificatePage;
+export default ResidentialCertificatePage;

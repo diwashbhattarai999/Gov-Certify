@@ -24,9 +24,9 @@ const Services = () => {
       link: "/marriage-certificate",
     },
     {
-      label: "Migration Certificate",
+      label: "Residential Certificate",
       icon: TbCertificate,
-      link: "/migration-certificate",
+      link: "/residential-certificate",
     },
   ];
   return (

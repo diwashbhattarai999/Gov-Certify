@@ -21,23 +21,19 @@ import {
 import Button from "@/components/ui/Button";
 import { useCurrentRole } from "@/hooks/use-current-role";
 import { cn } from "@/lib/utils";
-
-interface Certificate extends BirthCertificate {
-  selected?: boolean;
-}
+import { ICertificates } from "@/types";
 
 interface ICertificateTableProps {
-  birthCertificates:
-    | (Certificate & {
-        requester: Requester;
-        deliveryDetails: DeliveryDetails | null;
-      })[]
-    | null;
+  allCertificates: ICertificates[];
 }
 
-const CertificateTable = ({ birthCertificates }: ICertificateTableProps) => {
-  const [certificates, setCertificates] = useState(birthCertificates || []);
-
+const CertificateTable = ({ allCertificates }: ICertificateTableProps) => {
+  const [certificates, setCertificates] = useState(
+    allCertificates.map((certificate) => ({
+      ...certificate,
+      selected: false,
+    })) || []
+  );
   const userRole = useCurrentRole();
 
   const handleCheckboxChange = (id: string) => {
@@ -149,7 +145,7 @@ const CertificateTable = ({ birthCertificates }: ICertificateTableProps) => {
           <TableRow>
             <TableCell colSpan={7}>
               Showing {certificates.length} of{" "}
-              {birthCertificates ? birthCertificates.length : 0} rows
+              {certificates ? certificates.length : 0} rows
             </TableCell>
           </TableRow>
         </TableFooter>

@@ -1,5 +1,6 @@
 import AnimationWrapper from "@/components/animations/page-animation";
 import MaxWidthContainer from "@/components/max-width-container";
+import MarriageCertificate from "@/components/sections/certificates/marriage/marriage-certificate";
 import Breadcrumbs from "@/components/ui/bread-crumbs";
 
 const MarriageCertificatePage = () => {
@@ -12,7 +13,7 @@ const MarriageCertificatePage = () => {
           listClasses="hover:underline font-bold"
           capitalizeLinks
         />
-        MarriageCertificatePage
+        <MarriageCertificate />
       </MaxWidthContainer>
     </AnimationWrapper>
   );

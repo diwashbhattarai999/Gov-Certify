@@ -75,12 +75,12 @@ const UserProfile = () => {
       link: "/marriage-certificate",
     },
     {
-      label: "Migration Certificate",
+      label: "Residential Certificate",
       icon: TbCertificate,
       onClick: () => {
         setIsProfileOpen(false);
       },
-      link: "/migration-certificate",
+      link: "/residential-certificate",
     },
   ];
 

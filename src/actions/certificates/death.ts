@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 
 import { Status } from "@prisma/client";
 
-import { IBirthFormData } from "@/types";
+import { IDeathFormData } from "@/types";
 
 import { currentUser } from "@/lib/auth";
 import { db } from "@/lib/db";
@@ -12,7 +12,7 @@ import { db } from "@/lib/db";
 import { getUserById } from "@/data/user";
 import { getRequesterByEmail } from "@/data/certificates/requester";
 
-export const birth = async (formData: IBirthFormData) => {
+export const death = async (formData: IDeathFormData) => {
   const user = await currentUser();
 
   if (!user) {
@@ -29,18 +29,13 @@ export const birth = async (formData: IBirthFormData) => {
     firstName,
     middleName,
     lastName,
-    dateOfBirth,
+    causeOfDeath,
+    dateOfDeath,
     gender,
-    placeOfBirthCountry,
-    placeOfBirthProvince,
-    placeOfBirthDistrict,
-    placeOfBirthCity,
-    fatherFirstName,
-    fatherMiddleName,
-    fatherLastName,
-    motherFirstName,
-    motherMiddleName,
-    motherLastName,
+    placeOfDeathCity,
+    placeOfDeathCountry,
+    placeOfDeathDistrict,
+    placeOfDeathProvince,
     requesterFirstName,
     requesterMiddleName,
     requesterLastName,
@@ -85,23 +80,18 @@ export const birth = async (formData: IBirthFormData) => {
 
     const applicationNumber = await generateApplicationNumber();
 
-    await db.birthCertificate.create({
+    await db.deathCertificate.create({
       data: {
         firstName,
         middleName,
         lastName,
-        DateOfBirth: dateOfBirth,
+        causeOfDeath,
+        dateOfDeath,
         gender,
-        placeOfBirthCountry,
-        placeOfBirthProvince,
-        placeOfBirthDistrict,
-        placeOfBirthCity,
-        fatherFirstName,
-        fatherMiddleName,
-        fatherLastName,
-        motherFirstName,
-        motherMiddleName,
-        motherLastName,
+        placeOfDeathCity,
+        placeOfDeathCountry,
+        placeOfDeathDistrict,
+        placeOfDeathProvince,
         applicationNumber,
         status: Status.PENDING,
         requesterId: existingRequester.id,
@@ -135,23 +125,18 @@ export const birth = async (formData: IBirthFormData) => {
 
     const applicationNumber = await generateApplicationNumber();
 
-    await db.birthCertificate.create({
+    const newDeathCertificate = await db.deathCertificate.create({
       data: {
         firstName,
         middleName,
         lastName,
-        DateOfBirth: dateOfBirth,
+        causeOfDeath,
+        dateOfDeath: dateOfDeath,
         gender,
-        placeOfBirthCountry,
-        placeOfBirthProvince,
-        placeOfBirthDistrict,
-        placeOfBirthCity,
-        fatherFirstName,
-        fatherMiddleName,
-        fatherLastName,
-        motherFirstName,
-        motherMiddleName,
-        motherLastName,
+        placeOfDeathCity,
+        placeOfDeathCountry,
+        placeOfDeathDistrict,
+        placeOfDeathProvince,
         applicationNumber,
         status: Status.PENDING,
         requesterId: newRequester.id,
@@ -162,20 +147,21 @@ export const birth = async (formData: IBirthFormData) => {
   }
 
   revalidatePath("/your-certificates");
+
   return { success: "Form Submitted" };
 };
 
 async function generateApplicationNumber() {
-  const lastApplication = await db.birthCertificate.findFirst({
+  const lastApplication = await db.deathCertificate.findFirst({
     orderBy: { createdAt: "desc" },
   });
 
   if (lastApplication) {
     const lastApplicationNumber = lastApplication.applicationNumber;
-    const lastNumber = parseInt(lastApplicationNumber.replace("APB", ""));
+    const lastNumber = parseInt(lastApplicationNumber.replace("APD", ""));
     const nextNumber = lastNumber + 1;
-    return `APB${nextNumber.toString().padStart(3, "0")}`;
+    return `APD${nextNumber.toString().padStart(3, "0")}`;
   } else {
-    return "APB001";
+    return "APD001";
   }
 }
