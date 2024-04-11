@@ -1,5 +1,5 @@
 import * as z from "zod";
-import { Gender, UserRole } from "@prisma/client";
+import { Gender, Relationship, UserRole } from "@prisma/client";
 
 export const LoginSchema = z.object({
   email: z
@@ -262,21 +262,6 @@ export const FamilyMemberSchema = z.object({
   firstName: z.string().trim().min(1, { message: "First name is required" }),
   middleName: z.string().trim().optional(),
   lastName: z.string().trim().min(1, { message: "Last name is required" }),
-  relationshipToRequester: z.enum([
-    "FATHER",
-    "MOTHER",
-    "BROTHER",
-    "SISTER",
-    "UNCLE",
-    "AUNT",
-    "GRANDFATHER",
-    "GRANDMOTHER",
-    "SON",
-    "DAUGHTER",
-    "SPOUSE",
-    "SELF",
-    "OTHERS",
-  ]),
 });
 
 export const ResidentialDetailsSchema = z.object({
@@ -333,20 +318,20 @@ export const RequesterDetailsSchema = z.object({
     .string()
     .trim()
     .min(1, { message: "Phone number is required" }),
-  requesterRelationshipToOwner: z.enum([
-    "FATHER",
-    "MOTHER",
-    "BROTHER",
-    "SISTER",
-    "UNCLE",
-    "AUNT",
-    "GRANDFATHER",
-    "GRANDMOTHER",
-    "SON",
-    "DAUGHTER",
-    "SPOUSE",
-    "SELF",
-    "OTHERS",
+  relationshipToRequestor: z.enum([
+    Relationship.FATHER,
+    Relationship.MOTHER,
+    Relationship.BROTHER,
+    Relationship.SISTER,
+    Relationship.UNCLE,
+    Relationship.AUNT,
+    Relationship.GRANDFATHER,
+    Relationship.GRANDMOTHER,
+    Relationship.SON,
+    Relationship.DAUGHTER,
+    Relationship.SPOUSE,
+    Relationship.SELF,
+    Relationship.OTHERS,
   ]),
 });
 

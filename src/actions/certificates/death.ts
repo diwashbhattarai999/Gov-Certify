@@ -36,12 +36,12 @@ export const death = async (formData: IDeathFormData) => {
     placeOfDeathCountry,
     placeOfDeathDistrict,
     placeOfDeathProvince,
+    relationshipToRequestor,
     requesterFirstName,
     requesterMiddleName,
     requesterLastName,
     requesterEmail,
     requesterMobileNumber,
-    requesterRelationshipToOwner,
     DeliveryOption,
     deliveryProvince,
     deliveryDistrict,
@@ -62,7 +62,6 @@ export const death = async (formData: IDeathFormData) => {
         requesterLastName,
         requesterEmail,
         requesterMobileNumber,
-        requesterRelationshipToOwner,
       },
     });
 
@@ -93,6 +92,7 @@ export const death = async (formData: IDeathFormData) => {
         placeOfDeathDistrict,
         placeOfDeathProvince,
         applicationNumber,
+        relationshipToRequestor,
         status: Status.PENDING,
         requesterId: existingRequester.id,
         deliveryDetailsId: newDeliveryDetails.id,
@@ -107,7 +107,6 @@ export const death = async (formData: IDeathFormData) => {
         requesterLastName,
         requesterEmail,
         requesterMobileNumber,
-        requesterRelationshipToOwner,
       },
     });
 
@@ -138,6 +137,7 @@ export const death = async (formData: IDeathFormData) => {
         placeOfDeathDistrict,
         placeOfDeathProvince,
         applicationNumber,
+        relationshipToRequestor,
         status: Status.PENDING,
         requesterId: newRequester.id,
         deliveryDetailsId: newDeliveryDetails.id,

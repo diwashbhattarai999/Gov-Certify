@@ -12,16 +12,16 @@ import Input from "@/components/ui/input";
 import Select from "@/components/ui/select";
 import { useState } from "react";
 import Button from "@/components/ui/Button";
-import { useDeathFormState } from "@/context/death-form-context";
+import { useMarriageFormState } from "@/context/marriage-form-context";
 
 const relationshipOptions = Object.keys(Relationship).map((key) => ({
   label: key,
   value: key.toUpperCase(),
 }));
 
-const DeathRequestorsDetailsForm = () => {
+const MarriageRequestorsDetailsForm = () => {
   const { onHandleNext, setFormData, onHandleBack, formData } =
-    useDeathFormState();
+    useMarriageFormState();
   const [selectRelation, setSelectRelation] = useState(
     formData.relationshipToRequestor
   );
@@ -132,4 +132,4 @@ const DeathRequestorsDetailsForm = () => {
   );
 };
 
-export default DeathRequestorsDetailsForm;
+export default MarriageRequestorsDetailsForm;

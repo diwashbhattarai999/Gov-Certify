@@ -7,7 +7,7 @@ const Home = ({}: HomeProps) => {
   return (
     <div>
       <Hero />
-      <Services />
+      <Services showTitle />
       {/*  */}
       {/*  */}
     </div>

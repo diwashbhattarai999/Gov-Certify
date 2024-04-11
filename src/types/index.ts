@@ -55,6 +55,7 @@ export interface IBirthCertificates {
   motherFirstName: string;
   motherMiddleName: string | null;
   motherLastName: string;
+  relationshipToRequestor: string;
   requester: Requester;
   deliveryDetails: DeliveryDetails;
 }
@@ -75,8 +76,34 @@ export interface IDeathCertificates {
   dateOfDeath: string;
   gender: Gender;
   causeOfDeath: string;
+  relationshipToRequestor: string;
   requester: Requester;
   deliveryDetails: DeliveryDetails;
 }
 
-export type ICertificates = (IBirthCertificates | IDeathCertificates);
+export interface IMarriageCertificates {
+  id: string;
+  requesterId: string;
+  deliveryDetailsId: string;
+  applicationNumber: string;
+  status: Status;
+  husbandFirstName: string;
+  husbandMiddleName: string | null;
+  husbandLastName: string;
+  WifeFirstName: string;
+  wifeMiddleName: string | null;
+  wifeLastName: string;
+  placeOfMarriageCountry: string;
+  placeOfMarriageProvince: string;
+  placeOfMarriageDistrict: string;
+  placeOfMarriageCity: string;
+  dateOfMarriage: string;
+  relationshipToRequestor: string;
+  requester: Requester;
+  deliveryDetails: DeliveryDetails;
+}
+
+export type ICertificates =
+  | IBirthCertificates
+  | IDeathCertificates
+  | IMarriageCertificates;

@@ -24,7 +24,7 @@ const BirthRequestorsDetailsForm = () => {
   const { onHandleNext, setFormData, onHandleBack, formData } =
     useBirthFormState();
   const [selectRelation, setSelectRelation] = useState(
-    formData.requesterRelationshipToOwner
+    formData.relationshipToRequestor
   );
 
   const {
@@ -106,11 +106,11 @@ const BirthRequestorsDetailsForm = () => {
         {/* User Inputs -- Relationship to owner */}
         <Select
           selectLabel="Relationship to owner"
-          name="requesterRelationshipToOwner"
+          name="relationshipToRequestor"
           value={selectRelation}
           setSelectValue={setSelectRelation}
-          error={errors.requesterRelationshipToOwner?.message}
-          register={register("requesterRelationshipToOwner")}
+          error={errors.relationshipToRequestor?.message}
+          register={register("relationshipToRequestor")}
           options={relationshipOptions}
         />
       </div>

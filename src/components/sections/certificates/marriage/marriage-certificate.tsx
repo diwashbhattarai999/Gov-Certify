@@ -4,16 +4,18 @@ import { useEffect, useState } from "react";
 
 import { DeliveryOption, Relationship } from "@prisma/client";
 
-import CertificateWrapper from "@/components/sections/certificates/certificate-wrapper";
-import BirthPersonalDetailsForm from "../birth/birth-personal-details-form";
-import BirthRequestorsDetailsForm from "../birth/birth-requesters-details-form";
-import BirthDeliveryDetailsForm from "../birth/birth-delivery-details-form";
-import BirthFormSummary from "../birth/birth-form-summary";
 import { IMarriageFormData } from "@/types";
+
 import {
   MarriageFormProvider,
   useMarriageFormState,
 } from "@/context/marriage-form-context";
+
+import CertificateWrapper from "@/components/sections/certificates/certificate-wrapper";
+import MarriagePersonalDetailsForm from "./marriage-personal-details-form";
+import MarriageRequestorsDetailsForm from "./marriage-requesters-details-form";
+import MarriageDeliveryDetailsForm from "./marriage-delivery-details-form";
+import MarriageFormSummary from "./marriage-form-summary";
 
 const initialFormData: IMarriageFormData = {
   husbandFirstName: "",
@@ -24,15 +26,15 @@ const initialFormData: IMarriageFormData = {
   wifeLastName: "",
   dateOfMarriage: "",
   placeOfMarriageCity: "",
-  placeOfMarriageCountry: "",
+  placeOfMarriageCountry: "Nepal",
   placeOfMarriageProvince: "",
   placeOfMarriageDistrict: "",
+  relationshipToRequestor: "SELF",
   requesterFirstName: "",
   requesterMiddleName: "",
   requesterLastName: "",
   requesterEmail: "",
   requesterMobileNumber: "",
-  requesterRelationshipToOwner: Relationship.SELF,
   DeliveryOption: DeliveryOption.PICK_UP,
   deliveryProvince: "",
   deliveryDistrict: "",
@@ -55,13 +57,13 @@ const ActiveStepFormComponent = () => {
 
   switch (step) {
     case 1:
-      return <BirthPersonalDetailsForm />;
+      return <MarriagePersonalDetailsForm />;
     case 2:
-      return <BirthRequestorsDetailsForm />;
+      return <MarriageRequestorsDetailsForm />;
     case 3:
-      return <BirthDeliveryDetailsForm />;
+      return <MarriageDeliveryDetailsForm />;
     case 4:
-      return <BirthFormSummary />;
+      return <MarriageFormSummary />;
     default:
       return null;
   }

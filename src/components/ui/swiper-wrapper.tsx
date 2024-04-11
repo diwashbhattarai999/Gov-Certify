@@ -37,7 +37,7 @@ const SwiperWrapper = ({ children }: { children: React.ReactNode[] }) => {
           clickable: true,
         }}
         modules={[Autoplay, Pagination, EffectCreative]}
-        className="mySwiper h-full"
+        className="mySwiper h-full w-full"
       >
         {React.Children.map(children, (child, index) => (
           <SwiperSlide key={index}>{child}</SwiperSlide>

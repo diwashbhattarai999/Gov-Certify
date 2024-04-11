@@ -11,18 +11,25 @@ const RegisterPage = () => {
         <div className="lg:basis-[60%] lg:h-full lg:overflow-hidden max-lg:hidden">
           <SwiperWrapper>
             <Image
-              src="/images/auth-bg.jpeg"
+              src="/images/gov-auth-1.svg"
               alt="bg"
-              width={500}
-              height={500}
-              className="w-full h-full"
+              fill
+              sizes="(max-width: 768px) 100vw, 100vw"
+              className="object-cover"
             />
             <Image
-              src="/images/auth-bg.jpeg"
+              src="/images/gov-auth-2.svg"
               alt="bg"
-              width={500}
-              height={500}
-              className="w-full h-full"
+              fill
+              sizes="(max-width: 768px) 100vw, 100vw"
+              className="object-cover"
+            />
+            <Image
+              src="/images/gov-auth-3.jpg"
+              alt="bg"
+              fill
+              sizes="(max-width: 768px) 100vw, 100vw"
+              className="object-cover"
             />
           </SwiperWrapper>
         </div>

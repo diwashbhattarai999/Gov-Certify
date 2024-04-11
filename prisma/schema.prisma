@@ -123,29 +123,30 @@ model TwoFactorConfirmation {
 }
 
 model BirthCertificate {
-  id                   String   @id @default(auto()) @map("_id") @db.ObjectId
-  userId               String   @db.ObjectId
-  requesterId          String   @db.ObjectId
-  deliveryDetailsId    String   @db.ObjectId
-  applicationNumber    String
-  status               Status
-  firstName            String
-  middleName           String?
-  lastName             String
-  placeOfBirthCountry  String
-  placeOfBirthProvince String
-  placeOfBirthDistrict String
-  placeOfBirthCity     String
-  DateOfBirth          String
-  gender               Gender
-  fatherFirstName      String
-  fatherMiddleName     String?
-  fatherLastName       String
-  motherFirstName      String
-  motherMiddleName     String?
-  motherLastName       String
-  createdAt            DateTime @default(now())
-  updatedAt            DateTime @updatedAt
+  id                      String       @id @default(auto()) @map("_id") @db.ObjectId
+  userId                  String       @db.ObjectId
+  requesterId             String       @db.ObjectId
+  deliveryDetailsId       String       @db.ObjectId
+  applicationNumber       String
+  status                  Status
+  firstName               String
+  middleName              String?
+  lastName                String
+  placeOfBirthCountry     String
+  placeOfBirthProvince    String
+  placeOfBirthDistrict    String
+  placeOfBirthCity        String
+  DateOfBirth             String
+  gender                  Gender
+  fatherFirstName         String
+  fatherMiddleName        String?
+  fatherLastName          String
+  motherFirstName         String
+  motherMiddleName        String?
+  motherLastName          String
+  relationshipToRequestor Relationship
+  createdAt               DateTime     @default(now())
+  updatedAt               DateTime     @updatedAt
 
   requester       Requester       @relation(fields: [requesterId], references: [id])
   deliveryDetails DeliveryDetails @relation(fields: [deliveryDetailsId], references: [id])
@@ -155,24 +156,25 @@ model BirthCertificate {
 }
 
 model DeathCertificate {
-  id                   String   @id @default(auto()) @map("_id") @db.ObjectId
-  userId               String   @db.ObjectId
-  requesterId          String   @db.ObjectId
-  deliveryDetailsId    String   @db.ObjectId
-  applicationNumber    String
-  status               Status
-  firstName            String
-  middleName           String?
-  lastName             String
-  placeOfDeathCountry  String
-  placeOfDeathProvince String
-  placeOfDeathDistrict String
-  placeOfDeathCity     String
-  dateOfDeath          String
-  gender               Gender
-  causeOfDeath         String
-  createdAt            DateTime @default(now())
-  updatedAt            DateTime @updatedAt
+  id                      String       @id @default(auto()) @map("_id") @db.ObjectId
+  userId                  String       @db.ObjectId
+  requesterId             String       @db.ObjectId
+  deliveryDetailsId       String       @db.ObjectId
+  applicationNumber       String
+  status                  Status
+  firstName               String
+  middleName              String?
+  lastName                String
+  placeOfDeathCountry     String
+  placeOfDeathProvince    String
+  placeOfDeathDistrict    String
+  placeOfDeathCity        String
+  dateOfDeath             String
+  gender                  Gender
+  causeOfDeath            String
+  relationshipToRequestor Relationship
+  createdAt               DateTime     @default(now())
+  updatedAt               DateTime     @updatedAt
 
   requester       Requester       @relation(fields: [requesterId], references: [id])
   deliveryDetails DeliveryDetails @relation(fields: [deliveryDetailsId], references: [id])
@@ -182,10 +184,10 @@ model DeathCertificate {
 }
 
 model MarriageCertificate {
-  id                      String   @id @default(auto()) @map("_id") @db.ObjectId
-  userId                  String   @db.ObjectId
-  requesterId             String   @db.ObjectId
-  deliveryDetailsId       String   @db.ObjectId
+  id                      String       @id @default(auto()) @map("_id") @db.ObjectId
+  userId                  String       @db.ObjectId
+  requesterId             String       @db.ObjectId
+  deliveryDetailsId       String       @db.ObjectId
   applicationNumber       String
   status                  Status
   husbandFirstName        String
@@ -199,8 +201,9 @@ model MarriageCertificate {
   placeOfMarriageDistrict String
   placeOfMarriageCity     String
   dateOfMarriage          String
-  createdAt               DateTime @default(now())
-  updatedAt               DateTime @updatedAt
+  relationshipToRequestor Relationship
+  createdAt               DateTime     @default(now())
+  updatedAt               DateTime     @updatedAt
 
   user            User            @relation(fields: [userId], references: [id], onDelete: Cascade)
   deliveryDetails DeliveryDetails @relation(fields: [deliveryDetailsId], references: [id])
@@ -210,10 +213,10 @@ model MarriageCertificate {
 }
 
 model ResidentialCertificate {
-  id                         String   @id @default(auto()) @map("_id") @db.ObjectId
-  userId                     String   @db.ObjectId
-  requesterId                String   @db.ObjectId
-  deliveryDetailsId          String   @db.ObjectId
+  id                         String       @id @default(auto()) @map("_id") @db.ObjectId
+  userId                     String       @db.ObjectId
+  requesterId                String       @db.ObjectId
+  deliveryDetailsId          String       @db.ObjectId
   applicationNumber          String
   status                     Status
   currentCountry             String
@@ -224,8 +227,9 @@ model ResidentialCertificate {
   destinationDistrict        String
   destinationCity            String
   dateOfResidentialMigration String
-  createdAt                  DateTime @default(now())
-  updatedAt                  DateTime @updatedAt
+  relationshipToRequestor    Relationship
+  createdAt                  DateTime     @default(now())
+  updatedAt                  DateTime     @updatedAt
 
   user            User            @relation(fields: [userId], references: [id], onDelete: Cascade)
   deliveryDetails DeliveryDetails @relation(fields: [deliveryDetailsId], references: [id])
@@ -249,17 +253,16 @@ model FamilyMember {
 }
 
 model Requester {
-  id                           String                   @id @default(auto()) @map("_id") @db.ObjectId
-  requesterFirstName           String
-  requesterMiddleName          String?
-  requesterLastName            String
-  requesterEmail               String                   @unique
-  requesterMobileNumber        String
-  requesterRelationshipToOwner Relationship
-  BirthCertificate             BirthCertificate[]
-  DeathCertificate             DeathCertificate[]
-  MarriageCertificate          MarriageCertificate[]
-  ResidentialCertificate       ResidentialCertificate[]
+  id                     String                   @id @default(auto()) @map("_id") @db.ObjectId
+  requesterFirstName     String
+  requesterMiddleName    String?
+  requesterLastName      String
+  requesterEmail         String                   @unique
+  requesterMobileNumber  String
+  BirthCertificate       BirthCertificate[]
+  DeathCertificate       DeathCertificate[]
+  MarriageCertificate    MarriageCertificate[]
+  ResidentialCertificate ResidentialCertificate[]
 }
 
 model DeliveryDetails {

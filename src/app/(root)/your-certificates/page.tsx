@@ -5,28 +5,50 @@ import { currentUser } from "@/lib/auth";
 import {
   getBirthCertificatesByUserId,
   getDeathCertificatesByUserId,
+  getMarriageCertificatesByUserId,
 } from "@/data/certificates/certificates";
 
 import AnimationWrapper from "@/components/animations/page-animation";
 import MaxWidthContainer from "@/components/max-width-container";
 import CertificateTable from "@/components/sections/your-certificates/certificate-table";
 import Breadcrumbs from "@/components/ui/bread-crumbs";
-import { ICertificates } from "@/types";
+import {
+  IBirthCertificates,
+  ICertificates,
+  IDeathCertificates,
+  IMarriageCertificates,
+} from "@/types";
+import Services from "@/components/sections/Home/services";
 
 const YourCertificatesPage = async () => {
   const user = await currentUser();
+
+  // Fetch birth, death, and marriage certificates for the current user
   const birthCertificates = await getBirthCertificatesByUserId(
     user?.id as string
   );
-
   const deathCertificates = await getDeathCertificatesByUserId(
     user?.id as string
   );
+  const marriageCertificates = await getMarriageCertificatesByUserId(
+    user?.id as string
+  );
 
-  let certificates: ICertificates[] =
-    birthCertificates && deathCertificates
-      ? [...birthCertificates, ...deathCertificates]
-      : [];
+  // let certificates: ICertificates[] =
+  //   birthCertificates && deathCertificates && marriageCertificates
+  //     ? [...birthCertificates, ...deathCertificates, ...marriageCertificates]
+  //     : [];
+
+  // Create an object to hold certificates grouped by type
+  const certificates: {
+    birth: IBirthCertificates[];
+    death: IDeathCertificates[];
+    marriage: IMarriageCertificates[];
+  } = {
+    birth: birthCertificates || [],
+    death: deathCertificates || [],
+    marriage: marriageCertificates || [],
+  };
 
   return (
     <AnimationWrapper>
@@ -38,14 +60,26 @@ const YourCertificatesPage = async () => {
           capitalizeLinks
         />
 
-        <div className="flex flex-col bg-stone-50 p-4 border border-border shadow-sm rounded-md">
-          <div className="flex-1">
-            <h1 className="text-xl font-medium text-muted-foreground mb-8 border-b border-border pb-2">
-              View details of all applied certificates
-            </h1>
-            <CertificateTable allCertificates={certificates} />
+        {certificates.birth.length ||
+        certificates.death.length ||
+        certificates.marriage.length > 0 ? (
+          <div className="flex flex-col bg-stone-50 p-4 border border-border shadow-sm rounded-md">
+            <div className="flex-1">
+              <h1 className="text-xl font-medium text-muted-foreground mb-8 border-b border-border pb-2">
+                View details of all applied certificates
+              </h1>
+              <CertificateTable allCertificates={certificates} />
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="flex flex-col items-center justify-center min-h-[65vh]">
+            <div className="text-muted-foreground mb-6 text-center">
+              <h1 className="text-4xl font-medium ">No certificates found</h1>
+              <p className="text-xl">Apply for certificates Now</p>
+            </div>
+            <Services />
+          </div>
+        )}
       </MaxWidthContainer>
     </AnimationWrapper>
   );

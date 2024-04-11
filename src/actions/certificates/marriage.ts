@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 
 import { Status } from "@prisma/client";
 
-import { IBirthFormData } from "@/types";
+import { IMarriageFormData } from "@/types";
 
 import { currentUser } from "@/lib/auth";
 import { db } from "@/lib/db";
@@ -12,7 +12,7 @@ import { db } from "@/lib/db";
 import { getUserById } from "@/data/user";
 import { getRequesterByEmail } from "@/data/certificates/requester";
 
-export const birth = async (formData: IBirthFormData) => {
+export const marriage = async (formData: IMarriageFormData) => {
   const user = await currentUser();
 
   if (!user) {
@@ -26,21 +26,17 @@ export const birth = async (formData: IBirthFormData) => {
   }
 
   const {
-    firstName,
-    middleName,
-    lastName,
-    dateOfBirth,
-    gender,
-    placeOfBirthCountry,
-    placeOfBirthProvince,
-    placeOfBirthDistrict,
-    placeOfBirthCity,
-    fatherFirstName,
-    fatherMiddleName,
-    fatherLastName,
-    motherFirstName,
-    motherMiddleName,
-    motherLastName,
+    husbandFirstName,
+    husbandMiddleName,
+    husbandLastName,
+    WifeFirstName,
+    wifeMiddleName,
+    wifeLastName,
+    dateOfMarriage,
+    placeOfMarriageCity,
+    placeOfMarriageCountry,
+    placeOfMarriageProvince,
+    placeOfMarriageDistrict,
     relationshipToRequestor,
     requesterFirstName,
     requesterMiddleName,
@@ -84,25 +80,21 @@ export const birth = async (formData: IBirthFormData) => {
 
     const applicationNumber = await generateApplicationNumber();
 
-    await db.birthCertificate.create({
+    await db.marriageCertificate.create({
       data: {
-        firstName,
-        middleName,
-        lastName,
-        DateOfBirth: dateOfBirth,
-        gender,
-        placeOfBirthCountry,
-        placeOfBirthProvince,
-        placeOfBirthDistrict,
-        placeOfBirthCity,
-        fatherFirstName,
-        fatherMiddleName,
-        fatherLastName,
-        motherFirstName,
-        motherMiddleName,
-        motherLastName,
-        applicationNumber,
+        husbandFirstName,
+        husbandMiddleName,
+        husbandLastName,
+        WifeFirstName,
+        wifeMiddleName,
+        wifeLastName,
+        dateOfMarriage,
+        placeOfMarriageCity,
+        placeOfMarriageCountry,
+        placeOfMarriageProvince,
+        placeOfMarriageDistrict,
         relationshipToRequestor,
+        applicationNumber,
         status: Status.PENDING,
         requesterId: existingRequester.id,
         deliveryDetailsId: newDeliveryDetails.id,
@@ -134,25 +126,21 @@ export const birth = async (formData: IBirthFormData) => {
 
     const applicationNumber = await generateApplicationNumber();
 
-    await db.birthCertificate.create({
+    await db.marriageCertificate.create({
       data: {
-        firstName,
-        middleName,
-        lastName,
-        DateOfBirth: dateOfBirth,
-        gender,
-        placeOfBirthCountry,
-        placeOfBirthProvince,
-        placeOfBirthDistrict,
-        placeOfBirthCity,
-        fatherFirstName,
-        fatherMiddleName,
-        fatherLastName,
-        motherFirstName,
-        motherMiddleName,
-        motherLastName,
-        applicationNumber,
+        husbandFirstName,
+        husbandMiddleName,
+        husbandLastName,
+        WifeFirstName,
+        wifeMiddleName,
+        wifeLastName,
+        dateOfMarriage,
+        placeOfMarriageCity,
+        placeOfMarriageCountry,
+        placeOfMarriageProvince,
+        placeOfMarriageDistrict,
         relationshipToRequestor,
+        applicationNumber,
         status: Status.PENDING,
         requesterId: newRequester.id,
         deliveryDetailsId: newDeliveryDetails.id,
@@ -166,16 +154,16 @@ export const birth = async (formData: IBirthFormData) => {
 };
 
 async function generateApplicationNumber() {
-  const lastApplication = await db.birthCertificate.findFirst({
+  const lastApplication = await db.marriageCertificate.findFirst({
     orderBy: { createdAt: "desc" },
   });
 
   if (lastApplication) {
     const lastApplicationNumber = lastApplication.applicationNumber;
-    const lastNumber = parseInt(lastApplicationNumber.replace("APB", ""));
+    const lastNumber = parseInt(lastApplicationNumber.replace("APM", ""));
     const nextNumber = lastNumber + 1;
-    return `APB${nextNumber.toString().padStart(3, "0")}`;
+    return `APM${nextNumber.toString().padStart(3, "0")}`;
   } else {
-    return "APB001";
+    return "APM001";
   }
 }
