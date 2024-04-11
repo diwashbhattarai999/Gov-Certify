@@ -46,8 +46,7 @@ const CertificateTable = ({ allCertificates }: ICertificateTableProps) => {
     marriage: [],
   });
   const userRole = useCurrentRole();
-
-  // console.log(certificates);
+  let serialNumber = 1;
 
   const handleCheckboxChange = (
     type: "birth" | "death" | "marriage",
@@ -114,7 +113,7 @@ const CertificateTable = ({ allCertificates }: ICertificateTableProps) => {
                 }
               />
             </TableCell>
-            <TableCell className="font-medium">{index + 1}</TableCell>
+            <TableCell className="font-medium">{serialNumber++}</TableCell>
             <TableCell>{marriageCertificate.applicationNumber}</TableCell>
             <TableCell>
               {`${marriageCertificate.husbandFirstName} ${
@@ -178,7 +177,7 @@ const CertificateTable = ({ allCertificates }: ICertificateTableProps) => {
               onChange={() => handleCheckboxChange(type, id)}
             />
           </TableCell>
-          <TableCell className="font-medium">{index + 1}</TableCell>
+          <TableCell className="font-medium">{serialNumber++}</TableCell>
           <TableCell>{applicationNumber}</TableCell>
           <TableCell>{`${firstName} ${
             middleName || ""

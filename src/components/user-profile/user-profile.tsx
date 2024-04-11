@@ -97,7 +97,7 @@ const UserProfile = () => {
 
       <div
         className={cn(
-          "absolute right-0 z-30 px-2 py-3 rounded-md shadow-sm w-56 top-14 bg-primary text-foreground duration-300",
+          "absolute right-0 z-30 px-2 py-3 rounded-md shadow-md w-56 top-14 bg-background border border-border text-foreground duration-300",
           isProfileOpen
             ? "opacity-100 translate-y-0 pointer-events-auto"
             : "opacity-0 -translate-y-5 pointer-events-none"
@@ -117,7 +117,7 @@ const UserProfile = () => {
               <li
                 key={index}
                 onClick={item.onClick}
-                className="flex items-center gap-3 px-2 font-medium transition-colors rounded-md cursor-pointer hover:bg-popover"
+                className="flex items-center gap-3 px-2 font-medium transition-colors rounded-md cursor-pointer hover:bg-muted border border-transparent hover:border-border"
               >
                 {item.link ? (
                   <Link href={item.link}>
@@ -138,7 +138,7 @@ const UserProfile = () => {
 
           <li
             onClick={handleLogout}
-            className="flex items-center gap-3 px-2 font-medium transition-colors rounded-md cursor-pointer hover:bg-popover"
+            className="flex items-center gap-3 px-2 font-medium transition-colors rounded-md cursor-pointer hover:bg-muted border border-transparent hover:border-border"
           >
             <LuLogOut className="w-auto py-3 h-11" />
             <h3>Logout</h3>

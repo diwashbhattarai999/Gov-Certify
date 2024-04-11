@@ -25,13 +25,9 @@ const ProfileSettings = ({
 
   return (
     <>
-      {isProfileSettingsOpen && (
-        <div className="fixed inset-0 z-50 w-screen h-screen bg-background/80 backdrop-blur-sm"></div>
-      )}
-
       <div
         className={cn(
-          "fixed top-0 left-0 z-50 flex items-center justify-center w-screen min-h-screen duration-300",
+          "fixed top-0 left-0 z-50 bg-background/90 backdrop-blur-md flex items-center justify-center w-screen min-h-screen duration-300",
           isProfileSettingsOpen
             ? "translate-y-0 opacity-100 pointer-events-auto"
             : "-translate-y-10 opacity-0 pointer-events-none"
