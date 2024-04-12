@@ -7,8 +7,15 @@ import {
   DeathDetailsSchema,
   MarriageDetailsSchema,
   ResidentialDetailsSchema,
+  FamilyMemberSchema,
 } from "@/schemas";
-import { DeliveryDetails, Gender, Requester, Status } from "@prisma/client";
+import {
+  DeliveryDetails,
+  FamilyMember,
+  Gender,
+  Requester,
+  Status,
+} from "@prisma/client";
 
 export type IBirthFormData = z.infer<
   typeof BirthDetailsSchema &
@@ -103,7 +110,28 @@ export interface IMarriageCertificates {
   deliveryDetails: DeliveryDetails;
 }
 
+export interface IResidentialCertificates {
+  id: string;
+  requesterId: string;
+  deliveryDetailsId: string;
+  applicationNumber: string;
+  status: Status;
+  currentCountry: string;
+  currentProvince: string;
+  currentDistrict: string;
+  currentCity: string;
+  destinationCountry: string;
+  destinationDistrict: string;
+  destinationProvince: string;
+  destinationCity: string;
+  dateOfResidentialMigration: string;
+  requester: Requester;
+  deliveryDetails: DeliveryDetails;
+  familyMembers: FamilyMember[];
+}
+
 export type ICertificates =
   | IBirthCertificates
   | IDeathCertificates
-  | IMarriageCertificates;
+  | IMarriageCertificates
+  | IResidentialCertificates;

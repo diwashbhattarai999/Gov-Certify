@@ -25,6 +25,7 @@ import {
   IBirthCertificates,
   IDeathCertificates,
   IMarriageCertificates,
+  IResidentialCertificates,
 } from "@/types";
 
 interface ICertificateTableProps {
@@ -32,56 +33,22 @@ interface ICertificateTableProps {
     birth: IBirthCertificates[];
     death: IDeathCertificates[];
     marriage: IMarriageCertificates[];
+    residential: IResidentialCertificates[];
   };
 }
 
 const CertificateTable = ({ allCertificates }: ICertificateTableProps) => {
-  const [selectedCertificates, setSelectedCertificates] = useState<{
-    birth: string[];
-    death: string[];
-    marriage: string[];
-  }>({
-    birth: [],
-    death: [],
-    marriage: [],
-  });
   const userRole = useCurrentRole();
   let serialNumber = 1;
-
-  const handleCheckboxChange = (
-    type: "birth" | "death" | "marriage",
-    id: string
-  ) => {
-    setSelectedCertificates((prev) => ({
-      ...prev,
-      [type]: prev[type].includes(id)
-        ? prev[type].filter((item) => item !== id)
-        : [...prev[type], id],
-    }));
-  };
-
-  const handleSelectAll = (
-    type: "birth" | "death" | "marriage",
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const isChecked = event.target.checked;
-    setSelectedCertificates((prev) => ({
-      ...prev,
-      [type]: isChecked ? allCertificates[type].map((cert) => cert.id) : [],
-    }));
-  };
 
   const handleView = (id: string) => {
     console.log("View certificate with ID:", id);
   };
 
-  const handleDelete = (type: "birth" | "death" | "marriage") => {
-    console.log(
-      "Delete selected certificates of type",
-      type,
-      ":",
-      selectedCertificates[type]
-    );
+  const handleDelete = (
+    type: "birth" | "death" | "marriage" | "residential"
+  ) => {
+    console.log("Delete selected certificates of type", type);
   };
 
   const renderTableBody = (
@@ -89,30 +56,16 @@ const CertificateTable = ({ allCertificates }: ICertificateTableProps) => {
       | IBirthCertificates
       | IDeathCertificates
       | IMarriageCertificates
+      | IResidentialCertificates
     )[],
-    type: "birth" | "death" | "marriage"
+    type: "birth" | "death" | "marriage" | "residential"
   ) => {
     return certificates.map((certificate, index) => {
       // Type guard to check if it's a marriage certificate
       if (type === "marriage") {
         const marriageCertificate = certificate as IMarriageCertificates;
         return (
-          <TableRow
-            key={marriageCertificate.id}
-            onClick={() => handleCheckboxChange(type, marriageCertificate.id)}
-            className="cursor-pointer"
-          >
-            <TableCell>
-              <input
-                type="checkbox"
-                checked={selectedCertificates[type].includes(
-                  marriageCertificate.id
-                )}
-                onChange={() =>
-                  handleCheckboxChange(type, marriageCertificate.id)
-                }
-              />
-            </TableCell>
+          <TableRow key={marriageCertificate.id} className="cursor-pointer">
             <TableCell className="font-medium">{serialNumber++}</TableCell>
             <TableCell>{marriageCertificate.applicationNumber}</TableCell>
             <TableCell>
@@ -138,7 +91,7 @@ const CertificateTable = ({ allCertificates }: ICertificateTableProps) => {
             >
               {marriageCertificate.status}
             </TableCell>
-            <TableCell colSpan={2} className="flex gap-4">
+            <TableCell className="flex gap-4">
               <Button
                 onClick={() => handleView(marriageCertificate.id)}
                 className="w-20"
@@ -149,11 +102,7 @@ const CertificateTable = ({ allCertificates }: ICertificateTableProps) => {
                 onClick={() => handleDelete(type)}
                 destructive
                 className="w-20"
-                disabled={
-                  !selectedCertificates[type].includes(
-                    marriageCertificate.id
-                  ) || userRole === UserRole.USER
-                }
+                disabled={userRole === UserRole.USER}
               >
                 Delete
               </Button>
@@ -161,22 +110,58 @@ const CertificateTable = ({ allCertificates }: ICertificateTableProps) => {
           </TableRow>
         );
       }
+
+      // For residential certificate
+      if (type === "residential") {
+        const residentialCertificate = certificate as IResidentialCertificates;
+        return (
+          <TableRow key={residentialCertificate.id} className="cursor-pointer">
+            <TableCell className="font-medium">{serialNumber++}</TableCell>
+            <TableCell>{residentialCertificate.applicationNumber}</TableCell>
+            <TableCell>
+              {`${residentialCertificate.requester.requesterFirstName} ${
+                residentialCertificate.requester.requesterMiddleName || ""
+              } ${residentialCertificate.requester.requesterLastName} `}
+            </TableCell>
+            <TableCell className="capitalize">{type}</TableCell>
+            <TableCell
+              className={cn(
+                "font-semibold",
+                residentialCertificate.status === Status.APPROVED &&
+                  "text-emerald-500",
+                residentialCertificate.status === Status.REJECTED &&
+                  "text-red-500",
+                residentialCertificate.status === Status.PENDING &&
+                  "text-amber-500"
+              )}
+            >
+              {residentialCertificate.status}
+            </TableCell>
+            <TableCell className="flex gap-4">
+              <Button
+                onClick={() => handleView(residentialCertificate.id)}
+                className="w-20"
+              >
+                View
+              </Button>
+              <Button
+                onClick={() => handleDelete(type)}
+                destructive
+                className="w-20"
+                disabled={userRole === UserRole.USER}
+              >
+                Delete
+              </Button>
+            </TableCell>
+          </TableRow>
+        );
+      }
+
       // For birth and death certificates
       const { id, applicationNumber, firstName, middleName, lastName, status } =
         certificate as IBirthCertificates | IDeathCertificates;
       return (
-        <TableRow
-          key={id}
-          onClick={() => handleCheckboxChange(type, id)}
-          className="cursor-pointer"
-        >
-          <TableCell>
-            <input
-              type="checkbox"
-              checked={selectedCertificates[type].includes(id)}
-              onChange={() => handleCheckboxChange(type, id)}
-            />
-          </TableCell>
+        <TableRow key={id} className="cursor-pointer">
           <TableCell className="font-medium">{serialNumber++}</TableCell>
           <TableCell>{applicationNumber}</TableCell>
           <TableCell>{`${firstName} ${
@@ -193,7 +178,7 @@ const CertificateTable = ({ allCertificates }: ICertificateTableProps) => {
           >
             {status}
           </TableCell>
-          <TableCell colSpan={2} className="flex gap-4">
+          <TableCell className="flex gap-4">
             <Button onClick={() => handleView(id)} className="w-20">
               View
             </Button>
@@ -201,10 +186,7 @@ const CertificateTable = ({ allCertificates }: ICertificateTableProps) => {
               onClick={() => handleDelete(type)}
               destructive
               className="w-20"
-              disabled={
-                !selectedCertificates[type].includes(id) ||
-                userRole === UserRole.USER
-              }
+              disabled={userRole === UserRole.USER}
             >
               Delete
             </Button>
@@ -220,42 +202,33 @@ const CertificateTable = ({ allCertificates }: ICertificateTableProps) => {
         <TableCaption>A list of recent applied certificates.</TableCaption>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[100px]">
-              <input
-                type="checkbox"
-                onChange={(e) => handleSelectAll("birth", e)}
-                checked={
-                  allCertificates.birth.length > 0 &&
-                  allCertificates.birth.every((cert) =>
-                    selectedCertificates.birth.includes(cert.id)
-                  )
-                }
-              />
-            </TableHead>
             <TableHead className="w-[100px]">S.No.</TableHead>
             <TableHead>Application Number</TableHead>
             <TableHead>Name</TableHead>
             <TableHead>Certificate Type</TableHead>
             <TableHead>Status</TableHead>
-            <TableHead colSpan={2}>Action</TableHead>
+            <TableHead>Action</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {renderTableBody(allCertificates.birth, "birth")}
           {renderTableBody(allCertificates.death, "death")}
           {renderTableBody(allCertificates.marriage, "marriage")}
+          {renderTableBody(allCertificates.residential, "residential")}
         </TableBody>
         <TableFooter>
           <TableRow>
             <TableCell colSpan={7}>
               Showing{" "}
-              {allCertificates.birth.length +
+              {(allCertificates.birth.length +
                 allCertificates.death.length +
-                allCertificates.marriage.length}{" "}
+                allCertificates.marriage.length) |
+                allCertificates.residential.length}{" "}
               of{" "}
               {allCertificates.birth.length +
                 allCertificates.death.length +
-                allCertificates.marriage.length}{" "}
+                allCertificates.marriage.length +
+                allCertificates.residential.length}{" "}
               rows
             </TableCell>
           </TableRow>

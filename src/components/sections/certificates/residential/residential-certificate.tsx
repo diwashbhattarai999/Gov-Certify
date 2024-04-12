@@ -2,37 +2,35 @@
 
 import { useEffect, useState } from "react";
 
-import { DeliveryOption, Relationship } from "@prisma/client";
-
-import CertificateWrapper from "@/components/sections/certificates/certificate-wrapper";
-import BirthPersonalDetailsForm from "../birth/birth-personal-details-form";
-import BirthRequestorsDetailsForm from "../birth/birth-requesters-details-form";
-import BirthDeliveryDetailsForm from "../birth/birth-delivery-details-form";
-import BirthFormSummary from "../birth/birth-form-summary";
 import { IResidentialFormData } from "@/types";
 import {
   ResidentialFormProvider,
   useResidentialFormState,
 } from "@/context/residential-form-context ";
 
+import ResidentialDetailsForm from "./residential-details-form";
+import ResidentialRequestorsDetailsForm from "./residential-requesters-details-form";
+import ResidentialDeliveryDetailsForm from "./residential-delivery-details-form";
+import ResidentialFormSummary from "./residential-form-summary";
+import CertificateWrapper from "@/components/sections/certificates/certificate-wrapper";
+
 const initialFormData: IResidentialFormData = {
-  currentCountry: "",
+  currentCountry: "Nepal",
   currentProvince: "",
   currentDistrict: "",
   currentCity: "",
-  destinationCountry: "",
+  destinationCountry: "Nepal",
   destinationProvince: "",
   destinationDistrict: "",
   destinationCity: "",
   dateOfResidentialMigration: "",
-  FamilyMembers: [],
-  relationshipToRequestor: "SELF",
+  familyMembers: [],
   requesterFirstName: "",
   requesterMiddleName: "",
   requesterLastName: "",
   requesterEmail: "",
   requesterMobileNumber: "",
-  DeliveryOption: DeliveryOption.PICK_UP,
+  DeliveryOption: "DELIVERY",
   deliveryProvince: "",
   deliveryDistrict: "",
   deliveryAddress: "",
@@ -54,13 +52,13 @@ const ActiveStepFormComponent = () => {
 
   switch (step) {
     case 1:
-      return <BirthPersonalDetailsForm />;
+      return <ResidentialDetailsForm />;
     case 2:
-      return <BirthRequestorsDetailsForm />;
+      return <ResidentialRequestorsDetailsForm />;
     case 3:
-      return <BirthDeliveryDetailsForm />;
+      return <ResidentialDeliveryDetailsForm />;
     case 4:
-      return <BirthFormSummary />;
+      return <ResidentialFormSummary />;
     default:
       return null;
   }

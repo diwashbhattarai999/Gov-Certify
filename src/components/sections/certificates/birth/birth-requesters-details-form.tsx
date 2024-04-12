@@ -24,7 +24,7 @@ const BirthRequestorsDetailsForm = () => {
   const { onHandleNext, setFormData, onHandleBack, formData } =
     useBirthFormState();
   const [selectRelation, setSelectRelation] = useState(
-    formData.relationshipToRequestor
+    formData.relationshipToRequestor || Relationship.SELF
   );
 
   const {

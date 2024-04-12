@@ -2,9 +2,9 @@
 
 import { revalidatePath } from "next/cache";
 
-import { Relationship, Status } from "@prisma/client";
+import { Status } from "@prisma/client";
 
-import { IDeathFormData } from "@/types";
+import { IResidentialFormData } from "@/types";
 
 import { currentUser } from "@/lib/auth";
 import { db } from "@/lib/db";
@@ -12,7 +12,7 @@ import { db } from "@/lib/db";
 import { getUserById } from "@/data/user";
 import { getRequesterByEmail } from "@/data/certificates/requester";
 
-export const death = async (formData: IDeathFormData) => {
+export const residential = async (formData: IResidentialFormData) => {
   const user = await currentUser();
 
   if (!user) {
@@ -26,17 +26,16 @@ export const death = async (formData: IDeathFormData) => {
   }
 
   const {
-    firstName,
-    middleName,
-    lastName,
-    causeOfDeath,
-    dateOfDeath,
-    gender,
-    placeOfDeathCity,
-    placeOfDeathCountry,
-    placeOfDeathDistrict,
-    placeOfDeathProvince,
-    relationshipToRequestor,
+    currentCountry,
+    currentProvince,
+    currentDistrict,
+    currentCity,
+    destinationCountry,
+    destinationProvince,
+    destinationDistrict,
+    destinationCity,
+    dateOfResidentialMigration,
+    familyMembers,
     requesterFirstName,
     requesterMiddleName,
     requesterLastName,
@@ -50,11 +49,6 @@ export const death = async (formData: IDeathFormData) => {
     deliveryWard,
     deliveryPostalCode,
   } = formData;
-
-  const relationship =
-    relationshipToRequestor !== undefined
-      ? relationshipToRequestor
-      : Relationship.OTHERS;
 
   const existingRequester = await getRequesterByEmail(requesterEmail);
 
@@ -84,26 +78,49 @@ export const death = async (formData: IDeathFormData) => {
 
     const applicationNumber = await generateApplicationNumber();
 
-    await db.deathCertificate.create({
+    const newResidentialCertificate = await db.residentialCertificate.create({
       data: {
-        firstName,
-        middleName,
-        lastName,
-        causeOfDeath,
-        dateOfDeath,
-        gender,
-        placeOfDeathCity,
-        placeOfDeathCountry,
-        placeOfDeathDistrict,
-        placeOfDeathProvince,
+        currentCountry,
+        currentProvince,
+        currentDistrict,
+        currentCity,
+        destinationCountry,
+        destinationProvince,
+        destinationDistrict,
+        destinationCity,
+        dateOfResidentialMigration,
         applicationNumber,
-        relationshipToRequestor: relationship,
         status: Status.PENDING,
         requesterId: existingRequester.id,
         deliveryDetailsId: newDeliveryDetails.id,
         userId: dbUser.id,
       },
     });
+
+    familyMembers.forEach(
+      async ({
+        firstName,
+        middleName,
+        lastName,
+        dateOfBirth,
+        placeOfBirth,
+        gender,
+        relationshipToRequestor,
+      }) => {
+        await db.familyMember.create({
+          data: {
+            firstName,
+            middleName,
+            lastName,
+            dateOfBirth,
+            placeOfBirth,
+            gender,
+            relationshipToRequester: relationshipToRequestor,
+            residentialCertificateId: newResidentialCertificate.id,
+          },
+        });
+      }
+    );
   } else {
     const newRequester = await db.requester.create({
       data: {
@@ -129,44 +146,66 @@ export const death = async (formData: IDeathFormData) => {
 
     const applicationNumber = await generateApplicationNumber();
 
-    const newDeathCertificate = await db.deathCertificate.create({
+    const newResidentialCertificate = await db.residentialCertificate.create({
       data: {
-        firstName,
-        middleName,
-        lastName,
-        causeOfDeath,
-        dateOfDeath: dateOfDeath,
-        gender,
-        placeOfDeathCity,
-        placeOfDeathCountry,
-        placeOfDeathDistrict,
-        placeOfDeathProvince,
+        currentCountry,
+        currentProvince,
+        currentDistrict,
+        currentCity,
+        destinationCountry,
+        destinationProvince,
+        destinationDistrict,
+        destinationCity,
+        dateOfResidentialMigration,
         applicationNumber,
-        relationshipToRequestor: relationship,
         status: Status.PENDING,
         requesterId: newRequester.id,
         deliveryDetailsId: newDeliveryDetails.id,
         userId: dbUser.id,
       },
     });
+
+    familyMembers.forEach(
+      async ({
+        firstName,
+        middleName,
+        lastName,
+        dateOfBirth,
+        placeOfBirth,
+        gender,
+        relationshipToRequestor,
+      }) => {
+        await db.familyMember.create({
+          data: {
+            firstName,
+            middleName,
+            lastName,
+            dateOfBirth,
+            placeOfBirth,
+            gender,
+            relationshipToRequester: relationshipToRequestor,
+            residentialCertificateId: newResidentialCertificate.id,
+          },
+        });
+      }
+    );
   }
 
   revalidatePath("/your-certificates");
-
   return { success: "Form Submitted" };
 };
 
 async function generateApplicationNumber() {
-  const lastApplication = await db.deathCertificate.findFirst({
+  const lastApplication = await db.residentialCertificate.findFirst({
     orderBy: { createdAt: "desc" },
   });
 
   if (lastApplication) {
     const lastApplicationNumber = lastApplication.applicationNumber;
-    const lastNumber = parseInt(lastApplicationNumber.replace("APD", ""));
+    const lastNumber = parseInt(lastApplicationNumber.replace("APR", ""));
     const nextNumber = lastNumber + 1;
-    return `APD${nextNumber.toString().padStart(3, "0")}`;
+    return `APR${nextNumber.toString().padStart(3, "0")}`;
   } else {
-    return "APD001";
+    return "APR001";
   }
 }

@@ -2,6 +2,7 @@ import {
   IBirthCertificates,
   IDeathCertificates,
   IMarriageCertificates,
+  IResidentialCertificates,
 } from "@/types";
 
 import { db } from "@/lib/db";
@@ -106,6 +107,38 @@ export const getMarriageCertificatesByUserId = async (userId: string) => {
       });
 
     return marriageCertificates;
+  } catch (error) {
+    return null;
+  }
+};
+
+export const getResidentialCertificatesByUserId = async (userId: string) => {
+  try {
+    const residentialCertificates: IResidentialCertificates[] =
+      await db.residentialCertificate.findMany({
+        where: { userId },
+        select: {
+          id: true,
+          requesterId: true,
+          deliveryDetailsId: true,
+          applicationNumber: true,
+          status: true,
+          currentCountry: true,
+          currentProvince: true,
+          currentDistrict: true,
+          currentCity: true,
+          destinationCountry: true,
+          destinationDistrict: true,
+          destinationProvince: true,
+          destinationCity: true,
+          dateOfResidentialMigration: true,
+          requester: true,
+          deliveryDetails: true,
+          familyMembers: true,
+        },
+      });
+
+    return residentialCertificates;
   } catch (error) {
     return null;
   }

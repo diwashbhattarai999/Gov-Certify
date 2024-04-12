@@ -262,6 +262,27 @@ export const FamilyMemberSchema = z.object({
   firstName: z.string().trim().min(1, { message: "First name is required" }),
   middleName: z.string().trim().optional(),
   lastName: z.string().trim().min(1, { message: "Last name is required" }),
+  dateOfBirth: z.string().min(1, { message: "Date of Birth is required" }),
+  placeOfBirth: z
+    .string()
+    .trim()
+    .min(1, { message: "Place of Birth is required" }),
+  gender: z.enum([Gender.MALE, Gender.FEMALE, Gender.OTHERS]),
+  relationshipToRequestor: z.enum([
+    Relationship.FATHER,
+    Relationship.MOTHER,
+    Relationship.BROTHER,
+    Relationship.SISTER,
+    Relationship.UNCLE,
+    Relationship.AUNT,
+    Relationship.GRANDFATHER,
+    Relationship.GRANDMOTHER,
+    Relationship.SON,
+    Relationship.DAUGHTER,
+    Relationship.SPOUSE,
+    Relationship.SELF,
+    Relationship.OTHERS,
+  ]),
 });
 
 export const ResidentialDetailsSchema = z.object({
@@ -300,7 +321,7 @@ export const ResidentialDetailsSchema = z.object({
   dateOfResidentialMigration: z
     .string()
     .min(1, { message: "Date of Residential Migration is required" }),
-  FamilyMembers: z.array(FamilyMemberSchema),
+  familyMembers: z.array(FamilyMemberSchema),
 });
 
 export const RequesterDetailsSchema = z.object({
@@ -318,21 +339,23 @@ export const RequesterDetailsSchema = z.object({
     .string()
     .trim()
     .min(1, { message: "Phone number is required" }),
-  relationshipToRequestor: z.enum([
-    Relationship.FATHER,
-    Relationship.MOTHER,
-    Relationship.BROTHER,
-    Relationship.SISTER,
-    Relationship.UNCLE,
-    Relationship.AUNT,
-    Relationship.GRANDFATHER,
-    Relationship.GRANDMOTHER,
-    Relationship.SON,
-    Relationship.DAUGHTER,
-    Relationship.SPOUSE,
-    Relationship.SELF,
-    Relationship.OTHERS,
-  ]),
+  relationshipToRequestor: z.optional(
+    z.enum([
+      Relationship.FATHER,
+      Relationship.MOTHER,
+      Relationship.BROTHER,
+      Relationship.SISTER,
+      Relationship.UNCLE,
+      Relationship.AUNT,
+      Relationship.GRANDFATHER,
+      Relationship.GRANDMOTHER,
+      Relationship.SON,
+      Relationship.DAUGHTER,
+      Relationship.SPOUSE,
+      Relationship.SELF,
+      Relationship.OTHERS,
+    ])
+  ),
 });
 
 export const DeliveryDetailsSchema = z.object({

@@ -63,11 +63,12 @@ const Footer = () => {
               </ul>
             ))}
 
-            <div className="relative">
+            <div className="relative max-md:hidden">
               <Image
                 src="/images/Animated-Flag-Nepal.gif"
                 alt="Flag-of-Nepal"
                 fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 className="-mt-3"
               />
             </div>

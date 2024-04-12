@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 
-import { Status } from "@prisma/client";
+import { Relationship, Status } from "@prisma/client";
 
 import { IBirthFormData } from "@/types";
 
@@ -56,6 +56,11 @@ export const birth = async (formData: IBirthFormData) => {
     deliveryPostalCode,
   } = formData;
 
+  const relationship =
+    relationshipToRequestor !== undefined
+      ? relationshipToRequestor
+      : Relationship.OTHERS;
+
   const existingRequester = await getRequesterByEmail(requesterEmail);
 
   if (existingRequester) {
@@ -102,7 +107,7 @@ export const birth = async (formData: IBirthFormData) => {
         motherMiddleName,
         motherLastName,
         applicationNumber,
-        relationshipToRequestor,
+        relationshipToRequestor: relationship,
         status: Status.PENDING,
         requesterId: existingRequester.id,
         deliveryDetailsId: newDeliveryDetails.id,
@@ -152,7 +157,7 @@ export const birth = async (formData: IBirthFormData) => {
         motherMiddleName,
         motherLastName,
         applicationNumber,
-        relationshipToRequestor,
+        relationshipToRequestor: relationship,
         status: Status.PENDING,
         requesterId: newRequester.id,
         deliveryDetailsId: newDeliveryDetails.id,

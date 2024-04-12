@@ -23,7 +23,7 @@ const DeathRequestorsDetailsForm = () => {
   const { onHandleNext, setFormData, onHandleBack, formData } =
     useDeathFormState();
   const [selectRelation, setSelectRelation] = useState(
-    formData.relationshipToRequestor
+    formData.relationshipToRequestor || Relationship.SELF
   );
 
   const {

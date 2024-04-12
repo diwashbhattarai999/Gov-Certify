@@ -4,27 +4,16 @@ import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { Relationship } from "@prisma/client";
+import { useResidentialFormState } from "@/context/residential-form-context ";
 
 import { RequesterDetailsSchema } from "@/schemas";
 
 import Input from "@/components/ui/input";
-import Select from "@/components/ui/select";
-import { useState } from "react";
 import Button from "@/components/ui/Button";
-import { useMarriageFormState } from "@/context/marriage-form-context";
 
-const relationshipOptions = Object.keys(Relationship).map((key) => ({
-  label: key,
-  value: key.toUpperCase(),
-}));
-
-const MarriageRequestorsDetailsForm = () => {
+const ResidentialRequestorsDetailsForm = () => {
   const { onHandleNext, setFormData, onHandleBack, formData } =
-    useMarriageFormState();
-  const [selectRelation, setSelectRelation] = useState(
-    formData.relationshipToRequestor || Relationship.SELF
-  );
+    useResidentialFormState();
 
   const {
     register,
@@ -101,17 +90,6 @@ const MarriageRequestorsDetailsForm = () => {
           error={errors.requesterMobileNumber?.message}
           register={register("requesterMobileNumber")}
         />
-
-        {/* User Inputs -- Relationship to owner */}
-        <Select
-          selectLabel="Relationship to owner"
-          name="relationshipToRequestor"
-          value={selectRelation}
-          setSelectValue={setSelectRelation}
-          error={errors.relationshipToRequestor?.message}
-          register={register("relationshipToRequestor")}
-          options={relationshipOptions}
-        />
       </div>
 
       <div className="flex gap-4 justify-end mt-4">
@@ -132,4 +110,4 @@ const MarriageRequestorsDetailsForm = () => {
   );
 };
 
-export default MarriageRequestorsDetailsForm;
+export default ResidentialRequestorsDetailsForm;

@@ -6,6 +6,7 @@ import {
   getBirthCertificatesByUserId,
   getDeathCertificatesByUserId,
   getMarriageCertificatesByUserId,
+  getResidentialCertificatesByUserId,
 } from "@/data/certificates/certificates";
 
 import AnimationWrapper from "@/components/animations/page-animation";
@@ -17,6 +18,7 @@ import {
   ICertificates,
   IDeathCertificates,
   IMarriageCertificates,
+  IResidentialCertificates,
 } from "@/types";
 import Services from "@/components/sections/Home/services";
 
@@ -33,21 +35,21 @@ const YourCertificatesPage = async () => {
   const marriageCertificates = await getMarriageCertificatesByUserId(
     user?.id as string
   );
-
-  // let certificates: ICertificates[] =
-  //   birthCertificates && deathCertificates && marriageCertificates
-  //     ? [...birthCertificates, ...deathCertificates, ...marriageCertificates]
-  //     : [];
+  const residentialCertificates = await getResidentialCertificatesByUserId(
+    user?.id as string
+  );
 
   // Create an object to hold certificates grouped by type
   const certificates: {
     birth: IBirthCertificates[];
     death: IDeathCertificates[];
     marriage: IMarriageCertificates[];
+    residential: IResidentialCertificates[];
   } = {
     birth: birthCertificates || [],
     death: deathCertificates || [],
     marriage: marriageCertificates || [],
+    residential: residentialCertificates || [],
   };
 
   return (
@@ -63,7 +65,7 @@ const YourCertificatesPage = async () => {
         {certificates.birth.length ||
         certificates.death.length ||
         certificates.marriage.length > 0 ? (
-          <div className="flex flex-col bg-stone-50 p-4 border border-border shadow-sm rounded-md">
+          <div className="flex flex-col bg-stone-50 p-4 border border-border shadow-sm rounded-md mb-20">
             <div className="flex-1">
               <h1 className="text-xl font-medium text-muted-foreground mb-8 border-b border-border pb-2">
                 View details of all applied certificates

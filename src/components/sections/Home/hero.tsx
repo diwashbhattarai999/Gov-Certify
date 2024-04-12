@@ -36,7 +36,7 @@ const Hero = () => {
         <Image
           src="/images/nepal-parliament-building.jpg"
           alt="Banner"
-          className="absolute top-0 right-0 w-full md:w-[60%] h-full max-lg:rounded-t-lg lg:rounded-r-lg z-0"
+          className="absolute top-0 right-0 w-full md:w-[60%] h-full max-lg:rounded-t-lg lg:rounded-r-lg z-0 max-md:object-cover"
           width={500}
           height={500}
         />
