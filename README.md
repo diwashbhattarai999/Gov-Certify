@@ -1,6 +1,6 @@
 # GovCertify Portal
 
-![gov-certify-homepage](https://github.com/diwashbhattarai999/Gov-Certify/assets/87477700/0215ea11-b9d5-44b9-a1a1-7570a3b11c77)
+![gov-certify-homepage](https://github.com/diwashbhattarai999/Gov-Certify/assets/87477700/4734d788-668b-4605-af2b-f614a24c4a65)
 
 Welcome to GovCertify Portal! This platform is an online certificate registration system developed for the e-governance subject project. It aims to simplify and streamline the process of certificate registration and issuance for citizens.
 
@@ -69,7 +69,7 @@ This project is licensed under the [MIT License](LICENSE).
 - [Manish Dhungana](https://github.com/author) - Project Manager
 
 ## Images
-![gov-certify-homepage](https://github.com/diwashbhattarai999/Gov-Certify/assets/87477700/0215ea11-b9d5-44b9-a1a1-7570a3b11c77)
+![gov-certify-homepage](https://github.com/diwashbhattarai999/Gov-Certify/assets/87477700/4734d788-668b-4605-af2b-f614a24c4a65)
 ![gov-certify-birth-certificatepage](https://github.com/diwashbhattarai999/Gov-Certify/assets/87477700/f86bdc1a-53a4-4349-a025-79b7c5b09cb0)
 ![gov-certify-birth-certificate-requester-detailspage](https://github.com/diwashbhattarai999/Gov-Certify/assets/87477700/579492ec-3a45-4c68-a47c-68910428f08b)
 ![gov-certify-birth-certificate-delivery-detailspage](https://github.com/diwashbhattarai999/Gov-Certify/assets/87477700/77ca7365-b09f-4362-b299-14c56234c154)
