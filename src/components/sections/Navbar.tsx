@@ -47,7 +47,7 @@ const Navbar = ({}: NavbarProps) => {
   return (
     <nav
       ref={navRef}
-      className="h-[70px] border-b border-b-border/50 backdrop-blur dark:bg-background/70 bg-background/70  fixed w-full top-0 z-40"
+      className="h-[70px] border-b border-b-border/50 backdrop-blur bg-background/70 fixed w-full top-0 z-40"
     >
       <Container className="flex items-center justify-between h-full">
         <Link

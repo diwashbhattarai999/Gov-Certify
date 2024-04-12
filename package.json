@@ -45,6 +45,7 @@
     "react-loader-spinner": "^6.1.6",
     "react-select": "^5.8.0",
     "resend": "^3.2.0",
+    "sharp": "^0.33.3",
     "swiper": "^11.0.7",
     "tailwind-merge": "^2.2.1",
     "uploadthing": "^6.6.0",
