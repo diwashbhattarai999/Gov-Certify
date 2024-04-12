@@ -373,3 +373,24 @@ export const DeliveryDetailsSchema = z.object({
   deliveryWard: z.string().trim().optional(),
   deliveryPostalCode: z.string().trim().optional(),
 });
+
+export const ContactSchema = z.object({
+  firstName: z.string().trim().min(1, {
+    message: "FirstName is required",
+  }),
+  lastName: z.string().trim().min(1, {
+    message: "LastName is required",
+  }),
+  phoneNumber: z
+    .string()
+    .min(10, { message: "Phone Number requires 10 digits." })
+    .max(10, { message: "Phone Number requires 10 digits." }),
+  email: z
+    .string()
+    .trim()
+    .min(1, { message: "Email is required" })
+    .email({ message: "Please provide a valid email" }),
+  message: z.string().trim().min(1, {
+    message: "Message is required",
+  }),
+});

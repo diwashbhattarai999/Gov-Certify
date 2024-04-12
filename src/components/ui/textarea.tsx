@@ -13,6 +13,7 @@ import { cn } from "@/lib/utils";
 interface TextareaProps<T extends FieldValues = FieldValues> {
   name: keyof T;
   label: string;
+  placeholder: string;
   disabled?: boolean;
   error?: string;
   Icon?: IconType;
@@ -30,6 +31,7 @@ const Textarea = <T extends FieldValues>({
   value,
   setValue,
   register,
+  placeholder,
 }: TextareaProps<T>) => {
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const { ref, ...rest } = register(name as Path<T>);
@@ -81,7 +83,7 @@ const Textarea = <T extends FieldValues>({
           name={name as string}
           id={name as string}
           defaultValue={value}
-          placeholder={label}
+          placeholder={placeholder}
           className={cn(
             "w-full py-4 px-10 bg-transparent border rounded-md text-primary-foreground placeholder:text-secondary-foreground outline-none disabled:cursor-not-allowed disabled:opacity-50 resize-none leading-tight no-scrollbar",
             error

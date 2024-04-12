@@ -42,9 +42,9 @@ const Services = ({ showTitle }: { showTitle?: boolean }) => {
             <Link
               href={service.link}
               key={index}
-              className="px-3 py-12 shadow-md border border-foreground/70 w-full rounded-md hover:bg-muted/80 cursor-pointer duration-300 hover:scale-105 bg-gradient-to-bl from-stone-100 to-white hover:from-white hover:to-indgfrom-stone-100"
+              className="px-3 py-10 shadow-md border border-foreground/40 w-full rounded-md cursor-pointer duration-300 hover:scale-105 hover:-translate-y-2 flex items-center justify-center flex-col gap-2"
             >
-              <service.icon className="h-10 w-10" />
+              <service.icon className="h-16 w-16" />
               <h2 className="font-medium md:text-lg">{service.label}</h2>
             </Link>
           );
