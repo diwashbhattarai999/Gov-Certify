@@ -49,7 +49,7 @@ const Footer = () => {
             <div className="flex-1 grid gap-4 grid-cols-1 min-[350px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
               {FOOTER_INFOS.map((section, index) => (
                 <ul key={index} className="flex flex-col gap-2">
-                  <h2 className="text-xl font-semibold mb-2 pb-2 pr-4 border-b border-border w-fit">
+                  <h2 className="text-lg md:text-xl font-semibold mb-2 pb-2 pr-4 border-b border-border w-fit">
                     {section.title}
                   </h2>
                   {section.links.map((link, i) => (
@@ -59,7 +59,7 @@ const Footer = () => {
                       className="flex gap-2 items-center group hover:translate-x-1 duration-300"
                     >
                       <div className="w-2 h-2 bg-background rounded-full hidden group-hover:block" />
-                      <li className="text-primary group-hover:text-primary/90">
+                      <li className="text-sm md:text-base text-primary group-hover:text-primary/90">
                         {link.title}
                       </li>
                     </Link>
@@ -68,10 +68,10 @@ const Footer = () => {
               ))}
 
               <ul className="flex flex-col gap-2">
-                <h2 className="text-xl font-semibold mb-2 pb-2 pr-4 border-b border-border w-fit">
+                <h2 className="text-lg md:text-xl font-semibold mb-2 pb-2 pr-4 border-b border-border w-fit">
                   Contacts
                 </h2>
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-2 text-sm md:text-base ">
                   <p className="flex items-center gap-2">
                     <FaLocationDot />
                     Dudhpati, Bhaktapur
@@ -99,7 +99,7 @@ const Footer = () => {
           </div>
 
           {/* Bottom */}
-          <div className="border-t border-t-border/70 flex items-center justify-between text-center py-8 text-sm max-sm:flex-col max-sm:gap-2 md:text-sm">
+          <div className="border-t border-t-border/70 flex items-center justify-between text-center py-8 text-xs md:text-sm max-sm:flex-col max-sm:gap-2">
             <p>
               Copyright &copy; 2024 Diwash Bhattarai | Pravakar Rijal | Manish
               Dhungana | Prakash Pandey
