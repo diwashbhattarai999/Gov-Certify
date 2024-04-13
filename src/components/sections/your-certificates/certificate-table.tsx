@@ -27,6 +27,7 @@ import {
   IMarriageCertificates,
   IResidentialCertificates,
 } from "@/types";
+import Link from "next/link";
 
 interface ICertificateTableProps {
   allCertificates: {
@@ -92,12 +93,16 @@ const CertificateTable = ({ allCertificates }: ICertificateTableProps) => {
               {marriageCertificate.status}
             </TableCell>
             <TableCell className="flex gap-4">
-              <Button
-                onClick={() => handleView(marriageCertificate.id)}
-                className="w-20"
+              <Link
+                href={`/your-certificates/${type}?id=${marriageCertificate.id}`}
               >
-                View
-              </Button>
+                <Button
+                  onClick={() => handleView(marriageCertificate.id)}
+                  className="w-20"
+                >
+                  View
+                </Button>
+              </Link>
               <Button
                 onClick={() => handleDelete(type)}
                 destructive
@@ -138,12 +143,16 @@ const CertificateTable = ({ allCertificates }: ICertificateTableProps) => {
               {residentialCertificate.status}
             </TableCell>
             <TableCell className="flex gap-4">
-              <Button
-                onClick={() => handleView(residentialCertificate.id)}
-                className="w-20"
+              <Link
+                href={`/your-certificates/${type}?id=${residentialCertificate.id}`}
               >
-                View
-              </Button>
+                <Button
+                  onClick={() => handleView(residentialCertificate.id)}
+                  className="w-20"
+                >
+                  View
+                </Button>
+              </Link>
               <Button
                 onClick={() => handleDelete(type)}
                 destructive
@@ -179,9 +188,11 @@ const CertificateTable = ({ allCertificates }: ICertificateTableProps) => {
             {status}
           </TableCell>
           <TableCell className="flex gap-4">
-            <Button onClick={() => handleView(id)} className="w-20">
-              View
-            </Button>
+            <Link href={`/your-certificates/${type}?id=${id}`}>
+              <Button onClick={() => handleView(id)} className="w-20">
+                View
+              </Button>
+            </Link>
             <Button
               onClick={() => handleDelete(type)}
               destructive

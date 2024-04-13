@@ -46,7 +46,7 @@ const Hero = () => {
         <Image
           src="/images/hero-image.webp"
           alt="Banner"
-          className="z-10 object-contain !right-[-86px] !top-0 !left-auto !bottom-auto !w-1/2"
+          className="z-10 object-contain !right-[-86px] !top-0 !left-auto !bottom-auto !w-1/2 max-lg:hidden"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw"
           quality={100}
           fill
@@ -63,7 +63,7 @@ const Hero = () => {
         <Image
           src="/images/digital-file.svg"
           alt="Banner"
-          className="absolute bottom-[150px] left-[500px] opacity-20"
+          className="absolute bottom-[26%] max-lg:-right-[5%] lg:left-[40%] opacity-20"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw"
           quality={100}
           width={200}
