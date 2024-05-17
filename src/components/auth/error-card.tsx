@@ -4,7 +4,7 @@ import Link from "next/link";
 import { signOut } from "next-auth/react";
 
 import Button from "@/components/ui/Button";
-import Container from "@/components/max-width-container";
+import Container from "@/components/common/max-width-container";
 import AnimationWrapper from "../animations/page-animation";
 
 interface ErrorCardProps {

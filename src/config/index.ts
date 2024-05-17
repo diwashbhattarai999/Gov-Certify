@@ -2,9 +2,9 @@ import { Metadata } from "next";
 
 export const siteConfig: Metadata = {
   title: "Gov Certify |  Your Digital Gateway to Official Certificates",
-  metadataBase: new URL("https://example.com"), //TODO: Replace "example.com" with your actual website URL
+  metadataBase: new URL("https://localhost:3000"), //TODO: Replace "https://localhost:3000" with your actual website URL
   icons: [
-    { rel: "icon", url: "favicon.png" },
+    { rel: "icon", url: "/favicon.png" },
     { rel: "apple-touch-icon", url: "/apple-icon.png" },
   ],
 
@@ -12,7 +12,7 @@ export const siteConfig: Metadata = {
     canonical: "/",
   },
   authors: [
-    { name: "Diwash Bhattarai", url: "https://example.com/your-profile" }, //TODO: Update with your information
+    { name: "Diwash Bhattarai", url: "https://diwashb.com.np" }, //TODO: Update with your information
   ],
   description:
     "Gov Certify is your one-stop destination for online certificate registration with the government. Apply for various government-issued certificates hassle-free and securely.",

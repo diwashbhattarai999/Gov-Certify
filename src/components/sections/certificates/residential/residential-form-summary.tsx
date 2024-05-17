@@ -15,7 +15,7 @@ import {
   ResidentialDetailsSchema,
 } from "@/schemas";
 
-import Loader from "@/components/loader";
+import Loader from "@/components/common/loader";
 import Button from "@/components/ui/Button";
 import CertificateSuccess from "../certificate-success";
 import CertificateConfirmation from "../certificate-confirmation";

@@ -8,7 +8,7 @@ import {
 } from "@/data/certificates/certificates";
 
 import AnimationWrapper from "@/components/animations/page-animation";
-import MaxWidthContainer from "@/components/max-width-container";
+import MaxWidthContainer from "@/components/common/max-width-container";
 import Breadcrumbs from "@/components/ui/bread-crumbs";
 import {
   IBirthCertificates,
@@ -16,7 +16,7 @@ import {
   IMarriageCertificates,
   IResidentialCertificates,
 } from "@/types";
-import Loader from "@/components/loader";
+import Loader from "@/components/common/loader";
 import CertificateDetails from "@/components/sections/your-certificates/certificate-details";
 
 const YourCertificateTypePage = async ({
@@ -70,7 +70,7 @@ const YourCertificateTypePage = async ({
           listClasses="hover:underline font-bold"
           capitalizeLinks
         />
-        <CertificateDetails certificate={certificate} type={type}/>
+        <CertificateDetails certificate={certificate} type={type} />
       </MaxWidthContainer>
     </AnimationWrapper>
   );

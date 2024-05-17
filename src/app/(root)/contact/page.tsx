@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 import AnimationWrapper from "@/components/animations/page-animation";
-import MaxWidthContainer from "@/components/max-width-container";
+import MaxWidthContainer from "@/components/common/max-width-container";
 import Breadcrumbs from "@/components/ui/bread-crumbs";
 import ContactForm from "@/components/sections/contact/contact-form";
 

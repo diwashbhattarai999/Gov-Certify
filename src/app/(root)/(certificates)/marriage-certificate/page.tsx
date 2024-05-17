@@ -1,5 +1,5 @@
 import AnimationWrapper from "@/components/animations/page-animation";
-import MaxWidthContainer from "@/components/max-width-container";
+import MaxWidthContainer from "@/components/common/max-width-container";
 import MarriageCertificate from "@/components/sections/certificates/marriage/marriage-certificate";
 import Breadcrumbs from "@/components/ui/bread-crumbs";
 

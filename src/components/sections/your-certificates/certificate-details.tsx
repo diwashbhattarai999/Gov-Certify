@@ -1,6 +1,6 @@
 "use client";
 
-import Loader from "@/components/loader";
+import Loader from "@/components/common/loader";
 import { BirthDetailsSchema } from "@/schemas";
 import {
   IBirthCertificates,

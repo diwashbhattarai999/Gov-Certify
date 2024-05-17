@@ -15,7 +15,7 @@ import {
 } from "@/schemas";
 import { IBirthFormData } from "@/types";
 import { birth } from "@/actions/certificates/birth";
-import Loader from "@/components/loader";
+import Loader from "@/components/common/loader";
 
 const BirthFormSummary = () => {
   const [showConfirmation, setShowConfirmation] = useState(false);

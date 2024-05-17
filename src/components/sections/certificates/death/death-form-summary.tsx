@@ -2,7 +2,7 @@
 
 import { useState, useTransition } from "react";
 import * as z from "zod";
-import Loader from "@/components/loader";
+import Loader from "@/components/common/loader";
 
 import { IDeathFormData } from "@/types";
 

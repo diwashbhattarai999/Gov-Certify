@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { FaLocationDot } from "react-icons/fa6";
 
-import Container from "@/components/max-width-container";
+import Container from "@/components/common/max-width-container";
 import { FaPhone } from "react-icons/fa6";
 import { IoMail } from "react-icons/io5";
 
@@ -89,6 +89,7 @@ const Footer = () => {
             </div>
             <div className="relative max-md:hidden w-36 h-36 mt-4 justify-self-end ">
               <Image
+                unoptimized
                 src="/images/flag.gif"
                 alt="Flag-of-Nepal"
                 fill

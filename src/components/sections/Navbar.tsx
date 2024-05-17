@@ -4,7 +4,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { Fira_Sans } from "next/font/google";
 import Link from "next/link";
-import Image from "next/image";
 import { CgMenuRight, CgClose } from "react-icons/cg";
 
 import { NAV_LINKS } from "@/constants";
@@ -12,16 +11,13 @@ import { NAV_LINKS } from "@/constants";
 import useOnClickOutside from "@/hooks/use-on-click-outside";
 import { useCurrentUser } from "@/hooks/use-current-user";
 
-import Container from "@/components/max-width-container";
+import Container from "@/components/common/max-width-container";
 import MobileMenu from "@/components/ui/mobile-menu";
 import UserProfile from "@/components/user-profile/user-profile";
 import Button from "@/components/ui/Button";
+import Logo from "@/components/common/logo";
 
-const font = Fira_Sans({ subsets: ["latin"], weight: ["400", "500", "600"] });
-
-interface NavbarProps {}
-
-const Navbar = ({}: NavbarProps) => {
+const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const menuRef = useRef<HTMLDivElement>(null);
@@ -50,26 +46,7 @@ const Navbar = ({}: NavbarProps) => {
       className="h-[76px] border-b border-b-border/50 backdrop-blur bg-background/70 fixed w-full top-0 z-40"
     >
       <Container className="flex items-center justify-between h-full">
-        <Link
-          href="/"
-          className="text-2xl font-bold tracking-tight text-primary-foreground flex items-center gap-4"
-        >
-          <Image
-            src="images/Emblem_of_Nepal.svg"
-            alt="Logo"
-            width={500}
-            height={500}
-            className="w-14 h-14"
-          />
-          <div className={font.className}>
-            <h1>
-              Gov <span>Certify</span>
-            </h1>
-            <p className="text-sm font-normal hidden md:block -tracking-[0.06em]">
-              Your Digital Gateway to Official Certificates
-            </p>
-          </div>
-        </Link>
+        <Logo />
 
         <div className="hidden md:flex gap-16 text-sm font-medium lg:gap-24 lg:-ml-40">
           <ul className="flex items-center justify-between gap-4">
@@ -90,24 +67,31 @@ const Navbar = ({}: NavbarProps) => {
           </ul>
         </div>
         <div className="z-50 flex items-center gap-4" ref={menuRef}>
-          <ul className="flex items-center justify-between gap-4">
+          <div className="flex items-center justify-between gap-4">
             {!user && (
               <>
-                <li>
+                <div>
                   <Link href="/login">
                     <Button className="w-24">SignIn</Button>
                   </Link>
-                </li>
+                </div>
 
-                <li>
+                <div>
                   <Link href="/register">
                     <Button className="w-24">SignUp</Button>
                   </Link>
-                </li>
+                </div>
               </>
             )}
+            {user?.role === "ADMIN" && (
+              <div>
+                <Link href="/admin/dashboard">
+                  <Button className="rounded-lg px-4">Dashboard</Button>
+                </Link>
+              </div>
+            )}
             {user && <UserProfile />}
-          </ul>
+          </div>
 
           <div
             className="flex-col gap-1 px-2 py-1 duration-300 rounded-sm cursor-pointer lex md:hidden hover:bg-muted z-30"

@@ -10,7 +10,7 @@ import {
 } from "@/data/certificates/certificates";
 
 import AnimationWrapper from "@/components/animations/page-animation";
-import MaxWidthContainer from "@/components/max-width-container";
+import MaxWidthContainer from "@/components/common/max-width-container";
 import CertificateTable from "@/components/sections/your-certificates/certificate-table";
 import Breadcrumbs from "@/components/ui/bread-crumbs";
 import {
