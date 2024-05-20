@@ -1,42 +1,32 @@
-"use client";
+import { currentUser } from "@/lib/auth";
 
-import { useEffect, useState } from "react";
-import { useCurrentUser } from "@/hooks/use-current-user";
-import dayjs from "dayjs";
+import { getAllUsers } from "@/data/user";
+import {
+  getAllBirthCertificates,
+  getAllDeathCertificates,
+  getAllMarriageCertificates,
+  getAllResidentialCertificates,
+} from "@/data/certificates/certificates";
 
-const DashboardPage = () => {
-  const user = useCurrentUser();
-  const [currentDate, setCurrentDate] = useState("");
-  const [greeting, setGreeting] = useState("");
+import Dashboard from "@/components/admin/dashboard";
 
-  useEffect(() => {
-    const date = dayjs().format("dddd, MMMM D");
-    setCurrentDate(date);
+const DashboardPage = async () => {
+  const users = await getAllUsers();
 
-    const hour = dayjs().hour();
-    if (hour < 5) {
-      setGreeting("Good Night");
-    } else if (hour < 12) {
-      setGreeting("Good Morning");
-    } else if (hour < 18) {
-      setGreeting("Good Afternoon");
-    } else {
-      setGreeting("Good Evening");
-    }
-  }, []);
+  // Fetch birth, death, and marriage certificates for the current user
+  const birthCertificates = await getAllBirthCertificates();
+  const deathCertificates = await getAllDeathCertificates();
+  const marriageCertificates = await getAllMarriageCertificates();
+  const residentialCertificates = await getAllResidentialCertificates();
 
   return (
-    <div className="w-full h-full pt-20">
-      <div className="fixed pointer-events-none inset-0 bg-gradient-to-b from-accent/10 to-transparent -z-10 h-1/2"></div>
-      <div className="flex flex-col items-center">
-        {currentDate && <p>{currentDate}</p>}
-        {user && greeting && (
-          <h1 className="text-2xl font-semibold">
-            {greeting}, {user.name?.split(" ")[0]}
-          </h1>
-        )}
-      </div>
-    </div>
+    <Dashboard
+      users={users?.length}
+      birthCertificate={birthCertificates?.length ?? 0}
+      deathCertificate={deathCertificates?.length ?? 0}
+      marriageCertificate={marriageCertificates?.length ?? 0}
+      residentialCertificate={residentialCertificates?.length ?? 0}
+    />
   );
 };
 

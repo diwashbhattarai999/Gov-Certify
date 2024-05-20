@@ -143,3 +143,44 @@ export const getResidentialCertificatesByUserId = async (userId: string) => {
     return null;
   }
 };
+
+export const getAllBirthCertificates = async () => {
+  try {
+    const birthCertificate = await db.birthCertificate.findMany();
+
+    return birthCertificate;
+  } catch (error) {
+    return null;
+  }
+};
+
+export const getAllDeathCertificates = async () => {
+  try {
+    const deathCertificate = await db.deathCertificate.findMany();
+
+    return deathCertificate;
+  } catch (error) {
+    return null;
+  }
+};
+
+export const getAllMarriageCertificates = async () => {
+  try {
+    const marriageCertificate = await db.marriageCertificate.findMany();
+    const residentialCertificate = await db.residentialCertificate.findMany();
+
+    return marriageCertificate;
+  } catch (error) {
+    return null;
+  }
+};
+
+export const getAllResidentialCertificates = async () => {
+  try {
+    const residentialCertificate = await db.residentialCertificate.findMany();
+
+    return residentialCertificate;
+  } catch (error) {
+    return null;
+  }
+};

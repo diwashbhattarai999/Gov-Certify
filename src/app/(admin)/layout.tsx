@@ -1,6 +1,6 @@
 import { RoleGate } from "@/components/auth/role-gate";
-import Sidebar from "@/components/sections/admin/sidebar";
-import TopBar from "@/components/sections/admin/topbar";
+import Sidebar from "@/components/admin/sidebar";
+import TopBar from "@/components/admin/topbar";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
