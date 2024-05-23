@@ -31,10 +31,6 @@ const AdminMarriageTable = ({
 }: IAdminMarriageTableProps) => {
   const userRole = useCurrentRole();
 
-  const handleView = (id: string) => {
-    console.log("View certificate with ID:", id);
-  };
-
   const handleDelete = () => {
     console.log("Delete selected certificates");
   };
@@ -80,14 +76,9 @@ const AdminMarriageTable = ({
               </TableCell>
               <TableCell className="flex gap-4">
                 <Link
-                  href={`/admin/certificates/marriage?id=${certificate.id}`}
+                  href={`/admin/certificates/marriage/${certificate.id}`}
                 >
-                  <Button
-                    onClick={() => handleView(certificate.id)}
-                    className="w-20"
-                  >
-                    View
-                  </Button>
+                  <Button className="w-20">View</Button>
                 </Link>
                 <Button
                   onClick={() => handleDelete()}

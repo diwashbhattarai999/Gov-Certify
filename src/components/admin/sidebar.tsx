@@ -29,7 +29,7 @@ const Sidebar = () => {
   const pathname = usePathname();
 
   return (
-    <div className="w-56 border-r border-border flex flex-col items-center shadow-sm">
+    <div className="w-56 h-full border-r border-border flex flex-col items-center shadow-sm fixed top-20 left-0 z-50">
       <ul className="w-full mt-4 text-center flex flex-col gap-2">
         {SIDEBAR_LINKS.map((link) => {
           return (

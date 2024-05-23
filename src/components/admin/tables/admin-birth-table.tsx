@@ -29,10 +29,6 @@ interface IAdminBirthTableProps {
 const AdminBirthTable = ({ birthCertificates }: IAdminBirthTableProps) => {
   const userRole = useCurrentRole();
 
-  const handleView = (id: string) => {
-    console.log("View certificate with ID:", id);
-  };
-
   const handleDelete = () => {
     console.log("Delete selected certificates");
   };
@@ -71,13 +67,8 @@ const AdminBirthTable = ({ birthCertificates }: IAdminBirthTableProps) => {
                 {certificate.status}
               </TableCell>
               <TableCell className="flex gap-4">
-                <Link href={`/admin/certificates/birth?id=${certificate.id}`}>
-                  <Button
-                    onClick={() => handleView(certificate.id)}
-                    className="w-20"
-                  >
-                    View
-                  </Button>
+                <Link href={`/admin/certificates/birth/${certificate.id}`}>
+                  <Button className="w-20">View</Button>
                 </Link>
                 <Button
                   onClick={() => handleDelete()}

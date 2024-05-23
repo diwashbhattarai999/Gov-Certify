@@ -29,10 +29,6 @@ interface IAdminDeathTableProps {
 const AdminDeathTable = ({ deathCertificates }: IAdminDeathTableProps) => {
   const userRole = useCurrentRole();
 
-  const handleView = (id: string) => {
-    console.log("View certificate with ID:", id);
-  };
-
   const handleDelete = () => {
     console.log("Delete selected certificates");
   };
@@ -71,13 +67,8 @@ const AdminDeathTable = ({ deathCertificates }: IAdminDeathTableProps) => {
                 {certificate.status}
               </TableCell>
               <TableCell className="flex gap-4">
-                <Link href={`/admin/certificates/death?id=${certificate.id}`}>
-                  <Button
-                    onClick={() => handleView(certificate.id)}
-                    className="w-20"
-                  >
-                    View
-                  </Button>
+                <Link href={`/admin/certificates/death/${certificate.id}`}>
+                  <Button className="w-20">View</Button>
                 </Link>
                 <Button
                   onClick={() => handleDelete()}

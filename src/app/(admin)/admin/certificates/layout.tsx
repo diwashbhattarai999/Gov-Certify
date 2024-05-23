@@ -15,6 +15,7 @@ import {
 import CertificateSelect from "@/components/admin/certificate-select";
 import AnimationWrapper from "@/components/animations/page-animation";
 import MaxWidthContainer from "@/components/common/max-width-container";
+import Breadcrumbs from "@/components/ui/bread-crumbs";
 
 const AdminCertificatesLayout = async ({
   children,
@@ -48,12 +49,13 @@ const AdminCertificatesLayout = async ({
         certificates.marriage.length > 0 ? (
           <div>
             <CertificateSelect />
-            <div className="flex flex-col bg-stone-50 p-4 border border-border shadow-sm rounded-md mt-5">
-              <h1 className="text-xl font-medium text-muted-foreground mb-8 border-b border-border pb-2">
-                View details of applied certificates
-              </h1>
-              {children}
-            </div>
+            <Breadcrumbs
+              activeClasses="text-accent"
+              containerClasses="flex mt-0 mb-2"
+              listClasses="hover:underline font-bold"
+              capitalizeLinks
+            />
+            {children}
           </div>
         ) : (
           <div className="flex flex-col items-center justify-center min-h-[65vh]">

@@ -21,12 +21,12 @@ export default async function DashboardLayout({
       backButtonHref="/"
       backButtonLabel="Go to Home"
     >
-      <div className="relative min-h-screen flex flex-col">
+      <div className="min-h-screen flex flex-col">
         <TopBar />
-        <div className="flex-1 flex">
+        <div className="flex-1 flex relative">
           <Sidebar />
           {/* Main content */}
-          <main className="bg-muted/30 backdrop-blur-md w-full p-4">
+          <main className="bg-muted/30 backdrop-blur-md w-full p-4 ml-56 mt-20">
             {children}
           </main>
         </div>

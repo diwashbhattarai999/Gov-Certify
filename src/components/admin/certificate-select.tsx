@@ -11,7 +11,7 @@ const CertificateSelect = () => {
   return (
     <div className="flex items-center gap-4 font-medium text-muted-foreground mb-8 border-b-2 border-border">
       <Link
-        href={"birth"}
+        href={"/admin/certificates/birth"}
         className={cn(
           "hover:bg-accent/80 hover:text-accent-foreground rounded-t-md p-2 cursor-pointer",
           pathname === "birth" && "bg-accent/80 text-accent-foreground"
@@ -20,7 +20,7 @@ const CertificateSelect = () => {
         Birth Certificates
       </Link>
       <Link
-        href={"death"}
+        href={"/admin/certificates/death"}
         className={cn(
           "hover:bg-accent/80 hover:text-accent-foreground rounded-t-md p-2 duration-200 ease-in cursor-pointer",
           pathname === "death" && "bg-accent/80 text-accent-foreground"
@@ -29,7 +29,7 @@ const CertificateSelect = () => {
         Death Certificates
       </Link>
       <Link
-        href={"residential"}
+        href={"/admin/certificates/residential"}
         className={cn(
           "hover:bg-accent/80 hover:text-accent-foreground rounded-t-md p-2 duration-200 ease-in cursor-pointer",
           pathname === "residential" && "bg-accent/80 text-accent-foreground"
@@ -38,7 +38,7 @@ const CertificateSelect = () => {
         Residential Certificates
       </Link>
       <Link
-        href={"marriage"}
+        href={"/admin/certificates/marriage"}
         className={cn(
           "hover:bg-accent/80 hover:text-accent-foreground rounded-t-md p-2 duration-200 ease-in cursor-pointer",
           pathname === "marriage" && "bg-accent/80 text-accent-foreground"
