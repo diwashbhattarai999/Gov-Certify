@@ -29,19 +29,19 @@ const CertificateSelect = () => {
         Death Certificates
       </Link>
       <Link
-        href={"marriage"}
+        href={"residential"}
         className={cn(
           "hover:bg-accent/80 hover:text-accent-foreground rounded-t-md p-2 duration-200 ease-in cursor-pointer",
-          pathname === "marriage" && "bg-accent/80 text-accent-foreground"
+          pathname === "residential" && "bg-accent/80 text-accent-foreground"
         )}
       >
         Residential Certificates
       </Link>
       <Link
-        href={"residential"}
+        href={"marriage"}
         className={cn(
           "hover:bg-accent/80 hover:text-accent-foreground rounded-t-md p-2 duration-200 ease-in cursor-pointer",
-          pathname === "residential" && "bg-accent/80 text-accent-foreground"
+          pathname === "marriage" && "bg-accent/80 text-accent-foreground"
         )}
       >
         Marriage Certificates
