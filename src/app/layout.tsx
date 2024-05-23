@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils";
 
 import "./globals.css";
 import "@uploadthing/react/styles.css";
+import { Toaster } from "react-hot-toast";
 
 // const montserrat = Montserrat({
 //   subsets: ["latin"],
@@ -44,6 +45,7 @@ export default async function RootLayout({
         >
           <NextTopLoader color="#2463eb" showSpinner={false} />
           {children}
+          <Toaster position="top-center" reverseOrder={false} />
         </body>
       </html>
     </SessionProvider>

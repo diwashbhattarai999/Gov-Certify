@@ -1,10 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import toast from "react-hot-toast";
 
 import { Status, UserRole } from "@prisma/client";
 
 import { IMarriageCertificates } from "@/types";
+
+import { deleteMarriageCertificate } from "@/actions/certificates/delete-certificate";
 
 import { cn } from "@/lib/utils";
 
@@ -31,8 +34,20 @@ const AdminMarriageTable = ({
 }: IAdminMarriageTableProps) => {
   const userRole = useCurrentRole();
 
-  const handleDelete = () => {
-    console.log("Delete selected certificates");
+  const handleDelete = (id: string) => {
+    let loadingToast = toast.loading("Deleting certificate...");
+    deleteMarriageCertificate(id)
+      .then((data) => {
+        if (data?.error) {
+          toast.dismiss(loadingToast);
+          toast.error(data?.error);
+        }
+        if (data?.success) {
+          toast.dismiss(loadingToast);
+          toast.success(data?.success);
+        }
+      })
+      .catch(() => toast.success("Something went wrong"));
   };
 
   return (
@@ -75,13 +90,11 @@ const AdminMarriageTable = ({
                 {certificate.status}
               </TableCell>
               <TableCell className="flex gap-4">
-                <Link
-                  href={`/admin/certificates/marriage/${certificate.id}`}
-                >
+                <Link href={`/admin/certificates/marriage/${certificate.id}`}>
                   <Button className="w-20">View</Button>
                 </Link>
                 <Button
-                  onClick={() => handleDelete()}
+                  onClick={() => handleDelete(certificate.id)}
                   destructive
                   className="w-20"
                   disabled={userRole === UserRole.USER}

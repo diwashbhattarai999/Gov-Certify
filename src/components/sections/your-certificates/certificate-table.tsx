@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 
-import { Status, UserRole } from "@prisma/client";
+import { Status } from "@prisma/client";
 
 import {
   IBirthCertificates,
@@ -10,8 +10,6 @@ import {
   IMarriageCertificates,
   IResidentialCertificates,
 } from "@/types";
-
-import { useCurrentRole } from "@/hooks/use-current-role";
 
 import { cn } from "@/lib/utils";
 
@@ -37,12 +35,7 @@ interface ICertificateTableProps {
 }
 
 const CertificateTable = ({ allCertificates }: ICertificateTableProps) => {
-  const userRole = useCurrentRole();
   let serialNumber = 1;
-
-  const handleView = (id: string) => {
-    console.log("View certificate with ID:", id);
-  };
 
   const handleDelete = (
     type: "birth" | "death" | "marriage" | "residential"
@@ -94,21 +87,8 @@ const CertificateTable = ({ allCertificates }: ICertificateTableProps) => {
               <Link
                 href={`/your-certificates/${type}?id=${marriageCertificate.id}`}
               >
-                <Button
-                  onClick={() => handleView(marriageCertificate.id)}
-                  className="w-20"
-                >
-                  View
-                </Button>
+                <Button className="w-20">View</Button>
               </Link>
-              <Button
-                onClick={() => handleDelete(type)}
-                destructive
-                className="w-20"
-                disabled={userRole === UserRole.USER}
-              >
-                Delete
-              </Button>
             </TableCell>
           </TableRow>
         );
@@ -144,21 +124,8 @@ const CertificateTable = ({ allCertificates }: ICertificateTableProps) => {
               <Link
                 href={`/your-certificates/${type}?id=${residentialCertificate.id}`}
               >
-                <Button
-                  onClick={() => handleView(residentialCertificate.id)}
-                  className="w-20"
-                >
-                  View
-                </Button>
+                <Button className="w-20">View</Button>
               </Link>
-              <Button
-                onClick={() => handleDelete(type)}
-                destructive
-                className="w-20"
-                disabled={userRole === UserRole.USER}
-              >
-                Delete
-              </Button>
             </TableCell>
           </TableRow>
         );
@@ -187,18 +154,8 @@ const CertificateTable = ({ allCertificates }: ICertificateTableProps) => {
           </TableCell>
           <TableCell className="flex gap-4">
             <Link href={`/your-certificates/${type}?id=${id}`}>
-              <Button onClick={() => handleView(id)} className="w-20">
-                View
-              </Button>
+              <Button className="w-20">View</Button>
             </Link>
-            <Button
-              onClick={() => handleDelete(type)}
-              destructive
-              className="w-20"
-              disabled={userRole === UserRole.USER}
-            >
-              Delete
-            </Button>
           </TableCell>
         </TableRow>
       );
