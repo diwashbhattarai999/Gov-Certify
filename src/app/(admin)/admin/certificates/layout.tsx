@@ -1,5 +1,3 @@
-export const dynamic = "force-dynamic";
-
 import {
   IBirthCertificates,
   IDeathCertificates,
@@ -14,12 +12,15 @@ import {
   getAllResidentialCertificates,
 } from "@/data/certificates/certificates";
 
+import CertificateSelect from "@/components/admin/certificate-select";
 import AnimationWrapper from "@/components/animations/page-animation";
 import MaxWidthContainer from "@/components/common/max-width-container";
-import CertificateTable from "@/components/admin/certificate-table";
-import CertificateSelect from "@/components/admin/certificate-select";
 
-const CertificatesPage = async () => {
+const AdminCertificatesLayout = async ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   // Fetch birth, death, and marriage certificates for the current user
   const birthCertificates = await getAllBirthCertificates();
   const deathCertificates = await getAllDeathCertificates();
@@ -52,6 +53,7 @@ const CertificatesPage = async () => {
               View details of all applied certificates
             </h1>
             <CertificateTable allCertificates={certificates} isAdmin /> */}
+              {children}
             </div>
           </div>
         ) : (
@@ -66,4 +68,4 @@ const CertificatesPage = async () => {
   );
 };
 
-export default CertificatesPage;
+export default AdminCertificatesLayout;

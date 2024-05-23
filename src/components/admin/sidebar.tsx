@@ -40,10 +40,11 @@ const Sidebar = () => {
               <Link
                 href={link.href}
                 className={cn(
-                  "flex items-center justify-start gap-2 p-2 rounded-md hover:bg-accent/80 hover:text-accent-foreground duration-300",
+                  "flex items-center justify-start gap-2 p-2 rounded-md hover:bg-accent/80 text-secondary-foreground hover:text-accent-foreground duration-300",
                   {
-                    "bg-accent/80 text-accent-foreground":
-                      pathname === link.href,
+                    "bg-accent/80 text-accent-foreground": pathname.includes(
+                      link.href
+                    ),
                   }
                 )}
               >

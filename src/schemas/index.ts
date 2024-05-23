@@ -1,5 +1,5 @@
 import * as z from "zod";
-import { Gender, Relationship, UserRole } from "@prisma/client";
+import { Gender, Relationship, Status, UserRole } from "@prisma/client";
 
 export const LoginSchema = z.object({
   email: z
@@ -393,4 +393,8 @@ export const ContactSchema = z.object({
   message: z.string().trim().min(1, {
     message: "Message is required",
   }),
+});
+
+export const StatusSchema = z.object({
+  status: z.enum([Status.APPROVED, Status.REJECTED, Status.PENDING]),
 });

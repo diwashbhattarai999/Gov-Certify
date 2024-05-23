@@ -24,7 +24,7 @@ interface SelectProps {
   options: Options[];
   props?: ReactPropTypes;
   className?: string;
-  selectLabel: string;
+  selectLabel?: string;
   Icon?: IconType;
   onChange?: (value: string) => void;
 }
@@ -56,20 +56,23 @@ const Select = ({
   return (
     <div
       className={cn(
-        "w-full relative mb-8 flex flex-col items-start gap-2 ",
-        disabled && "cursor-not-allowed opacity-50"
+        "w-full relative flex flex-col items-start gap-2 ",
+        disabled && "cursor-not-allowed opacity-50",
+        selectLabel && "mb-8"
       )}
     >
-      <label
-        htmlFor="SelectRole"
-        className={cn(
-          "text-primary-foreground cursor-pointer ",
-          error && "text-destructive opacity-80",
-          disabled && "cursor-not-allowed opacity-50"
-        )}
-      >
-        {selectLabel}
-      </label>
+      {selectLabel && (
+        <label
+          htmlFor="SelectRole"
+          className={cn(
+            "text-primary-foreground cursor-pointer ",
+            error && "text-destructive opacity-80",
+            disabled && "cursor-not-allowed opacity-50"
+          )}
+        >
+          {selectLabel}
+        </label>
+      )}
 
       <div
         className="flex items-center w-full"
@@ -104,7 +107,7 @@ const Select = ({
 
       <div
         className={cn(
-          "w-full h-fit bg-background border border-border shadow-md absolute left-0 top-[5.7rem] py-2 rounded-md text-left duration-300 z-50 overflow-y-auto max-h-60",
+          "w-full h-fit bg-background border border-border shadow-md absolute left-0 py-2 rounded-md text-left duration-300 z-50 overflow-y-auto max-h-60",
           selectOpen
             ? "translate-y-0 opacity-100 h-auto pointer-events-auto"
             : "-translate-y-5 opacity-0 -h-4 pointer-events-none"

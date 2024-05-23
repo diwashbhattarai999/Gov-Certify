@@ -146,7 +146,12 @@ export const getResidentialCertificatesByUserId = async (userId: string) => {
 
 export const getAllBirthCertificates = async () => {
   try {
-    const birthCertificate = await db.birthCertificate.findMany();
+    const birthCertificate = await db.birthCertificate.findMany({
+      include: {
+        deliveryDetails: true,
+        requester: true,
+      },
+    });
 
     return birthCertificate;
   } catch (error) {
@@ -156,7 +161,12 @@ export const getAllBirthCertificates = async () => {
 
 export const getAllDeathCertificates = async () => {
   try {
-    const deathCertificate = await db.deathCertificate.findMany();
+    const deathCertificate = await db.deathCertificate.findMany({
+      include: {
+        deliveryDetails: true,
+        requester: true,
+      },
+    });
 
     return deathCertificate;
   } catch (error) {
@@ -166,8 +176,12 @@ export const getAllDeathCertificates = async () => {
 
 export const getAllMarriageCertificates = async () => {
   try {
-    const marriageCertificate = await db.marriageCertificate.findMany();
-    const residentialCertificate = await db.residentialCertificate.findMany();
+    const marriageCertificate = await db.marriageCertificate.findMany({
+      include: {
+        deliveryDetails: true,
+        requester: true,
+      },
+    });
 
     return marriageCertificate;
   } catch (error) {
@@ -177,7 +191,13 @@ export const getAllMarriageCertificates = async () => {
 
 export const getAllResidentialCertificates = async () => {
   try {
-    const residentialCertificate = await db.residentialCertificate.findMany();
+    const residentialCertificate = await db.residentialCertificate.findMany({
+      include: {
+        deliveryDetails: true,
+        requester: true,
+        familyMembers: true,
+      },
+    });
 
     return residentialCertificate;
   } catch (error) {

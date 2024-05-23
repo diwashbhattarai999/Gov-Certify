@@ -48,6 +48,10 @@ export default auth(async (req) => {
   if (isLoggedIn && isAdmin) {
     return Response.redirect(new URL("/admin/dashboard", nextUrl));
   }
+
+  if (isLoggedIn && nextUrl.pathname === "/admin/certificates") {
+    return Response.redirect(new URL("/admin/certificates/birth", nextUrl));
+  }
 });
 
 // Optionally, don't invoke Middleware on some paths

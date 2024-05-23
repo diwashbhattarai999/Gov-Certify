@@ -17,7 +17,7 @@ const Logo = ({
   showSlogan = true,
   className,
   width = 60,
-  height = 60,
+  height = 70,
 }: ILogoProps) => {
   return (
     <Link
@@ -27,7 +27,13 @@ const Logo = ({
         className
       )}
     >
-      <Image src={LogoImg} alt="Logo" width={width} height={height} />
+      <Image
+        src={LogoImg}
+        alt="Logo"
+        width={width}
+        height={height}
+        className="h-14"
+      />
       <div className={font.className}>
         <h1>
           Gov <span>Certify</span>

@@ -1,8 +1,19 @@
 "use client";
 
+import { useState, useTransition } from "react";
 import Link from "next/link";
+import { LuInfo } from "react-icons/lu";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+
+import { StatusSchema } from "@/schemas";
 
 import { Status, UserRole } from "@prisma/client";
+
+import { useCurrentRole } from "@/hooks/use-current-role";
+
+import { cn } from "@/lib/utils";
 
 import {
   IBirthCertificates,
@@ -10,10 +21,6 @@ import {
   IMarriageCertificates,
   IResidentialCertificates,
 } from "@/types";
-
-import { useCurrentRole } from "@/hooks/use-current-role";
-
-import { cn } from "@/lib/utils";
 
 import {
   Table,
@@ -26,6 +33,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import Button from "@/components/ui/Button";
+import Select from "@/components/ui/select";
 
 interface ICertificateTableProps {
   allCertificates: {
@@ -34,9 +42,37 @@ interface ICertificateTableProps {
     marriage: IMarriageCertificates[];
     residential: IResidentialCertificates[];
   };
+  isAdmin?: boolean;
 }
 
-const CertificateTable = ({ allCertificates }: ICertificateTableProps) => {
+const adminStatusOptions = [
+  {
+    value: Status.APPROVED,
+    label: "APPROVED",
+  },
+  {
+    value: Status.REJECTED,
+    label: "REJECTED",
+  },
+  {
+    value: Status.PENDING,
+    label: "PENDING",
+  },
+];
+
+const defaultValues = {
+  status: Status.PENDING,
+};
+
+const CertificateTable = ({
+  allCertificates,
+  isAdmin,
+}: ICertificateTableProps) => {
+  const [error, setError] = useState<string | undefined>("");
+  const [success, setSuccess] = useState<string | undefined>("");
+  const [isPending, startTransition] = useTransition();
+  const [selectStatus, setSelectStatus] = useState("Select status...");
+
   const userRole = useCurrentRole();
   let serialNumber = 1;
 
@@ -48,6 +84,28 @@ const CertificateTable = ({ allCertificates }: ICertificateTableProps) => {
     type: "birth" | "death" | "marriage" | "residential"
   ) => {
     console.log("Delete selected certificates of type", type);
+  };
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<z.infer<typeof StatusSchema>>({
+    resolver: zodResolver(StatusSchema),
+    defaultValues,
+  });
+
+  const onSubmit: SubmitHandler<typeof defaultValues> = (values) => {
+    setError("");
+    setSuccess("");
+
+    startTransition(() => {
+      // register(values).then((data) => {
+      //   setError(data.error);
+      //   setSuccess(data.sucess);
+      // });
+      console.log(values);
+    });
   };
 
   const renderTableBody = (
@@ -88,7 +146,22 @@ const CertificateTable = ({ allCertificates }: ICertificateTableProps) => {
                   "text-amber-500"
               )}
             >
-              {marriageCertificate.status}
+              {isAdmin ? (
+                <>
+                  <Select
+                    name="status"
+                    value={selectStatus}
+                    setSelectValue={setSelectStatus}
+                    Icon={LuInfo}
+                    error={errors.status?.message}
+                    disabled={isPending}
+                    options={adminStatusOptions}
+                    register={register("status")}
+                  />
+                </>
+              ) : (
+                <>{marriageCertificate.status}</>
+              )}
             </TableCell>
             <TableCell className="flex gap-4">
               <Link
@@ -138,7 +211,22 @@ const CertificateTable = ({ allCertificates }: ICertificateTableProps) => {
                   "text-amber-500"
               )}
             >
-              {residentialCertificate.status}
+              {isAdmin ? (
+                <>
+                  <Select
+                    name="status"
+                    value={selectStatus}
+                    setSelectValue={setSelectStatus}
+                    Icon={LuInfo}
+                    error={errors.status?.message}
+                    disabled={isPending}
+                    options={adminStatusOptions}
+                    register={register("status")}
+                  />
+                </>
+              ) : (
+                <> {residentialCertificate.status}</>
+              )}
             </TableCell>
             <TableCell className="flex gap-4">
               <Link
@@ -183,7 +271,22 @@ const CertificateTable = ({ allCertificates }: ICertificateTableProps) => {
               status === Status.PENDING && "text-amber-500"
             )}
           >
-            {status}
+            {isAdmin ? (
+              <>
+                <Select
+                  name="status"
+                  value={selectStatus}
+                  setSelectValue={setSelectStatus}
+                  Icon={LuInfo}
+                  error={errors.status?.message}
+                  disabled={isPending}
+                  options={adminStatusOptions}
+                  register={register("status")}
+                />
+              </>
+            ) : (
+              <> {status}</>
+            )}
           </TableCell>
           <TableCell className="flex gap-4">
             <Link href={`/your-certificates/${type}?id=${id}`}>
@@ -206,44 +309,42 @@ const CertificateTable = ({ allCertificates }: ICertificateTableProps) => {
   };
 
   return (
-    <div className="overflow-x-auto">
-      <Table>
-        <TableCaption>A list of recent applied certificates.</TableCaption>
-        <TableHeader>
-          <TableRow>
-            <TableHead className="w-[100px]">S.No.</TableHead>
-            <TableHead>Application Number</TableHead>
-            <TableHead>Name</TableHead>
-            <TableHead>Certificate Type</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead>Action</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {renderTableBody(allCertificates.birth, "birth")}
-          {renderTableBody(allCertificates.death, "death")}
-          {renderTableBody(allCertificates.marriage, "marriage")}
-          {renderTableBody(allCertificates.residential, "residential")}
-        </TableBody>
-        <TableFooter>
-          <TableRow>
-            <TableCell colSpan={7}>
-              Showing{" "}
-              {(allCertificates.birth.length +
-                allCertificates.death.length +
-                allCertificates.marriage.length) |
-                allCertificates.residential.length}{" "}
-              of{" "}
-              {allCertificates.birth.length +
-                allCertificates.death.length +
-                allCertificates.marriage.length +
-                allCertificates.residential.length}{" "}
-              rows
-            </TableCell>
-          </TableRow>
-        </TableFooter>
-      </Table>
-    </div>
+    <Table>
+      <TableCaption>A list of recent applied certificates.</TableCaption>
+      <TableHeader>
+        <TableRow>
+          <TableHead className="w-[100px]">S.No.</TableHead>
+          <TableHead>Application Number</TableHead>
+          <TableHead>Name</TableHead>
+          <TableHead>Certificate Type</TableHead>
+          <TableHead>Status</TableHead>
+          <TableHead>Action</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {renderTableBody(allCertificates.birth, "birth")}
+        {renderTableBody(allCertificates.death, "death")}
+        {renderTableBody(allCertificates.marriage, "marriage")}
+        {renderTableBody(allCertificates.residential, "residential")}
+      </TableBody>
+      <TableFooter>
+        <TableRow>
+          <TableCell colSpan={7}>
+            Showing{" "}
+            {(allCertificates.birth.length +
+              allCertificates.death.length +
+              allCertificates.marriage.length) |
+              allCertificates.residential.length}{" "}
+            of{" "}
+            {allCertificates.birth.length +
+              allCertificates.death.length +
+              allCertificates.marriage.length +
+              allCertificates.residential.length}{" "}
+            rows
+          </TableCell>
+        </TableRow>
+      </TableFooter>
+    </Table>
   );
 };
 
