@@ -1,3 +1,5 @@
+import { Status } from "@prisma/client";
+
 export const NAV_LINKS = [
   {
     label: "Your Certificates",
@@ -14,5 +16,20 @@ export const NAV_LINKS = [
   {
     label: "FAQ",
     path: "/faq",
+  },
+];
+
+export const selectOptions = [
+  {
+    label: "Pending",
+    value: Status.PENDING,
+  },
+  {
+    label: "Approved",
+    value: Status.APPROVED,
+  },
+  {
+    label: "Rejected",
+    value: Status.REJECTED,
   },
 ];
