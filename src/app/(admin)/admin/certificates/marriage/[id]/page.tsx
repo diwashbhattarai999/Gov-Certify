@@ -1,8 +1,6 @@
 import { IMarriageCertificates } from "@/types";
 
-import { currentUser } from "@/lib/auth";
-
-import { getMarriageCertificatesByUserId } from "@/data/certificates/certificates";
+import { getAllMarriageCertificates } from "@/data/certificates/certificates";
 
 import AnimationWrapper from "@/components/animations/page-animation";
 import CertificateDetails from "@/components/sections/your-certificates/certificate-details";
@@ -14,10 +12,8 @@ const YourCertificateTypePage = async ({
 }) => {
   const { id } = params;
 
-  const user = await currentUser();
-
   const certificateData: IMarriageCertificates[] | null =
-    await getMarriageCertificatesByUserId(user?.id as string);
+    await getAllMarriageCertificates();
 
   const certificate = certificateData?.find((cert) => cert.id === id);
 

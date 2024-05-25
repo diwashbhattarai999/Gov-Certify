@@ -43,28 +43,26 @@ const AdminCertificatesLayout = async ({
 
   return (
     <AnimationWrapper>
-      <MaxWidthContainer>
-        {certificates.birth.length ||
-        certificates.death.length ||
-        certificates.marriage.length > 0 ? (
-          <div>
-            <CertificateSelect />
-            <Breadcrumbs
-              activeClasses="text-accent"
-              containerClasses="flex mt-0 mb-2"
-              listClasses="hover:underline font-bold"
-              capitalizeLinks
-            />
-            {children}
+      {certificates.birth.length ||
+      certificates.death.length ||
+      certificates.marriage.length > 0 ? (
+        <>
+          <Breadcrumbs
+            activeClasses="text-accent"
+            containerClasses="flex mt-0 mb-2"
+            listClasses="hover:underline font-bold"
+            capitalizeLinks
+          />
+          <CertificateSelect />
+          {children}
+        </>
+      ) : (
+        <div className="flex flex-col items-center justify-center min-h-[65vh]">
+          <div className="text-muted-foreground mb-6 text-center">
+            <h1 className="text-4xl font-medium ">No certificates found</h1>
           </div>
-        ) : (
-          <div className="flex flex-col items-center justify-center min-h-[65vh]">
-            <div className="text-muted-foreground mb-6 text-center">
-              <h1 className="text-4xl font-medium ">No certificates found</h1>
-            </div>
-          </div>
-        )}
-      </MaxWidthContainer>
+        </div>
+      )}
     </AnimationWrapper>
   );
 };

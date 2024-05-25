@@ -11,6 +11,7 @@ import { db } from "@/lib/db";
 import { currentUser } from "@/lib/auth";
 import { sendVerificationEmail } from "@/lib/mail";
 import { generateVerificationToken } from "@/lib/tokens";
+import { revalidatePath } from "next/cache";
 
 export const settings = async (values: z.infer<typeof SettingsSchema>) => {
   const user = await currentUser();
@@ -88,6 +89,9 @@ export const settings = async (values: z.infer<typeof SettingsSchema>) => {
       password: values.password,
     },
   });
+
+  revalidatePath("/");
+  revalidatePath("/admin/users");
 
   return { success: "Settings Updated!" };
 };

@@ -1,8 +1,6 @@
 import { IBirthCertificates } from "@/types";
 
-import { currentUser } from "@/lib/auth";
-
-import { getBirthCertificatesByUserId } from "@/data/certificates/certificates";
+import { getAllBirthCertificates } from "@/data/certificates/certificates";
 
 import AnimationWrapper from "@/components/animations/page-animation";
 import CertificateDetails from "@/components/sections/your-certificates/certificate-details";
@@ -14,10 +12,8 @@ const YourCertificateTypePage = async ({
 }) => {
   const { id } = params;
 
-  const user = await currentUser();
-
   const certificateData: IBirthCertificates[] | null =
-    await getBirthCertificatesByUserId(user?.id as string);
+    await getAllBirthCertificates();
 
   const certificate = certificateData?.find((cert) => cert.id === id);
 

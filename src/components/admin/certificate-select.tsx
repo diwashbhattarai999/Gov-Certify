@@ -9,7 +9,7 @@ const CertificateSelect = () => {
   const pathname = p.split("/")[3];
 
   return (
-    <div className="flex items-center gap-4 font-medium text-muted-foreground mb-8 border-b-2 border-border">
+    <div className="flex items-center gap-4 font-medium text-muted-foreground my-8 border-b-2 border-border">
       <Link
         href={"/admin/certificates/birth"}
         className={cn(

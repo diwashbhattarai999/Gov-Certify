@@ -1,5 +1,3 @@
-import { currentUser } from "@/lib/auth";
-
 import { getAllUsers } from "@/data/user";
 import {
   getAllBirthCertificates,

@@ -1,8 +1,18 @@
+import { cn } from "@/lib/utils";
 import { Triangle } from "react-loader-spinner";
 
-const Loader = () => {
+interface ILoaderProps {
+  blur?: boolean;
+}
+
+const Loader = ({ blur = true }: ILoaderProps) => {
   return (
-    <div className="fixed top-0 left-0 backdrop-blur-sm h-screen w-full bg-foreground/5 flex items-center justify-center">
+    <div
+      className={cn(
+        "fixed inset-0 h-screen w-full flex items-center justify-center z-50",
+        { " bg-foreground/20 backdrop-blur-md": blur }
+      )}
+    >
       <Triangle
         visible={true}
         height="80"

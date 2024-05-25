@@ -1,8 +1,6 @@
 import { IResidentialCertificates } from "@/types";
 
-import { currentUser } from "@/lib/auth";
-
-import { getResidentialCertificatesByUserId } from "@/data/certificates/certificates";
+import { getAllResidentialCertificates } from "@/data/certificates/certificates";
 
 import AnimationWrapper from "@/components/animations/page-animation";
 import CertificateDetails from "@/components/sections/your-certificates/certificate-details";
@@ -14,10 +12,8 @@ const YourCertificateTypePage = async ({
 }) => {
   const { id } = params;
 
-  const user = await currentUser();
-
   const certificateData: IResidentialCertificates[] | null =
-    await getResidentialCertificatesByUserId(user?.id as string);
+    await getAllResidentialCertificates();
 
   const certificate = certificateData?.find((cert) => cert.id === id);
 

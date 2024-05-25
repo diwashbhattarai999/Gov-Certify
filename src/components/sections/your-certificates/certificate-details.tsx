@@ -24,14 +24,12 @@ const CertificateDetails = ({
   certificate,
   type,
 }: ICertificateDetailsProps) => {
-  if (!certificate) {
-    return <Loader />;
-  }
+  if (!certificate) return <Loader blur={false} />;
 
   const birthBody = (certificate: IBirthCertificates) => {
     return (
       <div className="flex flex-col bg-stone-50 p-4 border border-border shadow-sm rounded-md">
-        <h1>Application {certificate.applicationNumber}</h1>
+        <h1>Application {certificate?.applicationNumber}</h1>
         <div className="flex gap-4 flex-col">
           <h2 className="font-semibold text-lg my-4 underline">
             Personal Details:
@@ -43,8 +41,8 @@ const CertificateDetails = ({
                 Name:
               </h3>
               <p className="text-muted-foreground">
-                {certificate.firstName} {certificate.middleName || ""}{" "}
-                {certificate.lastName}
+                {certificate?.firstName} {certificate?.middleName || ""}{" "}
+                {certificate?.lastName}
               </p>
             </li>
 
@@ -53,7 +51,9 @@ const CertificateDetails = ({
               <h3 className="capitalize font-medium text-secondary-foreground ">
                 Date of Birth:
               </h3>
-              <p className="text-muted-foreground">{certificate.DateOfBirth}</p>
+              <p className="text-muted-foreground">
+                {certificate?.DateOfBirth}
+              </p>
             </li>
 
             {/* Gender */}
@@ -61,7 +61,7 @@ const CertificateDetails = ({
               <h3 className="capitalize font-medium text-secondary-foreground ">
                 Gender
               </h3>
-              <p className="text-muted-foreground">{certificate.gender}</p>
+              <p className="text-muted-foreground">{certificate?.gender}</p>
             </li>
 
             {/* Birth Country */}
@@ -70,7 +70,7 @@ const CertificateDetails = ({
                 Birth Country
               </h3>
               <p className="text-muted-foreground">
-                {certificate.placeOfBirthCountry}
+                {certificate?.placeOfBirthCountry}
               </p>
             </li>
 
@@ -80,7 +80,7 @@ const CertificateDetails = ({
                 Birth Province
               </h3>
               <p className="text-muted-foreground">
-                {certificate.placeOfBirthProvince}
+                {certificate?.placeOfBirthProvince}
               </p>
             </li>
 
@@ -90,7 +90,7 @@ const CertificateDetails = ({
                 Birth District
               </h3>
               <p className="text-muted-foreground">
-                {certificate.placeOfBirthDistrict}
+                {certificate?.placeOfBirthDistrict}
               </p>
             </li>
 
@@ -100,7 +100,7 @@ const CertificateDetails = ({
                 Birth City
               </h3>
               <p className="text-muted-foreground">
-                {certificate.placeOfBirthCity}
+                {certificate?.placeOfBirthCity}
               </p>
             </li>
 
@@ -110,9 +110,9 @@ const CertificateDetails = ({
                 {`Father's Name:`}
               </h3>
               <p className="text-muted-foreground">
-                {certificate.fatherFirstName}{" "}
-                {certificate.fatherMiddleName || ""}{" "}
-                {certificate.fatherLastName}
+                {certificate?.fatherFirstName}{" "}
+                {certificate?.fatherMiddleName || ""}{" "}
+                {certificate?.fatherLastName}
               </p>
             </li>
 
@@ -122,17 +122,17 @@ const CertificateDetails = ({
                 {`Mother's Name:`}
               </h3>
               <p className="text-muted-foreground">
-                {certificate.motherFirstName}{" "}
-                {certificate.motherMiddleName || ""}{" "}
-                {certificate.motherLastName}
+                {certificate?.motherFirstName}{" "}
+                {certificate?.motherMiddleName || ""}{" "}
+                {certificate?.motherLastName}
               </p>
             </li>
           </ul>
         </div>
 
         <RequesterDeliveryDetails
-          requester={certificate.requester}
-          deliveryDetails={certificate.deliveryDetails}
+          requester={certificate?.requester}
+          deliveryDetails={certificate?.deliveryDetails}
         />
       </div>
     );
@@ -141,7 +141,7 @@ const CertificateDetails = ({
   const deathBody = (certificate: IDeathCertificates) => {
     return (
       <div className="flex flex-col bg-stone-50 p-4 border border-border shadow-sm rounded-md">
-        <h1>Application {certificate.applicationNumber}</h1>
+        <h1>Application {certificate?.applicationNumber}</h1>
         <div className="flex gap-4 flex-col">
           <h2 className="font-semibold text-lg my-4 underline">
             Personal Details:
@@ -153,8 +153,8 @@ const CertificateDetails = ({
                 Name:
               </h3>
               <p className="text-muted-foreground">
-                {certificate.firstName} {certificate.middleName || ""}{" "}
-                {certificate.lastName}
+                {certificate?.firstName} {certificate?.middleName || ""}{" "}
+                {certificate?.lastName}
               </p>
             </li>
 
@@ -163,7 +163,9 @@ const CertificateDetails = ({
               <h3 className="capitalize font-medium text-secondary-foreground ">
                 Date of Death:
               </h3>
-              <p className="text-muted-foreground">{certificate.dateOfDeath}</p>
+              <p className="text-muted-foreground">
+                {certificate?.dateOfDeath}
+              </p>
             </li>
 
             {/* Gender */}
@@ -171,7 +173,7 @@ const CertificateDetails = ({
               <h3 className="capitalize font-medium text-secondary-foreground ">
                 Gender:
               </h3>
-              <p className="text-muted-foreground">{certificate.gender}</p>
+              <p className="text-muted-foreground">{certificate?.gender}</p>
             </li>
 
             {/* Death Country */}
@@ -180,7 +182,7 @@ const CertificateDetails = ({
                 Death Country:
               </h3>
               <p className="text-muted-foreground">
-                {certificate.placeOfDeathCountry}
+                {certificate?.placeOfDeathCountry}
               </p>
             </li>
 
@@ -190,7 +192,7 @@ const CertificateDetails = ({
                 Death Province:
               </h3>
               <p className="text-muted-foreground">
-                {certificate.placeOfDeathProvince}
+                {certificate?.placeOfDeathProvince}
               </p>
             </li>
 
@@ -200,7 +202,7 @@ const CertificateDetails = ({
                 Death District:
               </h3>
               <p className="text-muted-foreground">
-                {certificate.placeOfDeathDistrict}
+                {certificate?.placeOfDeathDistrict}
               </p>
             </li>
 
@@ -210,7 +212,7 @@ const CertificateDetails = ({
                 Death City:
               </h3>
               <p className="text-muted-foreground">
-                {certificate.placeOfDeathCity}
+                {certificate?.placeOfDeathCity}
               </p>
             </li>
 
@@ -220,15 +222,15 @@ const CertificateDetails = ({
                 Cause of Death:
               </h3>
               <p className="text-muted-foreground">
-                {certificate.causeOfDeath}
+                {certificate?.causeOfDeath}
               </p>
             </li>
           </ul>
         </div>
 
         <RequesterDeliveryDetails
-          requester={certificate.requester}
-          deliveryDetails={certificate.deliveryDetails}
+          requester={certificate?.requester}
+          deliveryDetails={certificate?.deliveryDetails}
         />
       </div>
     );
@@ -237,7 +239,7 @@ const CertificateDetails = ({
   const marriageBody = (certificate: IMarriageCertificates) => {
     return (
       <div className="flex flex-col bg-stone-50 p-4 border border-border shadow-sm rounded-md">
-        <h1>Application {certificate.applicationNumber}</h1>
+        <h1>Application {certificate?.applicationNumber}</h1>
         <div className="flex gap-4 flex-col">
           <h2 className="font-semibold text-lg my-4 underline">
             Personal Details:
@@ -249,9 +251,9 @@ const CertificateDetails = ({
                 Husband Name:
               </h3>
               <p className="text-muted-foreground">
-                {certificate.husbandFirstName}{" "}
-                {certificate.husbandMiddleName || ""}{" "}
-                {certificate.husbandLastName}
+                {certificate?.husbandFirstName}{" "}
+                {certificate?.husbandMiddleName || ""}{" "}
+                {certificate?.husbandLastName}
               </p>
             </li>
 
@@ -261,8 +263,8 @@ const CertificateDetails = ({
                 Wife Name:
               </h3>
               <p className="text-muted-foreground">
-                {certificate.WifeFirstName} {certificate.wifeMiddleName || ""}{" "}
-                {certificate.wifeLastName}
+                {certificate?.WifeFirstName} {certificate?.wifeMiddleName || ""}{" "}
+                {certificate?.wifeLastName}
               </p>
             </li>
 
@@ -272,7 +274,7 @@ const CertificateDetails = ({
                 Date of Marriage:
               </h3>
               <p className="text-muted-foreground">
-                {certificate.dateOfMarriage}
+                {certificate?.dateOfMarriage}
               </p>
             </li>
 
@@ -282,7 +284,7 @@ const CertificateDetails = ({
                 Marriage Country
               </h3>
               <p className="text-muted-foreground">
-                {certificate.placeOfMarriageCountry}
+                {certificate?.placeOfMarriageCountry}
               </p>
             </li>
 
@@ -292,7 +294,7 @@ const CertificateDetails = ({
                 Marriage Province
               </h3>
               <p className="text-muted-foreground">
-                {certificate.placeOfMarriageProvince}
+                {certificate?.placeOfMarriageProvince}
               </p>
             </li>
 
@@ -302,7 +304,7 @@ const CertificateDetails = ({
                 Marriage District
               </h3>
               <p className="text-muted-foreground">
-                {certificate.placeOfMarriageDistrict}
+                {certificate?.placeOfMarriageDistrict}
               </p>
             </li>
 
@@ -312,15 +314,15 @@ const CertificateDetails = ({
                 Marriage City
               </h3>
               <p className="text-muted-foreground">
-                {certificate.placeOfMarriageCity}
+                {certificate?.placeOfMarriageCity}
               </p>
             </li>
           </ul>
         </div>
 
         <RequesterDeliveryDetails
-          requester={certificate.requester}
-          deliveryDetails={certificate.deliveryDetails}
+          requester={certificate?.requester}
+          deliveryDetails={certificate?.deliveryDetails}
         />
       </div>
     );
@@ -329,7 +331,7 @@ const CertificateDetails = ({
   const residentialBody = (certificate: IResidentialCertificates) => {
     return (
       <div className="flex flex-col bg-stone-50 p-4 border border-border shadow-sm rounded-md">
-        <h1>Application {certificate.applicationNumber}</h1>
+        <h1>Application {certificate?.applicationNumber}</h1>
         <div className="flex gap-4 flex-col">
           <h2 className="font-semibold text-lg my-4 underline">
             Personal Details:
@@ -342,7 +344,7 @@ const CertificateDetails = ({
                 Current Country
               </h3>
               <p className="text-muted-foreground">
-                {certificate.currentCountry}
+                {certificate?.currentCountry}
               </p>
             </li>
 
@@ -352,7 +354,7 @@ const CertificateDetails = ({
                 Current Province
               </h3>
               <p className="text-muted-foreground">
-                {certificate.currentProvince}
+                {certificate?.currentProvince}
               </p>
             </li>
 
@@ -362,7 +364,7 @@ const CertificateDetails = ({
                 Current District
               </h3>
               <p className="text-muted-foreground">
-                {certificate.currentDistrict}
+                {certificate?.currentDistrict}
               </p>
             </li>
 
@@ -371,7 +373,9 @@ const CertificateDetails = ({
               <h3 className="capitalize font-medium text-secondary-foreground ">
                 Current City
               </h3>
-              <p className="text-muted-foreground">{certificate.currentCity}</p>
+              <p className="text-muted-foreground">
+                {certificate?.currentCity}
+              </p>
             </li>
 
             {/* Destination Country */}
@@ -380,7 +384,7 @@ const CertificateDetails = ({
                 Destination Country
               </h3>
               <p className="text-muted-foreground">
-                {certificate.destinationCountry}
+                {certificate?.destinationCountry}
               </p>
             </li>
 
@@ -390,7 +394,7 @@ const CertificateDetails = ({
                 Destination Province
               </h3>
               <p className="text-muted-foreground">
-                {certificate.destinationProvince}
+                {certificate?.destinationProvince}
               </p>
             </li>
 
@@ -400,7 +404,7 @@ const CertificateDetails = ({
                 Destination District
               </h3>
               <p className="text-muted-foreground">
-                {certificate.destinationDistrict}
+                {certificate?.destinationDistrict}
               </p>
             </li>
 
@@ -410,7 +414,7 @@ const CertificateDetails = ({
                 Destination City
               </h3>
               <p className="text-muted-foreground">
-                {certificate.destinationCity}
+                {certificate?.destinationCity}
               </p>
             </li>
 
@@ -420,15 +424,15 @@ const CertificateDetails = ({
                 Date of Residential Migration:
               </h3>
               <p className="text-muted-foreground">
-                {certificate.dateOfResidentialMigration}
+                {certificate?.dateOfResidentialMigration}
               </p>
             </li>
           </ul>
         </div>
 
         <RequesterDeliveryDetails
-          requester={certificate.requester}
-          deliveryDetails={certificate.deliveryDetails}
+          requester={certificate?.requester}
+          deliveryDetails={certificate?.deliveryDetails}
         />
       </div>
     );
@@ -469,23 +473,23 @@ const RequesterDeliveryDetails = ({
               Name:
             </h3>
             <p className="text-muted-foreground">
-              {requester.requesterFirstName}{" "}
-              {requester.requesterMiddleName || ""}{" "}
-              {requester.requesterLastName}
+              {requester?.requesterFirstName}{" "}
+              {requester?.requesterMiddleName || ""}{" "}
+              {requester?.requesterLastName}
             </p>
           </li>
           <li className="flex gap-4 min-w-72">
             <h3 className="capitalize font-medium text-secondary-foreground ">
               Email:
             </h3>
-            <p className="text-muted-foreground">{requester.requesterEmail}</p>
+            <p className="text-muted-foreground">{requester?.requesterEmail}</p>
           </li>
           <li className="flex gap-4 min-w-72">
             <h3 className="capitalize font-medium text-secondary-foreground ">
               Mobile Number:
             </h3>
             <p className="text-muted-foreground">
-              {requester.requesterMobileNumber}
+              {requester?.requesterMobileNumber}
             </p>
           </li>
         </ul>
@@ -500,7 +504,7 @@ const RequesterDeliveryDetails = ({
               Delivery Option:
             </h3>
             <p className="text-muted-foreground">
-              {deliveryDetails.deliveryOption}
+              {deliveryDetails?.deliveryOption}
             </p>
           </li>
           <li className="flex gap-4 min-w-72">
@@ -508,7 +512,7 @@ const RequesterDeliveryDetails = ({
               Delivery Province:
             </h3>
             <p className="text-muted-foreground">
-              {deliveryDetails.deliveryProvince}
+              {deliveryDetails?.deliveryProvince}
             </p>
           </li>
           <li className="flex gap-4 min-w-72">
@@ -516,7 +520,7 @@ const RequesterDeliveryDetails = ({
               Delivery District:
             </h3>
             <p className="text-muted-foreground">
-              {deliveryDetails.deliveryDistrict}
+              {deliveryDetails?.deliveryDistrict}
             </p>
           </li>
           <li className="flex gap-4 min-w-72">
@@ -524,17 +528,17 @@ const RequesterDeliveryDetails = ({
               Delivery Address:
             </h3>
             <p className="text-muted-foreground">
-              {deliveryDetails.deliveryAddress}
+              {deliveryDetails?.deliveryAddress}
             </p>
           </li>
-          {deliveryDetails.deliveryOption === "PICK_UP" && (
+          {deliveryDetails?.deliveryOption === "PICK_UP" && (
             <>
               <li className="flex gap-4 min-w-72">
                 <h3 className="capitalize font-medium text-secondary-foreground ">
                   Delivery Municipality:
                 </h3>
                 <p className="text-muted-foreground">
-                  {deliveryDetails.deliveryMunicipality}
+                  {deliveryDetails?.deliveryMunicipality}
                 </p>
               </li>
               <li className="flex gap-4 min-w-72">
@@ -542,7 +546,7 @@ const RequesterDeliveryDetails = ({
                   Delivery Ward:
                 </h3>
                 <p className="text-muted-foreground">
-                  {deliveryDetails.deliveryWard}
+                  {deliveryDetails?.deliveryWard}
                 </p>
               </li>
             </>
@@ -552,7 +556,7 @@ const RequesterDeliveryDetails = ({
               Postal Code:
             </h3>
             <p className="text-muted-foreground">
-              {deliveryDetails.deliveryPostalCode}
+              {deliveryDetails?.deliveryPostalCode}
             </p>
           </li>
         </ul>
