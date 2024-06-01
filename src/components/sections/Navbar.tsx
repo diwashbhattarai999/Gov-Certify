@@ -78,7 +78,12 @@ const Navbar = () => {
 
                 <div>
                   <Link href="/register">
-                    <Button className="w-24">SignUp</Button>
+                    <Button
+                      className="w-24 hover:bg-accent hover:text-accent-foreground"
+                      outline
+                    >
+                      SignUp
+                    </Button>
                   </Link>
                 </div>
               </>

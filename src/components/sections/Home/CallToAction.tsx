@@ -9,7 +9,14 @@ const CallToAction = () => (
       Get your certificates processed quickly and efficiently with our top-notch
       services.
     </p>
-    <Button outline className="text-primary mt-8 text-lg">
+
+    <Button
+      outline
+      className="text-primary mt-8 text-lg"
+      onClick={() => {
+        window.scrollTo(0, 0);
+      }}
+    >
       Get Started Now
     </Button>
   </section>

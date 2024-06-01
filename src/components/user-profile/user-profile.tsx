@@ -127,14 +127,14 @@ const UserProfile = ({ isAdmin }: IUserProfileProps) => {
                 >
                   {item.link ? (
                     <Link href={item.link}>
-                      <div className="flex items-center gap-3">
-                        <item.icon className="w-auto py-3 h-11" />
+                      <div className="flex items-center gap-3 py-2">
+                        <item.icon className="w-6 h-6" />
                         <h3>{item.label}</h3>
                       </div>
                     </Link>
                   ) : (
-                    <div className="flex items-center gap-3">
-                      <item.icon className="w-auto py-3 h-11" />
+                    <div className="flex items-center gap-3 py-2">
+                      <item.icon className="w-6 h-6" />
                       <h3>{item.label}</h3>
                     </div>
                   )}

@@ -40,7 +40,7 @@ export default async function RootLayout({
         <body
           className={cn(
             nunito.variable,
-            "antialiased flex flex-col min-h-screen bg-background text-foreground"
+            "antialiased flex flex-col min-h-screen bg-background text-foreground text-base"
           )}
         >
           <NextTopLoader color="#2463eb" showSpinner={false} />
