@@ -6,11 +6,11 @@ const Hero = () => {
     <div className="w-full mt-5">
       <div className="relative bg-background rounded-lg flex justify-between items-center overflow-x-hidden">
         <div className="absolute h-full w-full bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
-        <div className="py-24 z-20">
+        <div className="pt-32 pb-20 z-20">
           <p className="md:text-lg font-medium">
             Experience Effortless Government Certification
           </p>
-          <h1 className="max-md:text-[2.5rem] md:text-[3.5rem] font-bold text-secondary-foreground mt-4 mb-6 -ml-1 leading-[3rem] md:leading-[3.5rem]">
+          <h1 className="max-md:text-[2.5rem] md:text-[3.5rem] font-bold text-secondary-foreground mt-4 mb-6 -ml-1 leading-[3rem] md:leading-[3.5rem] max-w-[95%]">
             Unlock Hassle-Free Certificate Registration
           </h1>
           <p className="max-w-[40rem] text-lg">
@@ -46,7 +46,7 @@ const Hero = () => {
         <Image
           src="/images/hero-image.webp"
           alt="Banner"
-          className="z-10 object-contain !right-[-86px] !top-0 !left-auto !bottom-auto !w-1/2 max-lg:hidden"
+          className="z-10 object-contain !right-[-88px] !top-0 !left-auto !bottom-auto !w-1/2 max-lg:hidden"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw"
           quality={100}
           fill
@@ -54,7 +54,7 @@ const Hero = () => {
         <Image
           src="/images/digital-file.svg"
           alt="Banner"
-          className="absolute top-0 -left-10 opacity-20"
+          className="absolute top-6 -left-10 opacity-20"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw"
           quality={100}
           width={200}
@@ -63,7 +63,7 @@ const Hero = () => {
         <Image
           src="/images/digital-file.svg"
           alt="Banner"
-          className="absolute bottom-[26%] max-lg:-right-[5%] lg:left-[40%] opacity-20"
+          className="absolute bottom-[24%] max-lg:-right-[5%] lg:left-[40%] opacity-20"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw"
           quality={100}
           width={200}

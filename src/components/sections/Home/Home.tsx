@@ -1,16 +1,18 @@
+import CallToAction from "./CallToAction";
+import Steps from "./Steps";
 import Hero from "./hero";
 import Services from "./services";
+import Testimonials from "./Testimonials";
 
-interface HomeProps {}
-
-const Home = ({}: HomeProps) => {
+const Home = () => {
   return (
-    <div>
+    <>
       <Hero />
       <Services showTitle />
-      {/*  */}
-      {/*  */}
-    </div>
+      <Steps />
+      <Testimonials />
+      <CallToAction />
+    </>
   );
 };
 
