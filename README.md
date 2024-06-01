@@ -1,4 +1,3 @@
-![HomePage](https://github.com/diwashbhattarai999/Gov-Certify/assets/87477700/cddf8360-fd52-4a35-94a6-4075b4b401b1)
 
 👋 Welcome to GovCertify Portal! This platform is an online certificate registration system developed for the e-governance subject project. It aims to simplify and streamline the process of certificate registration and issuance for citizens.
 
