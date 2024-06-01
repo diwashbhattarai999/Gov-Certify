@@ -1,0 +1,297 @@
+//// ------------------------------------------------------
+//// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+//// ------------------------------------------------------
+
+Table User {
+  id String [pk]
+  name String
+  email String [unique]
+  emailVerified DateTime
+  image String
+  gender Gender
+  phoneNo String
+  dateOfBirth DateTime
+  password String
+  role UserRole [not null, default: 'USER']
+  accounts Account [not null]
+  isTwoFactorEnabled Boolean [not null, default: false]
+  twoFactorConfirmation TwoFactorConfirmation
+  twoFactorConfirmationId String
+  BirthCertificate BirthCertificate [not null]
+  DeathCertificate DeathCertificate [not null]
+  MarriageCertificate MarriageCertificate [not null]
+  ResidentialCertificate ResidentialCertificate [not null]
+}
+
+Table Account {
+  id String [pk]
+  userId String [not null]
+  type String [not null]
+  provider String [not null]
+  providerAccountId String [not null]
+  refresh_token String
+  access_token String
+  expires_at Int
+  token_type String
+  scope String
+  id_token String
+  session_state String
+  user User [not null]
+
+  indexes {
+    (provider, providerAccountId) [unique]
+  }
+}
+
+Table VerificationToken {
+  id String [pk]
+  email String [not null]
+  token String [unique, not null]
+  expires DateTime [not null]
+
+  indexes {
+    (email, token) [unique]
+  }
+}
+
+Table PasswordResetToken {
+  id String [pk]
+  email String [not null]
+  token String [unique, not null]
+  expires DateTime [not null]
+
+  indexes {
+    (email, token) [unique]
+  }
+}
+
+Table TwoFactorToken {
+  id String [pk]
+  email String [not null]
+  token String [unique, not null]
+  expires DateTime [not null]
+
+  indexes {
+    (email, token) [unique]
+  }
+}
+
+Table TwoFactorConfirmation {
+  id String [pk]
+  userId String [unique, not null]
+  user User [not null]
+}
+
+Table BirthCertificate {
+  id String [pk]
+  userId String [not null]
+  requesterId String [not null]
+  deliveryDetailsId String [not null]
+  applicationNumber String [not null]
+  status Status [not null]
+  firstName String [not null]
+  middleName String
+  lastName String [not null]
+  placeOfBirthCountry String [not null]
+  placeOfBirthProvince String [not null]
+  placeOfBirthDistrict String [not null]
+  placeOfBirthCity String [not null]
+  DateOfBirth String [not null]
+  gender Gender [not null]
+  fatherFirstName String [not null]
+  fatherMiddleName String
+  fatherLastName String [not null]
+  motherFirstName String [not null]
+  motherMiddleName String
+  motherLastName String [not null]
+  relationshipToRequestor Relationship [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  requester Requester [not null]
+  deliveryDetails DeliveryDetails [not null]
+  user User [not null]
+}
+
+Table DeathCertificate {
+  id String [pk]
+  userId String [not null]
+  requesterId String [not null]
+  deliveryDetailsId String [not null]
+  applicationNumber String [not null]
+  status Status [not null]
+  firstName String [not null]
+  middleName String
+  lastName String [not null]
+  placeOfDeathCountry String [not null]
+  placeOfDeathProvince String [not null]
+  placeOfDeathDistrict String [not null]
+  placeOfDeathCity String [not null]
+  dateOfDeath String [not null]
+  gender Gender [not null]
+  causeOfDeath String [not null]
+  relationshipToRequestor Relationship [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  requester Requester [not null]
+  deliveryDetails DeliveryDetails [not null]
+  user User [not null]
+}
+
+Table MarriageCertificate {
+  id String [pk]
+  userId String [not null]
+  requesterId String [not null]
+  deliveryDetailsId String [not null]
+  applicationNumber String [not null]
+  status Status [not null]
+  husbandFirstName String [not null]
+  husbandMiddleName String
+  husbandLastName String [not null]
+  WifeFirstName String [not null]
+  wifeMiddleName String
+  wifeLastName String [not null]
+  placeOfMarriageCountry String [not null]
+  placeOfMarriageProvince String [not null]
+  placeOfMarriageDistrict String [not null]
+  placeOfMarriageCity String [not null]
+  dateOfMarriage String [not null]
+  relationshipToRequestor Relationship [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  user User [not null]
+  deliveryDetails DeliveryDetails [not null]
+  requester Requester [not null]
+}
+
+Table ResidentialCertificate {
+  id String [pk]
+  userId String [not null]
+  requesterId String [not null]
+  deliveryDetailsId String [not null]
+  applicationNumber String [not null]
+  status Status [not null]
+  currentCountry String [not null]
+  currentProvince String [not null]
+  currentDistrict String [not null]
+  currentCity String [not null]
+  destinationCountry String [not null]
+  destinationProvince String [not null]
+  destinationDistrict String [not null]
+  destinationCity String [not null]
+  dateOfResidentialMigration String [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  user User [not null]
+  deliveryDetails DeliveryDetails [not null]
+  requester Requester [not null]
+  familyMembers FamilyMember [not null]
+}
+
+Table FamilyMember {
+  id String [pk]
+  firstName String [not null]
+  middleName String
+  lastName String [not null]
+  dateOfBirth String [not null]
+  placeOfBirth String [not null]
+  gender Gender [not null]
+  relationshipToRequester Relationship [not null]
+  residentialCertificate ResidentialCertificate [not null]
+  residentialCertificateId String [not null]
+}
+
+Table Requester {
+  id String [pk]
+  requesterFirstName String [not null]
+  requesterMiddleName String
+  requesterLastName String [not null]
+  requesterEmail String [unique, not null]
+  requesterMobileNumber String [not null]
+  BirthCertificate BirthCertificate [not null]
+  DeathCertificate DeathCertificate [not null]
+  MarriageCertificate MarriageCertificate [not null]
+  ResidentialCertificate ResidentialCertificate [not null]
+}
+
+Table DeliveryDetails {
+  id String [pk]
+  deliveryOption DeliveryOption [not null]
+  deliveryProvince String [not null]
+  deliveryDistrict String [not null]
+  deliveryAddress String [not null]
+  deliveryMunicipality String
+  deliveryWard String
+  deliveryPostalCode String
+  birthCertificate BirthCertificate [not null]
+  deathCertificate DeathCertificate [not null]
+  marriageCertificate MarriageCertificate [not null]
+  residentialCertificate ResidentialCertificate [not null]
+}
+
+Enum UserRole {
+  ADMIN
+  USER
+}
+
+Enum Gender {
+  MALE
+  FEMALE
+  OTHERS
+}
+
+Enum Status {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+Enum Relationship {
+  FATHER
+  MOTHER
+  BROTHER
+  SISTER
+  UNCLE
+  AUNT
+  GRANDFATHER
+  GRANDMOTHER
+  SON
+  DAUGHTER
+  SPOUSE
+  SELF
+  OTHERS
+}
+
+Enum DeliveryOption {
+  DELIVERY
+  PICK_UP
+}
+
+Ref: Account.userId > User.id [delete: Cascade]
+
+Ref: TwoFactorConfirmation.userId - User.id [delete: Cascade]
+
+Ref: BirthCertificate.requesterId > Requester.id
+
+Ref: BirthCertificate.deliveryDetailsId > DeliveryDetails.id
+
+Ref: BirthCertificate.userId > User.id [delete: Cascade]
+
+Ref: DeathCertificate.requesterId > Requester.id
+
+Ref: DeathCertificate.deliveryDetailsId > DeliveryDetails.id
+
+Ref: DeathCertificate.userId > User.id [delete: Cascade]
+
+Ref: MarriageCertificate.userId > User.id [delete: Cascade]
+
+Ref: MarriageCertificate.deliveryDetailsId > DeliveryDetails.id
+
+Ref: MarriageCertificate.requesterId > Requester.id
+
+Ref: ResidentialCertificate.userId > User.id [delete: Cascade]
+
+Ref: ResidentialCertificate.deliveryDetailsId > DeliveryDetails.id
+
+Ref: ResidentialCertificate.requesterId > Requester.id
+
+Ref: FamilyMember.residentialCertificateId > ResidentialCertificate.id

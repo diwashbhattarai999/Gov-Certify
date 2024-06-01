@@ -28,7 +28,7 @@ const CertificateDetails = ({
 
   const birthBody = (certificate: IBirthCertificates) => {
     return (
-      <div className="flex flex-col bg-stone-50 p-4 border border-border shadow-sm rounded-md">
+      <div className="flex flex-col bg-stone-50 p-4 border border-border shadow-sm rounded-md mb-10">
         <h1>Application {certificate?.applicationNumber}</h1>
         <div className="flex gap-4 flex-col">
           <h2 className="font-semibold text-lg my-4 underline">

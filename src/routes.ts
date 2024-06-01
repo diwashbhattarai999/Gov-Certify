@@ -9,6 +9,7 @@ export const publicRoutes = [
   "/contact",
   "/new-verification",
   "/not-found",
+  "/faq",
   "/api/uploadthing",
 ];
 

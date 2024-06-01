@@ -42,7 +42,7 @@ const FOOTER_INFOS = [
 const Footer = () => {
   return (
     <footer className={font.className}>
-      <div className="mt-8 bg-accent/90 text-background backdrop-blur-sm">
+      <div className="bg-accent/90 text-background backdrop-blur-sm">
         <Container>
           {/* Top */}
           <div className="flex gap-2 items-start pt-12 mb-8">

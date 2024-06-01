@@ -3,14 +3,17 @@ import Steps from "./Steps";
 import Hero from "./hero";
 import Services from "./services";
 import Testimonials from "./Testimonials";
+import MaxWidthContainer from "@/components/common/max-width-container";
 
 const Home = () => {
   return (
     <>
-      <Hero />
-      <Services showTitle />
-      <Steps />
-      <Testimonials />
+      <MaxWidthContainer>
+        <Hero />
+        <Services showTitle />
+        <Steps />
+        <Testimonials />
+      </MaxWidthContainer>
       <CallToAction />
     </>
   );

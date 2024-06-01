@@ -1,6 +1,7 @@
 // prisma/schema.prisma
 generator client {
   provider = "prisma-client-js"
+  // provider = "prisma-dbml-generator" // Uncomment this to generate the dbml and comment above provider then run npx prism generate
 }
 
 datasource db {
