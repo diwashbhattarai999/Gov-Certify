@@ -44,7 +44,7 @@ const Hero = () => {
           height={500}
         /> */}
         <Image
-          src="/images/hero-image.webp"
+          src="/images/hero.jpg"
           alt="Banner"
           className="z-10 object-contain !right-[-88px] !top-0 !left-auto !bottom-auto !w-1/2 max-lg:hidden"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw"

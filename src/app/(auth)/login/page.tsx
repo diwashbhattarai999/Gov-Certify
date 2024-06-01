@@ -13,21 +13,28 @@ const LoginPage = () => {
           <div className="lg:basis-[60%] lg:h-full lg:overflow-hidden max-lg:hidden">
             <SwiperWrapper>
               <Image
-                src="/images/gov-auth-1.svg"
+                src="/images/Birth-Slider.jpg"
                 alt="bg"
                 fill
                 sizes="(max-width: 768px) 100vw, 100vw"
                 className="object-cover"
               />
               <Image
-                src="/images/gov-auth-2.svg"
+                src="/images/Death-Slider.jpg"
                 alt="bg"
                 fill
                 sizes="(max-width: 768px) 100vw, 100vw"
                 className="object-cover"
               />
               <Image
-                src="/images/gov-auth-3.jpg"
+                src="/images/Marriage-Slider.jpg"
+                alt="bg"
+                fill
+                sizes="(max-width: 768px) 100vw, 100vw"
+                className="object-cover"
+              />
+              <Image
+                src="/images/Residential-Slider.jpg"
                 alt="bg"
                 fill
                 sizes="(max-width: 768px) 100vw, 100vw"

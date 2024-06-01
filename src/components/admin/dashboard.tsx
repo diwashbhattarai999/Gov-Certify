@@ -66,7 +66,7 @@ const Dashboard = ({
         <div className="grid grid-cols-1 gap-4 col-span-2">
           <div className="bg-background backdrop-blur-md border border-border rounded-md p-8 shadow-sm">
             <div className="text-3xl text-muted-foreground font-bold flex justify-between items-center">
-              Total Registerd Users
+              Total Registered Users
               <FaUsers className="text-accent/80" />
             </div>
             <p className="text-2xl text-muted-foreground font-medium mt-4">
